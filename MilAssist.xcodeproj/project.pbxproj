@@ -11,6 +11,8 @@
 		0A706A5E1F0012D900AB7BB8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A706A5C1F0012D900AB7BB8 /* Main.storyboard */; };
 		0A706A601F0012D900AB7BB8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A706A5F1F0012D900AB7BB8 /* Assets.xcassets */; };
 		0A706A631F0012D900AB7BB8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A706A611F0012D900AB7BB8 /* LaunchScreen.storyboard */; };
+		0A706A6C1F0015E400AB7BB8 /* NewsFeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A706A6B1F0015E400AB7BB8 /* NewsFeedCollectionViewCell.swift */; };
+		0A706A6E1F0015E700AB7BB8 /* NewsFeedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A706A6D1F0015E700AB7BB8 /* NewsFeedCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		0A706A5F1F0012D900AB7BB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A706A621F0012D900AB7BB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A706A641F0012D900AB7BB8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A706A6B1F0015E400AB7BB8 /* NewsFeedCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeedCollectionViewCell.swift; sourceTree = "<group>"; };
+		0A706A6D1F0015E700AB7BB8 /* NewsFeedCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeedCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,8 @@
 			children = (
 				0A706A6A1F0012F700AB7BB8 /* Supporting Files */,
 				0A706A5C1F0012D900AB7BB8 /* Main.storyboard */,
+				0A706A6B1F0015E400AB7BB8 /* NewsFeedCollectionViewCell.swift */,
+				0A706A6D1F0015E700AB7BB8 /* NewsFeedCollectionViewController.swift */,
 			);
 			path = MilAssist;
 			sourceTree = "<group>";
@@ -142,6 +148,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A706A6C1F0015E400AB7BB8 /* NewsFeedCollectionViewCell.swift in Sources */,
+				0A706A6E1F0015E700AB7BB8 /* NewsFeedCollectionViewController.swift in Sources */,
 				0A706A591F0012D900AB7BB8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,6 +316,7 @@
 				0A706A691F0012D900AB7BB8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

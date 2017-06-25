@@ -13,6 +13,7 @@ private let reuseIdentifier = "Cell"
 class NewsFeedCollectionViewController: UICollectionViewController {
     
     var initialPage = 1
+    var videosArray: Data?
     var newsArray: [News] = [] {
         didSet {
             collectionView?.reloadData()
@@ -22,13 +23,43 @@ class NewsFeedCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getNews(fromPage: initialPage)
-        
+        getVideos()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
         // Do any additional setup after loading the view.
+    }
+    
+    func getVideos() {
+        Parser.getYoutube { (data, response, error) in
+            if error != nil {
+                print(error!)
+            } else {
+                do {
+                    if let resultDictionary = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? Dictionary<NSObject, AnyObject> {
+                        print(resultDictionary)
+                        
+                        
+                        
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                } catch let error as NSError {
+                    print(error.localizedDescription)
+                }
+            }
+            self.videosArray = data
+            print(response)
+            print(self.videosArray!)
+        }
     }
     
     func getNews(fromPage page: Int) {

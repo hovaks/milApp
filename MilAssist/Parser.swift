@@ -9,12 +9,32 @@
 import UIKit
 
 struct Parser {
+    var channelsDataArray: Array<Dictionary<NSObject, AnyObject>> = []
     
-    static func getNews(fromPage page:Int, withHandler completion: @escaping ([News]) -> ()) {
+    
+    static func getYoutube(completion: @escaping (Data?, Int, Error?) -> Void) {
+        let urlString = "https://www.googleapis.com/youtube/v3/channels?part=contentDetails,snippet&forUsername=Google&key=AIzaSyC3fha2JJYQ1-mEC97qbhcyIWLJEUMti2Y"
+        if let url = URL(string: urlString) {
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    print(error)
+                } else {
+                    DispatchQueue.main.async {
+                        completion(data, (response as! HTTPURLResponse).statusCode, error)
+                    }
+                }
+                }.resume()
+        }
+    }
+    
+    
+    static func getNews(fromPage page:Int, withHandler completion: @escaping ([News]) -> Void) {
         var resultsArray:[News] = []
         if let url = URL(string: "http://www.mil.am/hy/news/page/\(page)") {
             let request = URLRequest(url: url)
-            URLSession.shared.dataTask(with: request) { (data, response, error) in
+            URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
                     print(error)
                 } else if let unwrappedData = data {
@@ -34,7 +54,7 @@ struct Parser {
                             dateContainer = dateContainer[1].components(separatedBy: "<div>")
                             dateContainer = dateContainer[1].components(separatedBy: "</div>")
                             let date = dateContainer[0]
-
+                            
                             //Parse Article URL
                             var URLContainer = newsContainer.components(separatedBy: "<a href=\"")
                             URLContainer = URLContainer[1].components(separatedBy: "\">")
@@ -73,9 +93,11 @@ struct Parser {
                             resultsArray.append(newsEntry)
                         }
                     }
-                    completion(resultsArray)
+                    DispatchQueue.main.async {
+                        completion(resultsArray)
+                    }
                 }
-            }.resume()
+                }.resume()
         }
     }
 }

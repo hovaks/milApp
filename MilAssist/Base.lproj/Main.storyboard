@@ -12,7 +12,7 @@
         <!--News Feed Collection View Controller-->
         <scene sceneID="9yZ-Ty-w6C">
             <objects>
-                <collectionViewController id="sQn-xu-Av8" customClass="NewsFeedCollectionViewController" customModule="MilApp" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="sQn-xu-Av8" customClass="NewsFeedCollectionViewController" customModule="MilAssist" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="mwd-SO-sER">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -24,7 +24,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NewsCell" id="42L-O3-6v1" customClass="NewsFeedCollectionViewCell" customModule="MilApp" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NewsCell" id="42L-O3-6v1" customClass="NewsFeedCollectionViewCell" customModule="MilAssist" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="50" width="375" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -112,7 +112,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XHR-0F-u1q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-20" y="47.226386806596707"/>
+            <point key="canvasLocation" x="-1046" y="133"/>
         </scene>
     </scenes>
     <resources>

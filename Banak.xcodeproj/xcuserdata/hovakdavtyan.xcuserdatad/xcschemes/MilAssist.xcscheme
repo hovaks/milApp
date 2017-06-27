@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0A706A541F0012D900AB7BB8"
-               BuildableName = "MilAssist.app"
-               BlueprintName = "MilAssist"
-               ReferencedContainer = "container:MilAssist.xcodeproj">
+               BuildableName = "Banak.app"
+               BlueprintName = "Banak"
+               ReferencedContainer = "container:Banak.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0A706A541F0012D900AB7BB8"
-            BuildableName = "MilAssist.app"
-            BlueprintName = "MilAssist"
-            ReferencedContainer = "container:MilAssist.xcodeproj">
+            BuildableName = "Banak.app"
+            BlueprintName = "Banak"
+            ReferencedContainer = "container:Banak.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0A706A541F0012D900AB7BB8"
-            BuildableName = "MilAssist.app"
-            BlueprintName = "MilAssist"
-            ReferencedContainer = "container:MilAssist.xcodeproj">
+            BuildableName = "Banak.app"
+            BlueprintName = "Banak"
+            ReferencedContainer = "container:Banak.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0A706A541F0012D900AB7BB8"
-            BuildableName = "MilAssist.app"
-            BlueprintName = "MilAssist"
-            ReferencedContainer = "container:MilAssist.xcodeproj">
+            BuildableName = "Banak.app"
+            BlueprintName = "Banak"
+            ReferencedContainer = "container:Banak.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

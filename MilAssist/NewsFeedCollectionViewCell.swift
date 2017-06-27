@@ -17,16 +17,21 @@ class NewsFeedCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     
     var news: News? { didSet { updateUI() } }
+    
     private  func updateUI() {
         titleLabel.text = news?.title
         descriptionLabel.text = news?.description
-        dateLabel.text = news?.dateCreated
+        
+        if let date = news?.dateCreated {
+        let dateFormatter = DateFormatter()
+        dateLabel.text = dateFormatter.string(from: date)
+        }
         
         let imageCache = NSCache<NSString, AnyObject>()
         if let imageURL = self.news?.imageURL {
             
             let imageURLString = (imageURL.absoluteString) as NSString
-
+            
             if let cachedImage = imageCache.object(forKey: imageURLString) as? UIImage {
                 self.imageView.image = cachedImage
             } else {

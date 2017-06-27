@@ -33,32 +33,36 @@ class NewsFeedCollectionViewController: UICollectionViewController {
     }
     
     func getVideos() {
+        var videosArray: [News] = []
         Parser.getYoutube { (data, response, error) in
             if error != nil {
                 print(error!)
             } else {
                 do {
-                    if let resultDictionary = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? Dictionary<NSObject, AnyObject> {
-                        print(resultDictionary)
-                        
-                        
-                        
+                    if let resultDictionary = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? Dictionary<String, AnyObject> {
+                        let items = resultDictionary["items"] as! Array<AnyObject>
+                        for item in items {
+                            let itemDictionary = item as! Dictionary<String, AnyObject>
+                            let snippetDictionary = itemDictionary["snippet"] as! Dictionary<String, AnyObject>
+                            var videoNews = News()
+                            videoNews.title = snippetDictionary["title"] as? String
+                            videoNews.description = snippetDictionary["description"] as? String
+                            let imageDictionary = snippetDictionary["thumbnails"] as! Dictionary<String, AnyObject>
+                            let imageDictionaryDefault = imageDictionary["high"] as! Dictionary<String, AnyObject>
+                            if let imageURLString = imageDictionaryDefault["url"] as? String {
+                                videoNews.imageURL = URL(string: imageURLString)
+                            }
+                            videoNews.dateCreated = Date() //snippetDictionary["publishedAt"] as? String !!!
+                            videoNews.articleURL = URL(string: "youtube.com")
+                            videoNews.type = .video
+                            videosArray.append(videoNews)
+                        }
+                        self.newsArray.append(contentsOf: videosArray)
                     }
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
                 } catch let error as NSError {
                     print(error.localizedDescription)
                 }
             }
-            self.videosArray = data
-            print(response)
-            print(self.videosArray!)
         }
     }
     
@@ -95,7 +99,19 @@ class NewsFeedCollectionViewController: UICollectionViewController {
             initialPage += 1
             getNews(fromPage: initialPage)
         }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NewsCell", for: indexPath)
+        
+        //Defining the Reuse Identifier
+        var reuseIdentifier = ""
+        switch news.type {
+        case .article? :
+            reuseIdentifier = "NewsCell"
+        case .video?:
+            reuseIdentifier = "VideoCell"
+        default:
+            break
+        }
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         if let newsCell = cell as? NewsFeedCollectionViewCell {
             newsCell.news = news
         }
@@ -107,6 +123,8 @@ class NewsFeedCollectionViewController: UICollectionViewController {
         cell.layer.shadowOpacity = 1.0
         cell.layer.masksToBounds = false
         cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.contentView.layer.cornerRadius).cgPath
+        cell.layer.masksToBounds = true
+        cell.layer.cornerRadius = 20
         return cell
     }
     

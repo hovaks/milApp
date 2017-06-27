@@ -18,7 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0A706A551F0012D900AB7BB8 /* MilAssist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MilAssist.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A706A551F0012D900AB7BB8 /* Banak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Banak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A706A581F0012D900AB7BB8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A706A5D1F0012D900AB7BB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0A706A5F1F0012D900AB7BB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -52,7 +52,7 @@
 		0A706A561F0012D900AB7BB8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0A706A551F0012D900AB7BB8 /* MilAssist.app */,
+				0A706A551F0012D900AB7BB8 /* Banak.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -84,9 +84,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0A706A541F0012D900AB7BB8 /* MilAssist */ = {
+		0A706A541F0012D900AB7BB8 /* Banak */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0A706A671F0012D900AB7BB8 /* Build configuration list for PBXNativeTarget "MilAssist" */;
+			buildConfigurationList = 0A706A671F0012D900AB7BB8 /* Build configuration list for PBXNativeTarget "Banak" */;
 			buildPhases = (
 				0A706A511F0012D900AB7BB8 /* Sources */,
 				0A706A521F0012D900AB7BB8 /* Frameworks */,
@@ -96,9 +96,9 @@
 			);
 			dependencies = (
 			);
-			name = MilAssist;
+			name = Banak;
 			productName = MilAssist;
-			productReference = 0A706A551F0012D900AB7BB8 /* MilAssist.app */;
+			productReference = 0A706A551F0012D900AB7BB8 /* Banak.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -118,7 +118,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0A706A501F0012D900AB7BB8 /* Build configuration list for PBXProject "MilAssist" */;
+			buildConfigurationList = 0A706A501F0012D900AB7BB8 /* Build configuration list for PBXProject "Banak" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -131,7 +131,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0A706A541F0012D900AB7BB8 /* MilAssist */,
+				0A706A541F0012D900AB7BB8 /* Banak */,
 			);
 		};
 /* End PBXProject section */
@@ -286,7 +286,7 @@
 				DEVELOPMENT_TEAM = 3JSC65UQ9L;
 				INFOPLIST_FILE = MilAssist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.alfasolutions.MilAssist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.alfasolutions.Banak;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -299,7 +299,7 @@
 				DEVELOPMENT_TEAM = 3JSC65UQ9L;
 				INFOPLIST_FILE = MilAssist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.alfasolutions.MilAssist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.alfasolutions.Banak;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -308,7 +308,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0A706A501F0012D900AB7BB8 /* Build configuration list for PBXProject "MilAssist" */ = {
+		0A706A501F0012D900AB7BB8 /* Build configuration list for PBXProject "Banak" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0A706A651F0012D900AB7BB8 /* Debug */,
@@ -317,7 +317,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0A706A671F0012D900AB7BB8 /* Build configuration list for PBXNativeTarget "MilAssist" */ = {
+		0A706A671F0012D900AB7BB8 /* Build configuration list for PBXNativeTarget "Banak" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0A706A681F0012D900AB7BB8 /* Debug */,

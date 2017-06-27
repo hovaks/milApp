@@ -12,8 +12,15 @@ import UIKit
 struct News
 {
     var imageURL: URL?
-    var dateCreated: String?
+    var dateCreated: Date?
     var articleURL: URL?
     var title: String?
     var description: String?
+    var type: NewsType?
 }
+
+enum NewsType {
+    case article
+    case video
+}
+

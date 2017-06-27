@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:MilAssist.xcodeproj">
+      location = "self:/Users/hovakdavtyan/Developer/MilAssist/Banak.xcodeproj">
    </FileRef>
 </Workspace>

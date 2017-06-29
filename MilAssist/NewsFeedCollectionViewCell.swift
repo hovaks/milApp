@@ -23,28 +23,9 @@ class NewsFeedCollectionViewCell: UICollectionViewCell {
         descriptionLabel.text = news?.description
         
         if let date = news?.dateCreated {
-        let dateFormatter = DateFormatter()
-        dateLabel.text = dateFormatter.string(from: date)
-        }
-        
-        let imageCache = NSCache<NSString, AnyObject>()
-        if let imageURL = self.news?.imageURL {
-            
-            let imageURLString = (imageURL.absoluteString) as NSString
-            
-            if let cachedImage = imageCache.object(forKey: imageURLString) as? UIImage {
-                self.imageView.image = cachedImage
-            } else {
-                DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-                    if let imageData = try? Data(contentsOf: imageURL) {
-                        let image = UIImage(data: imageData)
-                        DispatchQueue.main.async {
-                            self?.imageView.image = image
-                        }
-                        imageCache.setObject(image!, forKey: imageURLString)
-                    }
-                }
-            }
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd MMMM yyyy"
+            dateLabel.text = dateFormatter.string(from: date)
         }
     }
     

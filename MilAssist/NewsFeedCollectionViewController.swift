@@ -9,27 +9,45 @@
 import UIKit
 
 private let reuseIdentifier = "Cell"
+var setCounter = 0
 
 class NewsFeedCollectionViewController: UICollectionViewController {
     
-    var initialPage = 1
-    var videosArray: Data?
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var errorView: UIView!
+    
+    let imageCache = NSCache<NSString, AnyObject>()
     var newsArray: [News] = [] {
         didSet {
-            collectionView?.reloadData()
+            setCounter += 1
+            newsArray.sort{ $0.dateCreated! > $1.dateCreated! }
+            //Check the need to reload
+            if setCounter == 1 {
+                activityIndicator.stopAnimating()
+                collectionView?.reloadData()
+                setCounter = 0
+            }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getNews(fromPage: initialPage)
-        getVideos()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        errorView.isHidden = true
+        //getNews(toPage: 3)
+        getVideos()
+        if !activityIndicator.isAnimating {
+            activityIndicator.startAnimating()
+        }
     }
     
     func getVideos() {
@@ -42,20 +60,35 @@ class NewsFeedCollectionViewController: UICollectionViewController {
                     if let resultDictionary = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? Dictionary<String, AnyObject> {
                         let items = resultDictionary["items"] as! Array<AnyObject>
                         for item in items {
+                            
                             let itemDictionary = item as! Dictionary<String, AnyObject>
                             let snippetDictionary = itemDictionary["snippet"] as! Dictionary<String, AnyObject>
-                            var videoNews = News()
-                            videoNews.title = snippetDictionary["title"] as? String
-                            videoNews.description = snippetDictionary["description"] as? String
-                            let imageDictionary = snippetDictionary["thumbnails"] as! Dictionary<String, AnyObject>
-                            let imageDictionaryDefault = imageDictionary["high"] as! Dictionary<String, AnyObject>
-                            if let imageURLString = imageDictionaryDefault["url"] as? String {
-                                videoNews.imageURL = URL(string: imageURLString)
+                            
+                            //Setting Date Range
+                            let calendar = Calendar.current
+                            let weekEarlier = calendar.date(byAdding: .day, value: -8, to: Date())
+                            
+                            //Getting Date and checking for Date Range
+                            if let dateCreatedString = snippetDictionary["publishedAt"] as? String {
+                                let dateFormatter = DateFormatter()
+                                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                                if let dateCreated = dateFormatter.date(from: dateCreatedString) {
+                                    if dateCreated > weekEarlier! {
+                                        var videoNews = News()
+                                        videoNews.dateCreated = dateCreated
+                                        videoNews.title = snippetDictionary["title"] as? String
+                                        videoNews.description = snippetDictionary["description"] as? String
+                                        let imageDictionary = snippetDictionary["thumbnails"] as! Dictionary<String, AnyObject>
+                                        let imageDictionaryDefault = imageDictionary["high"] as! Dictionary<String, AnyObject>
+                                        if let imageURLString = imageDictionaryDefault["url"] as? String {
+                                            videoNews.imageURL = URL(string: imageURLString)
+                                        }
+                                        videoNews.articleURL = URL(string: "youtube.com")
+                                        videoNews.type = .video
+                                        videosArray.append(videoNews)
+                                    }
+                                }
                             }
-                            videoNews.dateCreated = Date() //snippetDictionary["publishedAt"] as? String !!!
-                            videoNews.articleURL = URL(string: "youtube.com")
-                            videoNews.type = .video
-                            videosArray.append(videoNews)
                         }
                         self.newsArray.append(contentsOf: videosArray)
                     }
@@ -66,9 +99,12 @@ class NewsFeedCollectionViewController: UICollectionViewController {
         }
     }
     
-    func getNews(fromPage page: Int) {
-        Parser.getNews(fromPage: page) { (newsResults) in
-            self.newsArray.append(contentsOf: newsResults)
+    func getNews(toPage page: Int) {
+        for page in 1...page {
+            print("getting from page\(page)")
+            Parser.getNews(fromPage: page) { newsResults in
+                self.newsArray.append(contentsOf: newsResults)
+            }
         }
     }
     
@@ -95,10 +131,6 @@ class NewsFeedCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let news = newsArray[indexPath.row]
-        if indexPath.row == newsArray.count - 5 {
-            initialPage += 1
-            getNews(fromPage: initialPage)
-        }
         
         //Defining the Reuse Identifier
         var reuseIdentifier = ""
@@ -114,6 +146,26 @@ class NewsFeedCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         if let newsCell = cell as? NewsFeedCollectionViewCell {
             newsCell.news = news
+            //Set Images Using Cache
+            if let imageURL = news.imageURL {
+                let imageURLString = (imageURL.absoluteString) as NSString
+                if let cachedImage = imageCache.object(forKey: imageURLString) as? UIImage {
+                    DispatchQueue.main.async {
+                        newsCell.imageView.image = cachedImage
+                    }
+                } else {
+                    DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+                        if let imageData = try? Data(contentsOf: imageURL) {
+                            let image = UIImage(data: imageData)
+                            self?.imageCache.setObject(image!, forKey: imageURLString)
+                            DispatchQueue.main.async {
+                                newsCell.imageView.image = image
+                            }
+                            
+                        }
+                    }
+                }
+            }
         }
         
         //Set Cell Shadow

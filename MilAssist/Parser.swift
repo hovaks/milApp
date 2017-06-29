@@ -9,9 +9,6 @@
 import UIKit
 
 struct Parser {
-    var channelsDataArray: Array<Dictionary<NSObject, AnyObject>> = []
-    
-    
     static func getYoutube(completion: @escaping (Data?, Int, Error?) -> Void) {
         let urlString = "https://www.googleapis.com/youtube/v3/search?key=AIzaSyC3fha2JJYQ1-mEC97qbhcyIWLJEUMti2Y&channelId=UCH5dvlXECL-WSLwWsXl4_eg&part=snippet,id&order=date&maxResults=50"
         if let url = URL(string: urlString) {
@@ -32,8 +29,7 @@ struct Parser {
     
     static func getNews(fromPage page:Int, withHandler completion: @escaping ([News]) -> Void) {
         let calendar = Calendar.current
-        let nowDate = Date()
-        let weekEarlier = calendar.date(byAdding: .day, value: -7, to: Date())
+        let weekEarlier = calendar.date(byAdding: .day, value: -8, to: Date())
         
         var resultsArray:[News] = []
         let armenianDateDictionary = [
@@ -52,9 +48,14 @@ struct Parser {
         ]
         
         if let url = URL(string: "http://www.mil.am/hy/news/page/\(page)") {
-            let request = URLRequest(url: url)
+            var request = URLRequest(url: url)
+            request.timeoutInterval = 15
             URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
+                    if let newsFeedCollectionViewController = UIApplication.shared.keyWindow?.rootViewController as? NewsFeedCollectionViewController {
+                        newsFeedCollectionViewController.activityIndicator.stopAnimating()
+                        newsFeedCollectionViewController.errorView.isHidden = false
+                    }
                     print(error)
                 } else if let unwrappedData = data {
                     let dataString = String(data: unwrappedData, encoding: .utf8)
@@ -120,6 +121,7 @@ struct Parser {
                         }
                     }
                     DispatchQueue.main.async {
+                        print("page \(page) loaded")
                         completion(resultsArray)
                     }
                 }

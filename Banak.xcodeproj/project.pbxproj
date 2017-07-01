@@ -16,6 +16,7 @@
 		0A706A701F00164500AB7BB8 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A706A6F1F00164500AB7BB8 /* News.swift */; };
 		0A706A721F00164C00AB7BB8 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A706A711F00164C00AB7BB8 /* Parser.swift */; };
 		0AAF9BE21F08277E00AF5943 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAF9BE11F08277E00AF5943 /* NewsViewController.swift */; };
+		0AAF9BEA1F083B5A00AF5943 /* SearchReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAF9BE91F083B5A00AF5943 /* SearchReusableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		0A706A6F1F00164500AB7BB8 /* News.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		0A706A711F00164C00AB7BB8 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		0AAF9BE11F08277E00AF5943 /* NewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
+		0AAF9BE91F083B5A00AF5943 /* SearchReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchReusableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			children = (
 				0A706A6A1F0012F700AB7BB8 /* Supporting Files */,
 				0A706A5C1F0012D900AB7BB8 /* Main.storyboard */,
+				0AAF9BE91F083B5A00AF5943 /* SearchReusableView.swift */,
 				0AAF9BE11F08277E00AF5943 /* NewsViewController.swift */,
 				0A706A6B1F0015E400AB7BB8 /* NewsFeedCollectionViewCell.swift */,
 				0A706A6D1F0015E700AB7BB8 /* NewsFeedCollectionViewController.swift */,
@@ -163,6 +166,7 @@
 				0AAF9BE21F08277E00AF5943 /* NewsViewController.swift in Sources */,
 				0A706A701F00164500AB7BB8 /* News.swift in Sources */,
 				0A706A591F0012D900AB7BB8 /* AppDelegate.swift in Sources */,
+				0AAF9BEA1F083B5A00AF5943 /* SearchReusableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

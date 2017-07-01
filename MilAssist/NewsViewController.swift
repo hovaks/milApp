@@ -11,6 +11,8 @@ import UIKit
 class NewsViewController: UIViewController {
     
     @IBOutlet weak var webView: UIWebView!
+    
+    var news: News!
     var articleURL: URL?
     
     override func viewDidLoad() {

@@ -10,14 +10,10 @@ import UIKit
 
 private var reuseIdentifier = "Cell"
 
-class NewsFeedCollectionViewController: UICollectionViewController {
+class NewsFeedCollectionViewController: UICollectionViewController, UISearchBarDelegate {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var errorView: UIView!
-    var setCounter = 0
-    
-    var refresher: UIRefreshControl!
-    let imageCache = NSCache<NSString, AnyObject>()
     
     var newsArray: [News] = [] {
         didSet {
@@ -27,6 +23,15 @@ class NewsFeedCollectionViewController: UICollectionViewController {
             }
         }
     }
+    
+    var refresher: UIRefreshControl!
+    
+    let imageCache = NSCache<NSString, AnyObject>()
+    
+    //Search
+    var searchController: UISearchController!
+    var searchText: String!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +56,8 @@ class NewsFeedCollectionViewController: UICollectionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        //self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        self.title = "Feed"
         
         populate()
         
@@ -61,14 +68,19 @@ class NewsFeedCollectionViewController: UICollectionViewController {
         if !activityIndicator.isAnimating {
             DispatchQueue.main.async {
                 self.activityIndicator.startAnimating()
-            }// Taftalogia
+            }// Taftalogia?
             
         }
     }
     
-    @objc private func populate() {
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         
-        newsArray = []
+        // Show the navigation bar on other view controllers
+        //self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    @objc private func populate() {
         
         getNews(toPage: 3) { newResults in
             self.newsArray = newResults
@@ -115,12 +127,11 @@ class NewsFeedCollectionViewController: UICollectionViewController {
             let destintaion = segue.destination as! NewsViewController
             if let indexPaths = collectionView?.indexPathsForSelectedItems {
                 for indexPath in indexPaths {
-                let news = newsArray[indexPath.row]
-                destintaion.articleURL = news.articleURL
+                    let news = newsArray[indexPath.row]
+                    destintaion.news = news
+                    destintaion.articleURL = news.articleURL
                 }
             }
-            
-                print("segueing")
         }
     }
     
@@ -221,5 +232,34 @@ class NewsFeedCollectionViewController: UICollectionViewController {
      
      }
      */
+    
+    // MARK: Search and UISearchBarDelegate
+    
+    @IBAction func searchClicked(_ sender: UIBarButtonItem) {
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.delegate = self
+        searchController.searchBar.tintColor = UIColor.gray
+        self.present(searchController, animated: true, completion: nil)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        searchText = searchBar.text
+        self.navigationItem.title = searchText.uppercased()
+        var searchResults: [News] = []
+        for news in newsArray {
+                let newsTitle = news.title
+            if (newsTitle?.contains(searchText))! {
+                searchResults.append(news)
+            }
+        }
+        newsArray = searchResults
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        populate()
+    }
     
 }

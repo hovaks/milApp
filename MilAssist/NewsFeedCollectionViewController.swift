@@ -8,30 +8,39 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-var setCounter = 0
+private var reuseIdentifier = "Cell"
 
 class NewsFeedCollectionViewController: UICollectionViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var errorView: UIView!
+    var setCounter = 0
     
+    var refresher: UIRefreshControl!
     let imageCache = NSCache<NSString, AnyObject>()
+    
     var newsArray: [News] = [] {
         didSet {
-            setCounter += 1
-            newsArray.sort{ $0.dateCreated! > $1.dateCreated! }
-            //Check the need to reload
-            if setCounter == 1 {
-                activityIndicator.stopAnimating()
-                collectionView?.reloadData()
-                setCounter = 0
+            DispatchQueue.main.async {
+                self.collectionView?.reloadData()
+                self.refresher.endRefreshing()
             }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Setting the UI Refresher
+        refresher = UIRefreshControl()
+        refresher.attributedTitle = NSAttributedString(string: "Refreshing")
+        refresher.addTarget(self, action: #selector(self.populate), for: UIControlEvents.valueChanged)
+        collectionView?.insertSubview(refresher, at: 0)
+        
+        
+        
+        
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         // Register cell classes
@@ -42,81 +51,79 @@ class NewsFeedCollectionViewController: UICollectionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        errorView.isHidden = true
-        //getNews(toPage: 3)
-        getVideos()
+        
+        populate()
+        
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+        } //???? Recheck
+        
         if !activityIndicator.isAnimating {
-            activityIndicator.startAnimating()
+            DispatchQueue.main.async {
+                self.activityIndicator.startAnimating()
+            }// Taftalogia
+            
         }
     }
     
-    func getVideos() {
-        var videosArray: [News] = []
-        Parser.getYoutube { (data, response, error) in
+    @objc private func populate() {
+        
+        newsArray = []
+        
+        getNews(toPage: 3) { newResults in
+            self.newsArray = newResults
+            self.newsArray.sort{ $0.dateCreated! > $1.dateCreated! }
+        }
+    }
+    
+    func getNews(toPage page: Int, completionHandler: @escaping ([News]) -> Void) {
+        
+        var newNewsArray: [News] = []
+        let downloadGroup = DispatchGroup()
+        downloadGroup.enter()
+        Parser.getYoutube { videoResults, response, error in
             if error != nil {
                 print(error!)
             } else {
-                do {
-                    if let resultDictionary = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? Dictionary<String, AnyObject> {
-                        let items = resultDictionary["items"] as! Array<AnyObject>
-                        for item in items {
-                            
-                            let itemDictionary = item as! Dictionary<String, AnyObject>
-                            let snippetDictionary = itemDictionary["snippet"] as! Dictionary<String, AnyObject>
-                            
-                            //Setting Date Range
-                            let calendar = Calendar.current
-                            let weekEarlier = calendar.date(byAdding: .day, value: -8, to: Date())
-                            
-                            //Getting Date and checking for Date Range
-                            if let dateCreatedString = snippetDictionary["publishedAt"] as? String {
-                                let dateFormatter = DateFormatter()
-                                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-                                if let dateCreated = dateFormatter.date(from: dateCreatedString) {
-                                    if dateCreated > weekEarlier! {
-                                        var videoNews = News()
-                                        videoNews.dateCreated = dateCreated
-                                        videoNews.title = snippetDictionary["title"] as? String
-                                        videoNews.description = snippetDictionary["description"] as? String
-                                        let imageDictionary = snippetDictionary["thumbnails"] as! Dictionary<String, AnyObject>
-                                        let imageDictionaryDefault = imageDictionary["high"] as! Dictionary<String, AnyObject>
-                                        if let imageURLString = imageDictionaryDefault["url"] as? String {
-                                            videoNews.imageURL = URL(string: imageURLString)
-                                        }
-                                        videoNews.articleURL = URL(string: "youtube.com")
-                                        videoNews.type = .video
-                                        videosArray.append(videoNews)
-                                    }
-                                }
-                            }
-                        }
-                        self.newsArray.append(contentsOf: videosArray)
-                    }
-                } catch let error as NSError {
-                    print(error.localizedDescription)
+                downloadGroup.leave()
+                newNewsArray.append(contentsOf: videoResults)
+            }
+        }
+        
+        for page in 1...page {
+            downloadGroup.enter()
+            Parser.getNews(fromPage: page) { newsResults, response, error in
+                if error != nil {
+                    print(error!)
+                } else {
+                    downloadGroup.leave()
+                    newNewsArray.append(contentsOf: newsResults)
                 }
             }
         }
-    }
-    
-    func getNews(toPage page: Int) {
-        for page in 1...page {
-            print("getting from page\(page)")
-            Parser.getNews(fromPage: page) { newsResults in
-                self.newsArray.append(contentsOf: newsResults)
-            }
+        
+        downloadGroup.notify(queue: DispatchQueue.main) {
+            completionHandler(newNewsArray)
         }
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using [segue destinationViewController].
-     // Pass the selected object to the new view controller.
-     }
-     */
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "newsSegue" {
+            let destintaion = segue.destination as! NewsViewController
+            if let indexPaths = collectionView?.indexPathsForSelectedItems {
+                for indexPath in indexPaths {
+                let news = newsArray[indexPath.row]
+                destintaion.articleURL = news.articleURL
+                }
+            }
+            
+                print("segueing")
+        }
+    }
+    
     
     // MARK: UICollectionViewDataSource
     
@@ -130,10 +137,9 @@ class NewsFeedCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let news = newsArray[indexPath.row]
         
         //Defining the Reuse Identifier
-        var reuseIdentifier = ""
+        let news = newsArray[indexPath.row]
         switch news.type {
         case .article? :
             reuseIdentifier = "NewsCell"
@@ -143,9 +149,13 @@ class NewsFeedCollectionViewController: UICollectionViewController {
             break
         }
         
+        //Getting Cell
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        
         if let newsCell = cell as? NewsFeedCollectionViewCell {
+            
             newsCell.news = news
+            
             //Set Images Using Cache
             if let imageURL = news.imageURL {
                 let imageURLString = (imageURL.absoluteString) as NSString
@@ -160,6 +170,7 @@ class NewsFeedCollectionViewController: UICollectionViewController {
                             self?.imageCache.setObject(image!, forKey: imageURLString)
                             DispatchQueue.main.async {
                                 newsCell.imageView.image = image
+                                newsCell.imageLoadActivityIndicator.stopAnimating()
                             }
                             
                         }

@@ -9,27 +9,82 @@
 import UIKit
 
 struct Parser {
-    static func getYoutube(completion: @escaping (Data?, Int, Error?) -> Void) {
+    
+    static func getYoutube(completionHandler: @escaping ([News], URLResponse?, Error?) -> Void) {
+        
+        var videosArray: [News] = []
+        
         let urlString = "https://www.googleapis.com/youtube/v3/search?key=AIzaSyC3fha2JJYQ1-mEC97qbhcyIWLJEUMti2Y&channelId=UCH5dvlXECL-WSLwWsXl4_eg&part=snippet,id&order=date&maxResults=50"
+        
         if let url = URL(string: urlString) {
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
             URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
+                    if let newsFeedCollectionViewController = UIApplication.shared.keyWindow?.rootViewController as? NewsFeedCollectionViewController {
+                        DispatchQueue.main.async {
+                            newsFeedCollectionViewController.activityIndicator.stopAnimating()
+                            newsFeedCollectionViewController.view.bringSubview(toFront: newsFeedCollectionViewController.errorView)
+                            newsFeedCollectionViewController.errorView.isHidden = false
+                        }
+                    }
                     print(error)
                 } else {
+                    do {
+                        if let resultDictionary = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? Dictionary<String, AnyObject> {
+                            let items = resultDictionary["items"] as! Array<AnyObject>
+                            for item in items {
+                                
+                                let itemDictionary = item as! Dictionary<String, AnyObject>
+                                let snippetDictionary = itemDictionary["snippet"] as! Dictionary<String, AnyObject>
+                                
+                                //Chech Date, if in range get other values and append
+                                let calendar = Calendar.current
+                                let weekEarlier = calendar.date(byAdding: .day, value: -8, to: Date())
+                                if let dateCreatedString = snippetDictionary["publishedAt"] as? String {
+                                    let dateFormatter = DateFormatter()
+                                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                                    if let dateCreated = dateFormatter.date(from: dateCreatedString) {
+                                        if dateCreated > weekEarlier! {
+                                            var videoNews = News()
+                                            //Setting Date, Title, Description
+                                            videoNews.dateCreated = dateCreated
+                                            videoNews.title = snippetDictionary["title"] as? String
+                                            videoNews.description = snippetDictionary["description"] as? String
+                                            //Setting imageURL
+                                            let imageDictionary = snippetDictionary["thumbnails"] as! Dictionary<String, AnyObject>
+                                            let imageDictionaryDefault = imageDictionary["high"] as! Dictionary<String, AnyObject>
+                                            if let imageURLString = imageDictionaryDefault["url"] as? String {
+                                                videoNews.imageURL = URL(string: imageURLString)
+                                            }
+                                            //Setting Article URL
+                                            let itemDictionary = item as! Dictionary<String, AnyObject>
+                                            let idDictionary = itemDictionary["id"] as! Dictionary<String, AnyObject>
+                                            if let videoId = idDictionary["videoId"] as? String {
+                                                var articleURLString = "https://www.youtube.com/watch?v="
+                                                articleURLString.append("\(videoId)")
+                                                videoNews.articleURL = URL(string: articleURLString)
+                                            }
+                                            //Setting The Type and appending
+                                            videoNews.type = .video
+                                            videosArray.append(videoNews)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } catch let error as NSError {
+                        print(error.localizedDescription)
+                    }
                     DispatchQueue.main.async {
-                        completion(data, (response as! HTTPURLResponse).statusCode, error)
+                        completionHandler(videosArray, response, error)
                     }
                 }
                 }.resume()
         }
     }
-    
-    
-    static func getNews(fromPage page:Int, withHandler completion: @escaping ([News]) -> Void) {
-        let calendar = Calendar.current
-        let weekEarlier = calendar.date(byAdding: .day, value: -8, to: Date())
+
+    static func getNews(fromPage page:Int, completionHandler: @escaping ([News], URLResponse?, Error?) -> Void) {
         
         var resultsArray:[News] = []
         let armenianDateDictionary = [
@@ -49,12 +104,15 @@ struct Parser {
         
         if let url = URL(string: "http://www.mil.am/hy/news/page/\(page)") {
             var request = URLRequest(url: url)
-            request.timeoutInterval = 15
+            request.timeoutInterval = 20
             URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
                     if let newsFeedCollectionViewController = UIApplication.shared.keyWindow?.rootViewController as? NewsFeedCollectionViewController {
-                        newsFeedCollectionViewController.activityIndicator.stopAnimating()
-                        newsFeedCollectionViewController.errorView.isHidden = false
+                        DispatchQueue.main.async {
+                            newsFeedCollectionViewController.activityIndicator.stopAnimating()
+                            newsFeedCollectionViewController.view.bringSubview(toFront: newsFeedCollectionViewController.errorView)
+                            newsFeedCollectionViewController.errorView.isHidden = false
+                        }
                     }
                     print(error)
                 } else if let unwrappedData = data {
@@ -63,18 +121,24 @@ struct Parser {
                         let containersCount = newsContainers.count
                         for newsContainer in newsContainers[1..<containersCount] {
                             
-                            //Parse Date
+                            //Chech Date, if in range get other values and append
                             var dateContainer = newsContainer.components(separatedBy: "<img src=\"pics/calendar.svg\">")
                             dateContainer = dateContainer[1].components(separatedBy: "<div>")
                             dateContainer = dateContainer[1].components(separatedBy: "</div>")
-                            
                             let dateStringArmenianSeperated = dateContainer[0].components(separatedBy: " ")
+                            
+                            //Create Date Components
                             var components = DateComponents()
                             components.day = Int(dateStringArmenianSeperated[0])
                             components.month = armenianDateDictionary[dateStringArmenianSeperated[1]]
                             components.year = Int(dateStringArmenianSeperated[2])
+                            
+                            //Check Range
+                            let calendar = Calendar.current
+                            let weekEarlier = calendar.date(byAdding: .day, value: -8, to: Date())
                             let date = calendar.date(from: components)
                             if date! > weekEarlier! {
+                                
                                 //Parse Image URL
                                 var imageContainer = newsContainer.components(separatedBy: "<img src=\"")
                                 imageContainer = imageContainer[1].components(separatedBy: "class=\"img-responsive img1\">")
@@ -115,17 +179,26 @@ struct Parser {
                                 description = descriptionContainer[0]
                                 
                                 //Create News
-                                let newsEntry = News(imageURL: imageURL, dateCreated: date, articleURL: articleURL, title: title, description: description, type: .article)
+                                let newsEntry = News(imageURL: imageURL,
+                                                     dateCreated:date,
+                                                     articleURL: articleURL,
+                                                     title: title, description: description,
+                                                     type: .article)
+                                
+                                //Append
                                 resultsArray.append(newsEntry)
                             }
                         }
                     }
                     DispatchQueue.main.async {
-                        print("page \(page) loaded")
-                        completion(resultsArray)
+                        completionHandler(resultsArray, response, error)
                     }
                 }
                 }.resume()
         }
+    }
+    
+    func getArticleByURL(url: URL?) -> News {
+        return News()
     }
 }

@@ -15,6 +15,7 @@ class NewsFeedCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var imageLoadActivityIndicator: UIActivityIndicatorView!
     
     var news: News? { didSet { updateUI() } }
     
@@ -31,6 +32,7 @@ class NewsFeedCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         imageView.image = #imageLiteral(resourceName: "ImagePlaceholder")
+        imageLoadActivityIndicator.startAnimating() //Recheck for work
         super.prepareForReuse()
     }
 }

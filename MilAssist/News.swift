@@ -9,8 +9,7 @@
 import Foundation
 import UIKit
 
-struct News
-{
+struct News {
     var imageURL: URL?
     var dateCreated: Date?
     var articleURL: URL?

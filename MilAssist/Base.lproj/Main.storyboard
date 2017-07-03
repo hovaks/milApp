@@ -13,7 +13,7 @@
         <scene sceneID="9yZ-Ty-w6C">
             <objects>
                 <collectionViewController id="sQn-xu-Av8" customClass="NewsFeedCollectionViewController" customModule="Banak" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="mwd-SO-sER">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="mwd-SO-sER">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.90065768029954696" alpha="1" colorSpace="calibratedWhite"/>
@@ -91,17 +91,12 @@
                                             <rect key="frame" x="10" y="170" width="365" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M4e-rp-Gvh">
-                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="30"/>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M4e-rp-Gvh">
+                                                    <rect key="frame" x="10" y="5" width="20" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <state key="normal" title="Հավանել"/>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aO4-Lc-719">
-                                                    <rect key="frame" x="75" y="0.0" width="70" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <state key="normal" title="Տարածել"/>
+                                                    <state key="normal" title="Հավանել" image="likeButton"/>
+                                                    <state key="selected" image="likeButtonFilled"/>
+                                                    <state key="highlighted" image="likeButtonFilled"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cSg-4E-lSu">
                                                     <rect key="frame" x="100" y="0.0" width="257" height="30"/>
@@ -110,6 +105,13 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aO4-Lc-719">
+                                                    <rect key="frame" x="40" y="5" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Տարածել" image="shareButton"/>
+                                                    <state key="selected" image="likeButtonFilled"/>
+                                                    <state key="highlighted" image="shareButtonFilled"/>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="0.90000000000000002" colorSpace="calibratedWhite"/>
                                         </view>
@@ -184,11 +186,19 @@
                                             <rect key="frame" x="10" y="170" width="365" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kEI-Uk-FIU">
-                                                    <rect key="frame" x="75" y="0.0" width="70" height="30"/>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CiY-Nb-aQq">
+                                                    <rect key="frame" x="10" y="5" width="20" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <state key="normal" title="Տարածել"/>
+                                                    <state key="normal" title="Հավանել" image="likeButton"/>
+                                                    <state key="selected" image="likeButtonFilled"/>
+                                                    <state key="highlighted" image="likeButtonFilled"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vv8-fk-7w1">
+                                                    <rect key="frame" x="40" y="5" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Տարածել" image="shareButton"/>
+                                                    <state key="selected" image="likeButtonFilled"/>
+                                                    <state key="highlighted" image="shareButtonFilled"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="20 հունիսի 2017 " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VRB-7h-64J">
                                                     <rect key="frame" x="100" y="0.0" width="257" height="30"/>
@@ -197,12 +207,6 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KmQ-hk-EKa">
-                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <state key="normal" title="Հավանել"/>
-                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="0.90000000000000002" colorSpace="calibratedWhite"/>
                                         </view>
@@ -259,17 +263,25 @@
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x0H-og-ram" userLabel="colorIdentifier">
                                             <rect key="frame" x="0.0" y="0.0" width="10" height="200"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" red="0.92941176470588238" green="0.38039215686274508" blue="0.054901960784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" red="0.89019607840000003" green="0.49019607840000001" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                         </view>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tly-Wj-DbS" userLabel="actionView">
                                             <rect key="frame" x="10" y="170" width="365" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fek-jC-FzI">
-                                                    <rect key="frame" x="75" y="0.0" width="70" height="30"/>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pgc-hg-2HN">
+                                                    <rect key="frame" x="10" y="5" width="20" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <state key="normal" title="Տարածել"/>
+                                                    <state key="normal" title="Հավանել" image="likeButton"/>
+                                                    <state key="selected" image="likeButtonFilled"/>
+                                                    <state key="highlighted" image="likeButtonFilled"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PQu-m3-brn">
+                                                    <rect key="frame" x="40" y="5" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Տարածել" image="shareButton"/>
+                                                    <state key="selected" image="likeButtonFilled"/>
+                                                    <state key="highlighted" image="shareButtonFilled"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="20 հունիսի 2017 " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jh3-PL-9VM">
                                                     <rect key="frame" x="100" y="0.0" width="257" height="30"/>
@@ -278,12 +290,6 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="szS-WI-ei4">
-                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <state key="normal" title="Հավանել"/>
-                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="0.90000000000000002" colorSpace="calibratedWhite"/>
                                         </view>
@@ -460,7 +466,11 @@
     </scenes>
     <resources>
         <image name="ImagePlaceholder" width="454" height="454"/>
+        <image name="likeButton" width="20" height="20"/>
+        <image name="likeButtonFilled" width="20" height="20"/>
         <image name="maintenance" width="175" height="175"/>
+        <image name="shareButton" width="20" height="20"/>
+        <image name="shareButtonFilled" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="wyJ-0t-RCC"/>

@@ -10,10 +10,11 @@ import UIKit
 
 private var reuseIdentifier = "Cell"
 
-class NewsFeedCollectionViewController: UICollectionViewController, UISearchBarDelegate {
+    class NewsFeedCollectionViewController: UICollectionViewController, UISearchBarDelegate {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var errorView: UIView!
+    var hasSearched = false
     
     var newsArray: [News] = [] {
         didSet {
@@ -35,10 +36,12 @@ class NewsFeedCollectionViewController: UICollectionViewController, UISearchBarD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("Larhos loaded")
+        self.navigationController?.navigationBar.topItem?.title = ""
         
         //Setting the UI Refresher
         refresher = UIRefreshControl()
-        refresher.attributedTitle = NSAttributedString(string: "Refreshing")
+        refresher.attributedTitle = NSAttributedString(string: "Բեռնվում է")
         refresher.addTarget(self, action: #selector(self.populate), for: UIControlEvents.valueChanged)
         collectionView?.insertSubview(refresher, at: 0)
         
@@ -57,9 +60,12 @@ class NewsFeedCollectionViewController: UICollectionViewController, UISearchBarD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //self.navigationController?.setNavigationBarHidden(true, animated: animated)
-        self.title = "Feed"
-        
+        self.title = "Լրահոս"
+        if !hasSearched {
         populate()
+        } else {
+            searchClicked()
+        }
         
         DispatchQueue.main.async {
             self.activityIndicator.stopAnimating()
@@ -73,12 +79,7 @@ class NewsFeedCollectionViewController: UICollectionViewController, UISearchBarD
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
         
-        // Show the navigation bar on other view controllers
-        //self.navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
     
     @objc private func populate() {
         
@@ -114,6 +115,12 @@ class NewsFeedCollectionViewController: UICollectionViewController, UISearchBarD
             }
         }
         
+        downloadGroup.enter()
+        Parser.get1000PlusNews(fromPage: 1) { (newsResults, respone, error) in
+            downloadGroup.leave()
+            newNewsArray.append(contentsOf: newsResults)
+        }
+        
         downloadGroup.notify(queue: DispatchQueue.main) {
             completionHandler(newNewsArray)
         }
@@ -123,7 +130,8 @@ class NewsFeedCollectionViewController: UICollectionViewController, UISearchBarD
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "newsSegue" {
+        switch segue.identifier! {
+        case "newsSegue":
             let destintaion = segue.destination as! NewsViewController
             if let indexPaths = collectionView?.indexPathsForSelectedItems {
                 for indexPath in indexPaths {
@@ -132,8 +140,17 @@ class NewsFeedCollectionViewController: UICollectionViewController, UISearchBarD
                     destintaion.articleURL = news.articleURL
                 }
             }
+        case "searchSegue":
+            let destintaion = segue.destination as! searchTableViewController
+            destintaion.newsArray = newsArray
+        default:
+            break
         }
     }
+        
+//    @IBAction func unwindToRootViewController(segue: UIStoryboardSegue) {
+//        print("Unwind to Root View Controller")
+//    }
     
     
     // MARK: UICollectionViewDataSource
@@ -156,6 +173,8 @@ class NewsFeedCollectionViewController: UICollectionViewController, UISearchBarD
             reuseIdentifier = "NewsCell"
         case .video?:
             reuseIdentifier = "VideoCell"
+        case .article1000Plus?:
+            reuseIdentifier = "News1000PlusCell"
         default:
             break
         }
@@ -197,8 +216,9 @@ class NewsFeedCollectionViewController: UICollectionViewController, UISearchBarD
         cell.layer.shadowOpacity = 1.0
         cell.layer.masksToBounds = false
         cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.contentView.layer.cornerRadius).cgPath
-        cell.layer.masksToBounds = true
-        cell.layer.cornerRadius = 20
+        //Uncomment to enable round corners
+//        cell.layer.masksToBounds = true
+//        cell.layer.cornerRadius = 20
         return cell
     }
     
@@ -235,7 +255,7 @@ class NewsFeedCollectionViewController: UICollectionViewController, UISearchBarD
     
     // MARK: Search and UISearchBarDelegate
     
-    @IBAction func searchClicked(_ sender: UIBarButtonItem) {
+    func searchClicked() {
         searchController = UISearchController(searchResultsController: nil)
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.delegate = self
@@ -246,7 +266,7 @@ class NewsFeedCollectionViewController: UICollectionViewController, UISearchBarD
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         searchText = searchBar.text
-        self.navigationItem.title = searchText.uppercased()
+        //self.navigationItem.title = searchText.uppercased()
         var searchResults: [News] = []
         for news in newsArray {
                 let newsTitle = news.title

@@ -21,5 +21,6 @@ struct News {
 enum NewsType {
     case article
     case video
+    case article1000Plus
 }
 

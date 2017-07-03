@@ -17,6 +17,7 @@ class NewsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.topItem?.title = ""
         if let urlToLoad = articleURL {
             webView.loadRequest(URLRequest(url: urlToLoad))
         }

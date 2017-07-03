@@ -83,7 +83,7 @@ struct Parser {
                 }.resume()
         }
     }
-
+    
     static func getNews(fromPage page:Int, completionHandler: @escaping ([News], URLResponse?, Error?) -> Void) {
         
         var resultsArray:[News] = []
@@ -198,7 +198,106 @@ struct Parser {
         }
     }
     
-    func getArticleByURL(url: URL?) -> News {
-        return News()
+    static func get1000PlusNews(fromPage page:Int, completionHandler: @escaping ([News], URLResponse?, Error?) -> Void) {
+        
+        var resultsArray:[News] = []
+        let armenianDateDictionary = [
+            "Հունվ": 1,
+            "Փետ": 2,
+            "Մար": 3,
+            "Ապր": 4,
+            "Մայ": 5,
+            "Հուն": 6,
+            "Հուլ": 7,
+            "Օգոս": 8,
+            "Սեպտ": 9,
+            "Հոկտ": 10,
+            "Նոյեմ": 11,
+            "Դեկտ": 12
+        ]
+        
+        if let url = URL(string: "https://www.1000plus.am/hy/news?page=\(page)") {
+            var request = URLRequest(url: url)
+            request.timeoutInterval = 20
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    if let newsFeedCollectionViewController = UIApplication.shared.keyWindow?.rootViewController as? NewsFeedCollectionViewController {
+                        DispatchQueue.main.async {
+                            newsFeedCollectionViewController.activityIndicator.stopAnimating()
+                            newsFeedCollectionViewController.view.bringSubview(toFront: newsFeedCollectionViewController.errorView)
+                            newsFeedCollectionViewController.errorView.isHidden = false
+                        }
+                    }
+                    print(error)
+                } else if let unwrappedData = data {
+                    let dataString = String(data: unwrappedData, encoding: .utf8)
+                    if let newsContainers = dataString?.components(separatedBy: "<div class=\"news-list\">") {
+                        let containersCount = newsContainers.count
+                        for newsContainer in newsContainers[1..<containersCount] {
+                            
+                            //Chech Date, if in range get other values and append
+                            var dateContainer = newsContainer.components(separatedBy: "<div class=\"slider-date\">")
+                            var dateDayContainer = dateContainer[1].components(separatedBy: "<p class=\"fs38 helvetica-neue-thin\">")
+                            dateDayContainer = dateDayContainer[1].components(separatedBy: "</p>")
+                            var dateMonthContainer = dateContainer[1].components(separatedBy: "<p class=\"fs15 month\">")
+                            dateMonthContainer = dateMonthContainer[1].components(separatedBy: ",</p>")
+                            var dateYearContainer = dateContainer[1].components(separatedBy: "<p class=\"fs15 helvetica-neue-thin\">")
+                            dateYearContainer = dateYearContainer[1].components(separatedBy: "</p>")
+                            
+                            //Create Date Components
+                            var components = DateComponents()
+                            components.day = Int(dateDayContainer[0])
+                            components.month = armenianDateDictionary[dateMonthContainer[0]]
+                            components.year = Int(dateYearContainer[0])
+                            
+                            //Check Range
+                            let calendar = Calendar.current
+                            let weekEarlier = calendar.date(byAdding: .day, value: -8, to: Date())
+                            let date = calendar.date(from: components)
+                            if date! > weekEarlier! {
+                                
+                                //Parse Image URL
+                                var imageContainer = newsContainer.components(separatedBy: "<div class=\"news-content\">")
+                                imageContainer = imageContainer[1].components(separatedBy: "<img src=\"")
+                                imageContainer = imageContainer[1].components(separatedBy: "\"  />")
+                                let imageURL = URL(string:"\(imageContainer[0])")
+                                
+                                //Parse Article URL
+                                var URLContainer = newsContainer.components(separatedBy: "<div class=\"news-right-content\">")
+                                URLContainer = URLContainer[1].components(separatedBy: "<h3><a href=\"")
+                                URLContainer = URLContainer[1].components(separatedBy: "\" class=")
+                                var urlString = "https://www.1000plus.am/hy/" + URLContainer[0]
+                                urlString = urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+                                let articleURL = URL(string: urlString)
+
+                                //Parse Title
+                                var titleContainer = newsContainer.components(separatedBy: "class=\"db fb fs18 trans-color\">")
+                                titleContainer = titleContainer[1].components(separatedBy: "</a></h3>")
+                                let title = titleContainer[0]
+                                
+                                //Parse Description
+                                var descriptionContainer = newsContainer.components(separatedBy: "<div class=\"description\"><p>")
+                                descriptionContainer = descriptionContainer[1].components(separatedBy: "</div>")
+                                let description = descriptionContainer[0]
+                                
+                                //Create News
+                                let newsEntry = News(imageURL: imageURL,
+                                                     dateCreated:date,
+                                                     articleURL: articleURL,
+                                                     title: title, description: description,
+                                                     type: .article1000Plus)
+                                
+                                //Append
+                                resultsArray.append(newsEntry)
+                            }
+                        }
+                    }
+                    DispatchQueue.main.async {
+                        completionHandler(resultsArray, response, error)
+                    }
+                }
+                }.resume()
+        }
     }
+    
 }

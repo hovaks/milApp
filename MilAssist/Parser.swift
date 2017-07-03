@@ -269,7 +269,7 @@ struct Parser {
                                 var urlString = "https://www.1000plus.am/hy/" + URLContainer[0]
                                 urlString = urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
                                 let articleURL = URL(string: urlString)
-
+                                
                                 //Parse Title
                                 var titleContainer = newsContainer.components(separatedBy: "class=\"db fb fs18 trans-color\">")
                                 titleContainer = titleContainer[1].components(separatedBy: "</a></h3>")
@@ -296,6 +296,131 @@ struct Parser {
                         completionHandler(resultsArray, response, error)
                     }
                 }
+                }.resume()
+        }
+    }
+    
+    static func get1000PlusContent (completionHandler: @escaping ([String : [String : String]], URLResponse?, Error?) -> Void) {
+        var resultsDictionary = [String : [String : String]]()
+        
+        if let url = URL(string: "https://www.1000plus.am/en") {
+            var request = URLRequest(url: url)
+            request.timeoutInterval = 20
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    if let newsFeedCollectionViewController = UIApplication.shared.keyWindow?.rootViewController as? NewsFeedCollectionViewController {
+                        DispatchQueue.main.async {
+                            newsFeedCollectionViewController.activityIndicator.stopAnimating()
+                            newsFeedCollectionViewController.view.bringSubview(toFront: newsFeedCollectionViewController.errorView)
+                            newsFeedCollectionViewController.errorView.isHidden = false
+                        }
+                        print(error)
+                    }
+                } else if let unwrappedData = data {
+                        
+                        let dataString = String(data: unwrappedData, encoding: .utf8)
+                        if let infoContainer = dataString?.components(separatedBy: "<div class=\"accounts-wrapper\">") {
+                            
+                            //Get Total Funds
+                            let totalFundsContainer = infoContainer[1].components(separatedBy: "<p class=\"accounts-title fs18\">Total funds</p>")
+                            //By AMD
+                            let totalFundsAMDContainer = totalFundsContainer[1].components(separatedBy: "<span data-cur=\"amd\" data-sum=\"")
+                            let totalFundsAMD = totalFundsAMDContainer[1].components(separatedBy: "\" class=\"ccy db fs30 amd trans-background active\">դր.</span>")[0]
+                            //By USD
+                            let totalFundsUSDContainer = totalFundsContainer[1].components(separatedBy: "<span data-cur=\"usd\" data-sum=\"")
+                            let totalFundsUSD = totalFundsUSDContainer[1].components(separatedBy: "\" class=\"ccy db fs30 roboto-regular trans-background\">&#36;</span>")[0]
+                            //By RUB
+                            let totalFundsRUBContainer = totalFundsContainer[1].components(separatedBy: "<span data-cur=\"rub\" data-sum=\"")
+                            let totalFundsRUB = totalFundsRUBContainer[1].components(separatedBy: "\" class=\"ccy db fs30 roboto-regular trans-background\">&#8381;</span>")[0]
+                            //By EUR
+                            let totalFundsEURContainer = totalFundsContainer[1].components(separatedBy: "<span data-cur=\"eur\" data-sum=\"")
+                            let totalFundsEUR = totalFundsEURContainer[1].components(separatedBy: "\" class=\"ccy db fs30 roboto-regular trans-background\">&euro;</span>")[0]
+                            //Create dictionary
+                            let totalFundsDictionary = [
+                                "AMD" : totalFundsAMD,
+                                "USD" : totalFundsUSD,
+                                "RUB" : totalFundsRUB,
+                                "EUR" : totalFundsEUR
+                            ]
+                            
+                            //Get Stamp Duty
+                            let stampDutyContainer = infoContainer[1].components(separatedBy: "<h5 class=\"title\">Stamp duty</h5>")
+                            //By AMD
+                            let stampDutyAMDContainer = stampDutyContainer[1].components(separatedBy: "<span class=\"amd dn\">")
+                            let stampDutyAMD = stampDutyAMDContainer[1].components(separatedBy: "</span>")[0]
+                            //By USD
+                            let stampDutyUSDContainer = stampDutyContainer[1].components(separatedBy: "<span class=\"usd dn\">")
+                            let stampDutyUSD = stampDutyUSDContainer[1].components(separatedBy: "</span>")[0]
+                            //By RUB
+                            let stampDutyRUBContainer = stampDutyContainer[1].components(separatedBy: "<span class=\"rub dn\">")
+                            let stampDutyRUB = stampDutyRUBContainer[1].components(separatedBy: "</span>")[0]
+                            //By EUR
+                            let stampDutyEURContainer = stampDutyContainer[1].components(separatedBy: "<span class=\"eur dn\">")
+                            let stampDutyEUR = stampDutyEURContainer[1].components(separatedBy: "</span>")[0]
+                            //Create dictionary
+                            let stampDutyDictionary = [
+                                "AMD" : stampDutyAMD,
+                                "USD" : stampDutyUSD,
+                                "RUB" : stampDutyRUB,
+                                "EUR" : stampDutyEUR
+                            ]
+                            
+                            //Get Donations
+                            let donationsContainer = infoContainer[1].components(separatedBy: "<h5 class=\"title\">Donations</h5>")
+                            //By AMD
+                            let donationsAMDContainer = donationsContainer[1].components(separatedBy: "<span class=\"amd dn\">")
+                            let donationsAMD = donationsAMDContainer[1].components(separatedBy: "</span>")[0]
+                            //By USD
+                            let donationsUSDContainer = donationsContainer[1].components(separatedBy: "<span class=\"usd dn\">")
+                            let donationsUSD = donationsUSDContainer[1].components(separatedBy: "</span>")[0]
+                            //By RUB
+                            let donationsRUBContainer = donationsContainer[1].components(separatedBy: "<span class=\"rub dn\">")
+                            let donationsRUB = donationsRUBContainer[1].components(separatedBy: "</span>")[0]
+                            //By EUR
+                            let donationsEURContainer = donationsContainer[1].components(separatedBy: "<span class=\"eur dn\">")
+                            let donationsEUR = donationsEURContainer[1].components(separatedBy: "</span>")[0]
+                            //Create dictionary
+                            let donationsDictionary = [
+                                "AMD" : donationsAMD,
+                                "USD" : donationsUSD,
+                                "RUB" : donationsRUB,
+                                "EUR" : donationsEUR
+                            ]
+                            
+                            //Get Compansations
+                            let compensationsContainer = infoContainer[1].components(separatedBy: "<p class=\"accounts-title fs18\">Compensations</p>")
+                            //By AMD
+                            let compensationsAMDContainer = compensationsContainer[1].components(separatedBy: "<span data-cur=\"amd\" data-sum=\"")
+                            let compensationsAMD = compensationsAMDContainer[1].components(separatedBy: "\" class=\"ccy db fs30 amd trans-background active\">դր.</span>")[0]
+                            //By USD
+                            let compensationsUSDContainer = compensationsContainer[1].components(separatedBy: "<span data-cur=\"usd\" data-sum=\"")
+                            let compensationsUSD = compensationsUSDContainer[1].components(separatedBy: "\" class=\"ccy db fs30 roboto-regular trans-background\">&#36;</span>")[0]
+                            //By RUB
+                            let compensationsRUBContainer = compensationsContainer[1].components(separatedBy: "<span data-cur=\"rub\" data-sum=\"")
+                            let compensationsRUB = compensationsRUBContainer[1].components(separatedBy: "\" class=\"ccy db fs30 roboto-regular trans-background\">&#8381;</span>")[0]
+                            //By EUR
+                            let compensationsEURContainer = compensationsContainer[1].components(separatedBy: "<span data-cur=\"eur\" data-sum=\"")
+                            let compensationsEUR = compensationsEURContainer[1].components(separatedBy: "\" class=\"ccy db fs30 roboto-regular trans-background\">&euro;</span>")[0]
+                            //Create dictionary
+                            let compensationsDictionary = [
+                                "AMD" : compensationsAMD,
+                                "USD" : compensationsUSD,
+                                "RUB" : compensationsRUB,
+                                "EUR" : compensationsEUR
+                            ]
+                            
+                            //Create Info Dictionary
+                            resultsDictionary = [
+                                "TotalFunds" : totalFundsDictionary,
+                                "StampDuty" : stampDutyDictionary,
+                                "Donations" : donationsDictionary,
+                                "Compensations" : compensationsDictionary
+                            ]
+                        }
+                    }
+                    DispatchQueue.main.async {
+                        completionHandler(resultsDictionary, response, error)
+                    }
                 }.resume()
         }
     }

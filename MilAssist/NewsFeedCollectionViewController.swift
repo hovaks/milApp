@@ -141,7 +141,7 @@ private var reuseIdentifier = "Cell"
                 }
             }
         case "searchSegue":
-            let destintaion = segue.destination as! searchTableViewController
+            let destintaion = segue.destination as! SearchTableViewController
             destintaion.newsArray = newsArray
         default:
             break

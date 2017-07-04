@@ -362,7 +362,7 @@
         <!--Search Table View Controller-->
         <scene sceneID="fhG-y8-0E1">
             <objects>
-                <tableViewController id="dJO-rf-DFN" customClass="searchTableViewController" customModule="Banak" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="dJO-rf-DFN" customClass="SearchTableViewController" customModule="Banak" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="HaL-7u-ifa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -448,12 +448,14 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
+                        <outlet property="delegate" destination="Np9-7Q-JGz" id="pZG-GN-dDi"/>
                         <segue destination="Hax-Yt-WjQ" kind="relationship" relationship="rootViewController" id="Md7-7Y-oJE"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VZk-Ty-Y8I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="Np9-7Q-JGz" customClass="_000PlusViewController" customModule="Banak" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="-108" y="2589.3553223388308"/>
+            <point key="canvasLocation" x="-108" y="3142"/>
         </scene>
         <!--Plus View Controller-->
         <scene sceneID="bgU-AG-cea">
@@ -597,6 +599,9 @@
                                 <state key="normal" title="Նվիրաբերե՛լ">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="DWz-xL-fGe" kind="custom" identifier="showAction" customClass="CustomSegue" customModule="Banak" customModuleProvider="target" id="LZB-Oe-c72"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B1f-wE-o0m">
                                 <rect key="frame" x="59" y="547" width="256" height="42"/>
@@ -606,6 +611,9 @@
                                 <state key="normal" title="Փնտրել">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="T2a-Ll-tNF" kind="custom" customClass="CustomSegue" customModule="Banak" customModuleProvider="target" id="JjF-wd-Tty"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Կատարված հատուցումներ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EsK-QG-rH6">
                                 <rect key="frame" x="16" y="339" width="256" height="21"/>
@@ -634,7 +642,173 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AYm-UR-ogS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="844" y="2588.4557721139431"/>
+            <point key="canvasLocation" x="844" y="3141"/>
+        </scene>
+        <!--Find View Controller-->
+        <scene sceneID="MTy-hS-otL">
+            <objects>
+                <viewController storyboardIdentifier="Find Donation" id="T2a-Ll-tNF" customClass="FindViewController" customModule="Banak" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wWJ-kq-rek"/>
+                        <viewControllerLayoutGuide type="bottom" id="UZf-B6-ziU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="AgR-ai-VjC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7al-ph-pcK">
+                                <rect key="frame" x="10" y="10" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="closeButton"/>
+                                <connections>
+                                    <action selector="close:" destination="T2a-Ll-tNF" eventType="touchUpInside" id="JyG-oO-2ZI"/>
+                                    <action selector="close:" destination="DWz-xL-fGe" eventType="touchUpInside" id="taJ-yV-rjE"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Նվիրաբերություններ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SR3-8C-PVy">
+                                <rect key="frame" x="41" y="100" width="293" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m0u-H5-svv">
+                                <rect key="frame" x="41" y="146" width="293" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <string key="text">Դուք կարող եք փնտրել տվյալները՝ 
+մուտքագրելով</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" ԷԼ.ՓՈՍՏ" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JDK-P0-f1Z">
+                                <rect key="frame" x="16" y="308" width="343" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" ՀՎՀՀ" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Abj-iO-qzW">
+                                <rect key="frame" x="16" y="217" width="343" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="կամ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="moZ-J5-zxg">
+                                <rect key="frame" x="168" y="275" width="39" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="կամ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DVH-j7-eBo">
+                                <rect key="frame" x="168" y="366" width="39" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" ՀԾՀ" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e3Y-Jj-c0t">
+                                <rect key="frame" x="16" y="395" width="343" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y1v-df-DRm">
+                                <rect key="frame" x="59" y="504" width="256" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.92941176469999998" green="0.3803921569" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Փնտրել">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
+                    <connections>
+                        <outlet property="EINtextField" destination="Abj-iO-qzW" id="azV-ky-8KQ"/>
+                        <outlet property="SSNTextField" destination="e3Y-Jj-c0t" id="QZL-lg-rRq"/>
+                        <outlet property="emailTextField" destination="JDK-P0-f1Z" id="BzF-Uw-XDP"/>
+                        <outlet property="findButton" destination="Y1v-df-DRm" id="pMP-LJ-Gl5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BAM-tj-NL5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1829.5999999999999" y="3477.2113943028489"/>
+        </scene>
+        <!--Donate View Controller-->
+        <scene sceneID="cO4-bj-aWw">
+            <objects>
+                <viewController id="DWz-xL-fGe" customClass="DonateViewController" customModule="Banak" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pWV-T7-glH"/>
+                        <viewControllerLayoutGuide type="bottom" id="18J-IV-tnx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="K1v-oL-yJB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W3a-CG-AcU">
+                                <rect key="frame" x="10" y="10" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="closeButton"/>
+                                <connections>
+                                    <action selector="close:" destination="DWz-xL-fGe" eventType="touchUpInside" id="BVv-g2-hq2"/>
+                                </connections>
+                            </button>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ttR-VQ-ufr">
+                                <rect key="frame" x="16" y="20" width="343" height="150"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" Անուն" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dgn-j5-D6J">
+                                <rect key="frame" x="16" y="214" width="343" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" Ազգանուն" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nEB-w7-qnR">
+                                <rect key="frame" x="16" y="284" width="343" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" էլ. փոստ" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zn1-fY-4pj">
+                                <rect key="frame" x="16" y="354" width="343" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Nk-1y-Woy">
+                                <rect key="frame" x="59" y="490" width="256" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.92941176469999998" green="0.3803921569" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Նվիրաբերե՛լ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
+                    <connections>
+                        <outlet property="donateButton" destination="0Nk-1y-Woy" id="RxN-hU-CbA"/>
+                        <outlet property="emailTextField" destination="zn1-fY-4pj" id="zA4-Cj-OS6"/>
+                        <outlet property="nameTextField" destination="Dgn-j5-D6J" id="2tr-t9-tLV"/>
+                        <outlet property="pickerView" destination="ttR-VQ-ufr" id="Ngh-Pj-lCX"/>
+                        <outlet property="surnameTextField" destination="nEB-w7-qnR" id="fGH-Bf-yMA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b9e-gW-gPs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1829.5999999999999" y="2810.6446776611697"/>
         </scene>
         <!--Հետադարձ կապ-->
         <scene sceneID="NWu-nq-4Hl">
@@ -651,7 +825,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fOg-kT-jUQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-108" y="3286.5067466266869"/>
+            <point key="canvasLocation" x="-108" y="4273"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="bDo-Vb-C5X">
@@ -679,7 +853,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r7R-UO-DMP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="844" y="3286.5067466266869"/>
+            <point key="canvasLocation" x="844" y="4273"/>
         </scene>
         <!--Այլ-->
         <scene sceneID="TvP-my-Lfe">
@@ -696,7 +870,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ABo-Is-DcA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-108" y="4051.1244377811099"/>
+            <point key="canvasLocation" x="-108" y="5038"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="7f5-qH-wKD">
@@ -724,7 +898,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="49e-jV-Mnz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="844" y="4050.2248875562223"/>
+            <point key="canvasLocation" x="844" y="5037"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="aHd-mU-Frg">
@@ -828,6 +1002,7 @@
         <image name="1000plus" width="30" height="30"/>
         <image name="ImagePlaceholder" width="454" height="454"/>
         <image name="amdIcon" width="50" height="50"/>
+        <image name="closeButton" width="30" height="30"/>
         <image name="contactTab" width="30" height="30"/>
         <image name="contactTabFilled" width="30" height="30"/>
         <image name="likeButton" width="20" height="20"/>
@@ -843,7 +1018,7 @@
         <image name="socialTabFilled" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Pei-RZ-Gcx"/>
         <segue reference="wyJ-0t-RCC"/>
+        <segue reference="Hv9-lK-NnE"/>
     </inferredMetricsTieBreakers>
 </document>

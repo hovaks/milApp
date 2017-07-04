@@ -1,5 +1,5 @@
 //
-//  searchTableViewController.swift
+//  SearchTableViewController.swift
 //  Banak
 //
 //  Created by Hovak Davtyan on 7/2/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class searchTableViewController: UITableViewController, UISearchBarDelegate {
+class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     var newsArray: [News] = []
     
     //Search

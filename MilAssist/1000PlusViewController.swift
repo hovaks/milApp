@@ -8,7 +8,7 @@
 
 import UIKit
 
-class _000PlusViewController: UIViewController {
+class _000PlusViewController: UIViewController, UINavigationControllerDelegate, UIViewControllerTransitioningDelegate {
     
     //Label Outlets
     @IBOutlet weak var totalFundsValueLabel: UILabel!
@@ -92,14 +92,23 @@ class _000PlusViewController: UIViewController {
     }
     
     
-    /*
+
      // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
+    let customPresentAnimationController = CustomPresentAnimationController()
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showAction" {
+            let toViewController = segue.destination as? DonateViewController
+            toViewController?.transitioningDelegate = self
+        }
+    }
+    
+    func navigationController(_ navigationController: UINavigationController,
+                              animationControllerFor operation: UINavigationControllerOperation,
+                              from fromVC: UIViewController,
+                              to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        let animationController = CustomPresentAnimationController()
+        return animationController
+    }
 }

@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A268E331F09384E0001B95D /* searchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A268E321F09384E0001B95D /* searchTableViewController.swift */; };
+		0A268E331F09384E0001B95D /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A268E321F09384E0001B95D /* SearchTableViewController.swift */; };
 		0A35B9901F0AB8C300BFA94D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A35B98F1F0AB8C300BFA94D /* Assets.xcassets */; };
 		0A5A7E6D1F0AE50500A904BC /* 1000PlusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A7E6C1F0AE50500A904BC /* 1000PlusViewController.swift */; };
+		0A5A7E751F0B1E0400A904BC /* DonateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A7E741F0B1E0400A904BC /* DonateViewController.swift */; };
+		0A5A7E791F0B20E500A904BC /* CustomPresentAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A7E781F0B20E500A904BC /* CustomPresentAnimationController.swift */; };
+		0A5A7E7B1F0B28E100A904BC /* CustomSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A7E7A1F0B28E100A904BC /* CustomSegue.swift */; };
+		0A5A7E7D1F0B78EA00A904BC /* FindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A7E7C1F0B78EA00A904BC /* FindViewController.swift */; };
 		0A706A591F0012D900AB7BB8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A706A581F0012D900AB7BB8 /* AppDelegate.swift */; };
 		0A706A5E1F0012D900AB7BB8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A706A5C1F0012D900AB7BB8 /* Main.storyboard */; };
 		0A706A631F0012D900AB7BB8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A706A611F0012D900AB7BB8 /* LaunchScreen.storyboard */; };
@@ -22,9 +26,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0A268E321F09384E0001B95D /* searchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = searchTableViewController.swift; sourceTree = "<group>"; };
+		0A268E321F09384E0001B95D /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		0A35B98F1F0AB8C300BFA94D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A5A7E6C1F0AE50500A904BC /* 1000PlusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = 1000PlusViewController.swift; sourceTree = "<group>"; };
+		0A5A7E741F0B1E0400A904BC /* DonateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonateViewController.swift; sourceTree = "<group>"; };
+		0A5A7E781F0B20E500A904BC /* CustomPresentAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPresentAnimationController.swift; sourceTree = "<group>"; };
+		0A5A7E7A1F0B28E100A904BC /* CustomSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSegue.swift; sourceTree = "<group>"; };
+		0A5A7E7C1F0B78EA00A904BC /* FindViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindViewController.swift; sourceTree = "<group>"; };
 		0A706A551F0012D900AB7BB8 /* Banak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Banak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A706A581F0012D900AB7BB8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A706A5D1F0012D900AB7BB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -70,8 +78,10 @@
 			children = (
 				0A706A6A1F0012F700AB7BB8 /* Supporting Files */,
 				0A706A5C1F0012D900AB7BB8 /* Main.storyboard */,
+				0A5A7E741F0B1E0400A904BC /* DonateViewController.swift */,
+				0A5A7E7C1F0B78EA00A904BC /* FindViewController.swift */,
 				0A5A7E6C1F0AE50500A904BC /* 1000PlusViewController.swift */,
-				0A268E321F09384E0001B95D /* searchTableViewController.swift */,
+				0A268E321F09384E0001B95D /* SearchTableViewController.swift */,
 				0AAF9BE91F083B5A00AF5943 /* SearchReusableView.swift */,
 				0AAF9BE11F08277E00AF5943 /* NewsViewController.swift */,
 				0A706A6B1F0015E400AB7BB8 /* NewsFeedCollectionViewCell.swift */,
@@ -85,6 +95,8 @@
 		0A706A6A1F0012F700AB7BB8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0A5A7E7A1F0B28E100A904BC /* CustomSegue.swift */,
+				0A5A7E781F0B20E500A904BC /* CustomPresentAnimationController.swift */,
 				0A706A581F0012D900AB7BB8 /* AppDelegate.swift */,
 				0A706A611F0012D900AB7BB8 /* LaunchScreen.storyboard */,
 				0A706A641F0012D900AB7BB8 /* Info.plist */,
@@ -166,15 +178,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A5A7E791F0B20E500A904BC /* CustomPresentAnimationController.swift in Sources */,
 				0A706A6C1F0015E400AB7BB8 /* NewsFeedCollectionViewCell.swift in Sources */,
 				0A706A6E1F0015E700AB7BB8 /* NewsFeedCollectionViewController.swift in Sources */,
 				0A706A721F00164C00AB7BB8 /* Parser.swift in Sources */,
+				0A5A7E7B1F0B28E100A904BC /* CustomSegue.swift in Sources */,
+				0A5A7E7D1F0B78EA00A904BC /* FindViewController.swift in Sources */,
 				0AAF9BE21F08277E00AF5943 /* NewsViewController.swift in Sources */,
 				0A5A7E6D1F0AE50500A904BC /* 1000PlusViewController.swift in Sources */,
 				0A706A701F00164500AB7BB8 /* News.swift in Sources */,
 				0A706A591F0012D900AB7BB8 /* AppDelegate.swift in Sources */,
+				0A5A7E751F0B1E0400A904BC /* DonateViewController.swift in Sources */,
 				0AAF9BEA1F083B5A00AF5943 /* SearchReusableView.swift in Sources */,
-				0A268E331F09384E0001B95D /* searchTableViewController.swift in Sources */,
+				0A268E331F09384E0001B95D /* SearchTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

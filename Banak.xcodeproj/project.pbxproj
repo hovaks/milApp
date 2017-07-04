@@ -7,10 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A268E331F09384E0001B95D /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A268E321F09384E0001B95D /* SearchTableViewController.swift */; };
 		0A35B9901F0AB8C300BFA94D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A35B98F1F0AB8C300BFA94D /* Assets.xcassets */; };
 		0A5A7E6D1F0AE50500A904BC /* 1000PlusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A7E6C1F0AE50500A904BC /* 1000PlusViewController.swift */; };
-		0A5A7E751F0B1E0400A904BC /* DonateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A7E741F0B1E0400A904BC /* DonateViewController.swift */; };
 		0A5A7E791F0B20E500A904BC /* CustomPresentAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A7E781F0B20E500A904BC /* CustomPresentAnimationController.swift */; };
 		0A5A7E7B1F0B28E100A904BC /* CustomSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A7E7A1F0B28E100A904BC /* CustomSegue.swift */; };
 		0A5A7E7D1F0B78EA00A904BC /* FindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5A7E7C1F0B78EA00A904BC /* FindViewController.swift */; };
@@ -23,14 +21,14 @@
 		0A706A721F00164C00AB7BB8 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A706A711F00164C00AB7BB8 /* Parser.swift */; };
 		0AAF9BE21F08277E00AF5943 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAF9BE11F08277E00AF5943 /* NewsViewController.swift */; };
 		0AAF9BEA1F083B5A00AF5943 /* SearchReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAF9BE91F083B5A00AF5943 /* SearchReusableView.swift */; };
+		0AC6F9C41F0B89500037EAD7 /* SearchTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC6F9C31F0B89500037EAD7 /* SearchTableTableViewController.swift */; };
+		0AC6F9C61F0B89B40037EAD7 /* DonateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC6F9C51F0B89B40037EAD7 /* DonateViewController.swift */; };
 		B742EDE3BFC7DD183C347E31 /* Pods_Banak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24597496B584C633656B0CFB /* Pods_Banak.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0A268E321F09384E0001B95D /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		0A35B98F1F0AB8C300BFA94D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A5A7E6C1F0AE50500A904BC /* 1000PlusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = 1000PlusViewController.swift; sourceTree = "<group>"; };
-		0A5A7E741F0B1E0400A904BC /* DonateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonateViewController.swift; sourceTree = "<group>"; };
 		0A5A7E781F0B20E500A904BC /* CustomPresentAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPresentAnimationController.swift; sourceTree = "<group>"; };
 		0A5A7E7A1F0B28E100A904BC /* CustomSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSegue.swift; sourceTree = "<group>"; };
 		0A5A7E7C1F0B78EA00A904BC /* FindViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindViewController.swift; sourceTree = "<group>"; };
@@ -45,6 +43,8 @@
 		0A706A711F00164C00AB7BB8 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		0AAF9BE11F08277E00AF5943 /* NewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		0AAF9BE91F083B5A00AF5943 /* SearchReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchReusableView.swift; sourceTree = "<group>"; };
+		0AC6F9C31F0B89500037EAD7 /* SearchTableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableTableViewController.swift; sourceTree = "<group>"; };
+		0AC6F9C51F0B89B40037EAD7 /* DonateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonateViewController.swift; sourceTree = "<group>"; };
 		24597496B584C633656B0CFB /* Pods_Banak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Banak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F4C9ECD9224BB263C157035 /* Pods-Banak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Banak.release.xcconfig"; path = "Pods/Target Support Files/Pods-Banak/Pods-Banak.release.xcconfig"; sourceTree = "<group>"; };
 		F36558785FF2EF5BD1FD6949 /* Pods-Banak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Banak.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Banak/Pods-Banak.debug.xcconfig"; sourceTree = "<group>"; };
@@ -85,11 +85,11 @@
 			children = (
 				0A706A6A1F0012F700AB7BB8 /* Supporting Files */,
 				0A706A5C1F0012D900AB7BB8 /* Main.storyboard */,
-				0A5A7E741F0B1E0400A904BC /* DonateViewController.swift */,
 				0A5A7E7C1F0B78EA00A904BC /* FindViewController.swift */,
+				0AC6F9C51F0B89B40037EAD7 /* DonateViewController.swift */,
 				0A5A7E6C1F0AE50500A904BC /* 1000PlusViewController.swift */,
-				0A268E321F09384E0001B95D /* SearchTableViewController.swift */,
 				0AAF9BE91F083B5A00AF5943 /* SearchReusableView.swift */,
+				0AC6F9C31F0B89500037EAD7 /* SearchTableTableViewController.swift */,
 				0AAF9BE11F08277E00AF5943 /* NewsViewController.swift */,
 				0A706A6B1F0015E400AB7BB8 /* NewsFeedCollectionViewCell.swift */,
 				0A706A6D1F0015E700AB7BB8 /* NewsFeedCollectionViewController.swift */,
@@ -258,14 +258,14 @@
 				0A706A6E1F0015E700AB7BB8 /* NewsFeedCollectionViewController.swift in Sources */,
 				0A706A721F00164C00AB7BB8 /* Parser.swift in Sources */,
 				0A5A7E7B1F0B28E100A904BC /* CustomSegue.swift in Sources */,
+				0AC6F9C61F0B89B40037EAD7 /* DonateViewController.swift in Sources */,
 				0A5A7E7D1F0B78EA00A904BC /* FindViewController.swift in Sources */,
+				0AC6F9C41F0B89500037EAD7 /* SearchTableTableViewController.swift in Sources */,
 				0AAF9BE21F08277E00AF5943 /* NewsViewController.swift in Sources */,
 				0A5A7E6D1F0AE50500A904BC /* 1000PlusViewController.swift in Sources */,
 				0A706A701F00164500AB7BB8 /* News.swift in Sources */,
 				0A706A591F0012D900AB7BB8 /* AppDelegate.swift in Sources */,
-				0A5A7E751F0B1E0400A904BC /* DonateViewController.swift in Sources */,
 				0AAF9BEA1F083B5A00AF5943 /* SearchReusableView.swift in Sources */,
-				0A268E331F09384E0001B95D /* SearchTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

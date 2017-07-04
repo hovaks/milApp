@@ -46,5 +46,10 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>com.paypal.ppclient.touch.v1</string>
+        <string>com.paypal.ppclient.touch.v2</string>
+    </array>
 </dict>
 </plist>

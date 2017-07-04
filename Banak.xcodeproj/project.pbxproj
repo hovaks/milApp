@@ -23,6 +23,7 @@
 		0A706A721F00164C00AB7BB8 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A706A711F00164C00AB7BB8 /* Parser.swift */; };
 		0AAF9BE21F08277E00AF5943 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAF9BE11F08277E00AF5943 /* NewsViewController.swift */; };
 		0AAF9BEA1F083B5A00AF5943 /* SearchReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAF9BE91F083B5A00AF5943 /* SearchReusableView.swift */; };
+		B742EDE3BFC7DD183C347E31 /* Pods_Banak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24597496B584C633656B0CFB /* Pods_Banak.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,9 @@
 		0A706A711F00164C00AB7BB8 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		0AAF9BE11F08277E00AF5943 /* NewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		0AAF9BE91F083B5A00AF5943 /* SearchReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchReusableView.swift; sourceTree = "<group>"; };
+		24597496B584C633656B0CFB /* Pods_Banak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Banak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F4C9ECD9224BB263C157035 /* Pods-Banak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Banak.release.xcconfig"; path = "Pods/Target Support Files/Pods-Banak/Pods-Banak.release.xcconfig"; sourceTree = "<group>"; };
+		F36558785FF2EF5BD1FD6949 /* Pods-Banak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Banak.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Banak/Pods-Banak.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B742EDE3BFC7DD183C347E31 /* Pods_Banak.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +67,8 @@
 			children = (
 				0A706A571F0012D900AB7BB8 /* MilAssist */,
 				0A706A561F0012D900AB7BB8 /* Products */,
+				68569D5D1A4ED57068D1B4BB /* Pods */,
+				19B2DD2EFAA5B83BD1F493B8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -105,6 +112,23 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		19B2DD2EFAA5B83BD1F493B8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				24597496B584C633656B0CFB /* Pods_Banak.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		68569D5D1A4ED57068D1B4BB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F36558785FF2EF5BD1FD6949 /* Pods-Banak.debug.xcconfig */,
+				9F4C9ECD9224BB263C157035 /* Pods-Banak.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -112,9 +136,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A706A671F0012D900AB7BB8 /* Build configuration list for PBXNativeTarget "Banak" */;
 			buildPhases = (
+				777F27460A374FC188DF3B27 /* [CP] Check Pods Manifest.lock */,
 				0A706A511F0012D900AB7BB8 /* Sources */,
 				0A706A521F0012D900AB7BB8 /* Frameworks */,
 				0A706A531F0012D900AB7BB8 /* Resources */,
+				215F3E4D24894D83E3FA8AB7 /* [CP] Embed Pods Frameworks */,
+				3E8F4715AF64BCB24A1B8DFD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -172,6 +199,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		215F3E4D24894D83E3FA8AB7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Banak/Pods-Banak-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3E8F4715AF64BCB24A1B8DFD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Banak/Pods-Banak-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		777F27460A374FC188DF3B27 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0A706A511F0012D900AB7BB8 /* Sources */ = {
@@ -313,6 +388,7 @@
 		};
 		0A706A681F0012D900AB7BB8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F36558785FF2EF5BD1FD6949 /* Pods-Banak.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3JSC65UQ9L;
@@ -326,6 +402,7 @@
 		};
 		0A706A691F0012D900AB7BB8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F4C9ECD9224BB263C157035 /* Pods-Banak.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3JSC65UQ9L;

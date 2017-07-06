@@ -18,9 +18,9 @@ struct News {
     var type: NewsType?
 }
 
-enum NewsType {
-    case article
-    case video
-    case article1000Plus
+enum NewsType : Int {
+    case article = 1
+    case video = 2
+    case article1000Plus = 3
 }
 

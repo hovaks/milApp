@@ -10,7 +10,7 @@ import UIKit
 
 private var reuseIdentifier = "Cell"
 
-    class NewsFeedCollectionViewController: UICollectionViewController, UISearchBarDelegate {
+class NewsFeedCollectionViewController: UICollectionViewController, UISearchBarDelegate {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var errorView: UIView!
@@ -36,7 +36,7 @@ private var reuseIdentifier = "Cell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Larhos loaded")
+        
         self.navigationController?.navigationBar.topItem?.title = ""
         
         //Setting the UI Refresher
@@ -44,10 +44,6 @@ private var reuseIdentifier = "Cell"
         refresher.attributedTitle = NSAttributedString(string: "Բեռնվում է")
         refresher.addTarget(self, action: #selector(self.populate), for: UIControlEvents.valueChanged)
         collectionView?.insertSubview(refresher, at: 0)
-        
-        
-        
-        
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -59,33 +55,42 @@ private var reuseIdentifier = "Cell"
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //self.navigationController?.setNavigationBarHidden(true, animated: animated)
-        self.title = "Լրահոս"
-        if !hasSearched {
-        populate()
-        } else {
-            searchClicked()
-        }
         
-        DispatchQueue.main.async {
-            self.activityIndicator.stopAnimating()
-        } //???? Recheck
+        self.title = "Լրահոս"
         
         if !activityIndicator.isAnimating {
             DispatchQueue.main.async {
                 self.activityIndicator.startAnimating()
-            }// Taftalogia?
-            
+            }
+        }
+        
+        if !hasSearched {
+            populate()
+        } else {
+            searchClicked()
         }
     }
     
-        
+    
     
     @objc private func populate() {
         
         getNews(toPage: 3) { newResults in
-            self.newsArray = newResults
-            self.newsArray.sort{ $0.dateCreated! > $1.dateCreated! }
+            
+            //Check if news have been added
+            let newsResultsSorted = newResults.sorted {
+                if $0.dateCreated == $1.dateCreated && $0.type != $1.type {
+                    return ($0.type?.rawValue)! < ($1.type?.rawValue)!
+                } else {
+                    return $0.dateCreated! > $1.dateCreated!
+                }
+            }
+            
+            if self.newsArray.isEmpty || self.newsArray[0].title != newsResultsSorted[0].title {
+                self.newsArray = newsResultsSorted
+            } else {
+                return
+            }
         }
     }
     
@@ -147,10 +152,10 @@ private var reuseIdentifier = "Cell"
             break
         }
     }
-        
-//    @IBAction func unwindToRootViewController(segue: UIStoryboardSegue) {
-//        print("Unwind to Root View Controller")
-//    }
+    
+    //    @IBAction func unwindToRootViewController(segue: UIStoryboardSegue) {
+    //        print("Unwind to Root View Controller")
+    //    }
     
     
     // MARK: UICollectionViewDataSource
@@ -217,8 +222,8 @@ private var reuseIdentifier = "Cell"
         cell.layer.masksToBounds = false
         cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.contentView.layer.cornerRadius).cgPath
         //Uncomment to enable round corners
-//        cell.layer.masksToBounds = true
-//        cell.layer.cornerRadius = 20
+        //        cell.layer.masksToBounds = true
+        //        cell.layer.cornerRadius = 20
         return cell
     }
     
@@ -269,7 +274,7 @@ private var reuseIdentifier = "Cell"
         //self.navigationItem.title = searchText.uppercased()
         var searchResults: [News] = []
         for news in newsArray {
-                let newsTitle = news.title
+            let newsTitle = news.title
             if (newsTitle?.contains(searchText))! {
                 searchResults.append(news)
             }

@@ -89,6 +89,7 @@ class NewsFeedCollectionViewController: UICollectionViewController, UISearchBarD
             if self.newsArray.isEmpty || self.newsArray[0].title != newsResultsSorted[0].title {
                 self.newsArray = newsResultsSorted
             } else {
+                self.refresher.endRefreshing()
                 return
             }
         }

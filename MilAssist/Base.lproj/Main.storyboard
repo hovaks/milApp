@@ -359,10 +359,10 @@
             </objects>
             <point key="canvasLocation" x="1732" y="116.49175412293854"/>
         </scene>
-        <!--Search Table Table View Controller-->
+        <!--Search Table View Controller-->
         <scene sceneID="fhG-y8-0E1">
             <objects>
-                <tableViewController id="dJO-rf-DFN" customClass="SearchTableTableViewController" customModule="Banak" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="dJO-rf-DFN" customClass="SearchTableViewController" customModule="Banak" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="HaL-7u-ifa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -391,7 +391,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PKh-D9-TjH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-95" y="-624"/>
+            <point key="canvasLocation" x="844" y="-618"/>
         </scene>
         <!--Իրավական-->
         <scene sceneID="y4U-lG-PqL">

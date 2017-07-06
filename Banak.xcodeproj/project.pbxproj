@@ -21,7 +21,7 @@
 		0A706A721F00164C00AB7BB8 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A706A711F00164C00AB7BB8 /* Parser.swift */; };
 		0AAF9BE21F08277E00AF5943 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAF9BE11F08277E00AF5943 /* NewsViewController.swift */; };
 		0AAF9BEA1F083B5A00AF5943 /* SearchReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAF9BE91F083B5A00AF5943 /* SearchReusableView.swift */; };
-		0AC6F9C41F0B89500037EAD7 /* SearchTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC6F9C31F0B89500037EAD7 /* SearchTableTableViewController.swift */; };
+		0AC6F9C41F0B89500037EAD7 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC6F9C31F0B89500037EAD7 /* SearchTableViewController.swift */; };
 		0AC6F9C61F0B89B40037EAD7 /* DonateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC6F9C51F0B89B40037EAD7 /* DonateViewController.swift */; };
 		B742EDE3BFC7DD183C347E31 /* Pods_Banak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24597496B584C633656B0CFB /* Pods_Banak.framework */; };
 /* End PBXBuildFile section */
@@ -43,7 +43,7 @@
 		0A706A711F00164C00AB7BB8 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		0AAF9BE11F08277E00AF5943 /* NewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		0AAF9BE91F083B5A00AF5943 /* SearchReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchReusableView.swift; sourceTree = "<group>"; };
-		0AC6F9C31F0B89500037EAD7 /* SearchTableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableTableViewController.swift; sourceTree = "<group>"; };
+		0AC6F9C31F0B89500037EAD7 /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		0AC6F9C51F0B89B40037EAD7 /* DonateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonateViewController.swift; sourceTree = "<group>"; };
 		24597496B584C633656B0CFB /* Pods_Banak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Banak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F4C9ECD9224BB263C157035 /* Pods-Banak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Banak.release.xcconfig"; path = "Pods/Target Support Files/Pods-Banak/Pods-Banak.release.xcconfig"; sourceTree = "<group>"; };
@@ -89,7 +89,7 @@
 				0AC6F9C51F0B89B40037EAD7 /* DonateViewController.swift */,
 				0A5A7E6C1F0AE50500A904BC /* 1000PlusViewController.swift */,
 				0AAF9BE91F083B5A00AF5943 /* SearchReusableView.swift */,
-				0AC6F9C31F0B89500037EAD7 /* SearchTableTableViewController.swift */,
+				0AC6F9C31F0B89500037EAD7 /* SearchTableViewController.swift */,
 				0AAF9BE11F08277E00AF5943 /* NewsViewController.swift */,
 				0A706A6B1F0015E400AB7BB8 /* NewsFeedCollectionViewCell.swift */,
 				0A706A6D1F0015E700AB7BB8 /* NewsFeedCollectionViewController.swift */,
@@ -260,7 +260,7 @@
 				0A5A7E7B1F0B28E100A904BC /* CustomSegue.swift in Sources */,
 				0AC6F9C61F0B89B40037EAD7 /* DonateViewController.swift in Sources */,
 				0A5A7E7D1F0B78EA00A904BC /* FindViewController.swift in Sources */,
-				0AC6F9C41F0B89500037EAD7 /* SearchTableTableViewController.swift in Sources */,
+				0AC6F9C41F0B89500037EAD7 /* SearchTableViewController.swift in Sources */,
 				0AAF9BE21F08277E00AF5943 /* NewsViewController.swift in Sources */,
 				0A5A7E6D1F0AE50500A904BC /* 1000PlusViewController.swift in Sources */,
 				0A706A701F00164500AB7BB8 /* News.swift in Sources */,

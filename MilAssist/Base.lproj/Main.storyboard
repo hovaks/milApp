@@ -8,8 +8,13 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="weblysleekuisl.ttf">
+            <string>WeblySleekUISemilight</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--News Feed Collection View Controller-->
+        <!--Լրահոս-->
         <scene sceneID="9yZ-Ty-w6C">
             <objects>
                 <collectionViewController id="sQn-xu-Av8" customClass="NewsFeedCollectionViewController" customModule="Banak" customModuleProvider="target" sceneMemberID="viewController">
@@ -24,34 +29,13 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <view key="backgroundView" contentMode="scaleToFill" fixedFrame="YES" id="P0c-EV-wWN">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <rect key="frame" x="0.0" y="-64" width="375" height="667"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xPf-0Z-NW0">
                                     <rect key="frame" x="177" y="323" width="20" height="20"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </activityIndicatorView>
-                                <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Lj-9g-WSK">
-                                    <rect key="frame" x="0.0" y="180" width="375" height="307"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <subviews>
-                                        <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zaV-tb-gaV">
-                                            <rect key="frame" x="8" y="178" width="359" height="109"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <string key="text">Հայցում ենք Ձեր ներողամտությունը տեխնիկական խնդիրների համար։
-
-Շուտով ամեն ինչ լավ կլինի։</string>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" misplaced="YES" image="maintenance" translatesAutoresizingMaskIntoConstraints="NO" id="kZx-kv-1uh">
-                                            <rect key="frame" x="112" y="20" width="150" height="150"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
-                                    </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
@@ -80,7 +64,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qsZ-OE-Buw">
                                                     <rect key="frame" x="20" y="0.0" width="350" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="WeblySleekUISemilight" family="WeblySleek UI" pointSize="13"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.80284674659999999" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -315,21 +299,22 @@
                             <outlet property="delegate" destination="sQn-xu-Av8" id="CBh-QA-340"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="scw-ZW-E0m">
+                    <navigationItem key="navigationItem" title="Լրահոս" id="scw-ZW-E0m">
+                        <barButtonItem key="backBarButtonItem" title=" " id="bwR-6G-vRs"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="SgW-Fv-92g">
                             <connections>
-                                <segue destination="dJO-rf-DFN" kind="show" identifier="searchSegue" animates="NO" id="iez-eU-Nzd"/>
+                                <segue destination="dJO-rf-DFN" kind="show" identifier="searchSegue" id="iez-eU-Nzd"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="xPf-0Z-NW0" id="ago-bU-ET0"/>
-                        <outlet property="errorView" destination="5Lj-9g-WSK" id="PUk-HH-Kzp"/>
+                        <outlet property="searchBarItem" destination="SgW-Fv-92g" id="l6n-8j-aYV"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XHR-0F-u1q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="844" y="117.39130434782609"/>
+            <point key="canvasLocation" x="844" y="116"/>
         </scene>
         <!--News View Controller-->
         <scene sceneID="JtO-so-pIE">
@@ -362,19 +347,39 @@
         <!--Search Table View Controller-->
         <scene sceneID="fhG-y8-0E1">
             <objects>
-                <tableViewController id="dJO-rf-DFN" customClass="SearchTableViewController" customModule="Banak" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="dJO-rf-DFN" customClass="SearchTableViewController" customModule="Banak" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="HaL-7u-ifa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="3GN-uz-IF6">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchHistoryCell" id="3GN-uz-IF6" customClass="searchHistoryTableViewCell" customModule="Banak" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3GN-uz-IF6" id="zbL-Jz-aUL">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="searchHistory" translatesAutoresizingMaskIntoConstraints="NO" id="SpT-FQ-O9t">
+                                            <rect key="frame" x="15" y="12.5" width="20" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oiV-dE-E2M">
+                                            <rect key="frame" x="70" y="0.0" width="305" height="44"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="historyLink" translatesAutoresizingMaskIntoConstraints="NO" id="FPg-IH-TZe">
+                                            <rect key="frame" x="335" y="12.5" width="20" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="searchHistoryCellLabel" destination="oiV-dE-E2M" id="oDH-FP-xjs"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -385,20 +390,21 @@
                     <navigationItem key="navigationItem" id="jzg-y2-gbK">
                         <barButtonItem key="backBarButtonItem" title=" " id="7kW-MW-6mR"/>
                     </navigationItem>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <segue destination="sQn-xu-Av8" kind="show" identifier="searchResultsSegue" id="Hv9-lK-NnE"/>
+                        <segue destination="W67-wl-VFF" kind="show" identifier="searchResultsSegue" id="Q0g-Ft-vBc"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PKh-D9-TjH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="844" y="-618"/>
+            <point key="canvasLocation" x="536.79999999999995" y="-709.29535232383819"/>
         </scene>
         <!--Իրավական-->
         <scene sceneID="y4U-lG-PqL">
             <objects>
                 <navigationController id="XU8-eC-GWj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Իրավական" image="socialTab" selectedImage="socialTabFilled" id="DeO-TW-YIB"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8TE-5p-jrx">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="8TE-5p-jrx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -443,7 +449,7 @@
             <objects>
                 <navigationController id="O1F-xf-Drr" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="1000+" image="1000plus" selectedImage="1000plus" id="3p4-zP-q3P"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cup-p6-gIo">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cup-p6-gIo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -818,7 +824,7 @@
             <objects>
                 <navigationController id="PMM-GZ-uXZ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Հետադարձ կապ" image="contactTab" selectedImage="contactTabFilled" id="6pI-gi-qDP"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1lb-sL-oLi">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="1lb-sL-oLi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -863,7 +869,7 @@
             <objects>
                 <navigationController id="BSm-3f-2FA" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Այլ" image="more" selectedImage="moreFilled" id="ShF-XW-bV8"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Lli-kv-AGr">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Lli-kv-AGr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -961,7 +967,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RmI-w4-ja0" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Լրահոս" image="newsTab" selectedImage="newsTabFilled" id="9TP-3t-eYj"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="N4S-Tb-wTT">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="N4S-Tb-wTT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1001,6 +1007,291 @@
             </objects>
             <point key="canvasLocation" x="-3447" y="1902"/>
         </scene>
+        <!--News Feed Search Results Collection View Controller-->
+        <scene sceneID="xaJ-Rh-PtJ">
+            <objects>
+                <collectionViewController extendedLayoutIncludesOpaqueBars="YES" id="W67-wl-VFF" customClass="NewsFeedSearchResultsCollectionViewController" customModule="Banak" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="Aar-Zg-iP3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.90065768030000004" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bii-II-idL">
+                            <size key="itemSize" width="375" height="200"/>
+                            <size key="headerReferenceSize" width="50" height="10"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <view key="backgroundView" contentMode="scaleToFill" fixedFrame="YES" id="xaG-lf-0L2">
+                            <rect key="frame" x="0.0" y="-20" width="375" height="667"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="VideoCell" id="qo6-XO-JLa" userLabel="VideoCell" customClass="NewsFeedCollectionViewCell" customModule="Banak" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="10" width="375" height="200"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ImagePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="J4i-kc-iU5">
+                                            <rect key="frame" x="5" y="0.0" width="370" height="200"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="0.74298064720000001" green="0.74298064720000001" blue="0.74298064720000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </imageView>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="88T-Ri-o6s">
+                                            <rect key="frame" x="169" y="82" width="37" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </activityIndicatorView>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EWU-M9-vtn" userLabel="titleView">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Clf-Ay-tQj">
+                                                    <rect key="frame" x="20" y="0.0" width="350" height="45"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="0.80284674659999999" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.16459787440000001" green="0.16459787440000001" blue="0.16459787440000001" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jtc-qz-kdj" userLabel="actionView">
+                                            <rect key="frame" x="10" y="170" width="365" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kvr-f5-p5X">
+                                                    <rect key="frame" x="10" y="5" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Հավանել" image="likeButton"/>
+                                                    <state key="selected" image="likeButtonFilled"/>
+                                                    <state key="highlighted" image="likeButtonFilled"/>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KYO-fI-yJE">
+                                                    <rect key="frame" x="100" y="0.0" width="257" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ocK-Da-J9v">
+                                                    <rect key="frame" x="40" y="5" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Տարածել" image="shareButton"/>
+                                                    <state key="selected" image="likeButtonFilled"/>
+                                                    <state key="highlighted" image="shareButtonFilled"/>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="0.90000000000000002" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="20" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AUx-JD-eVD">
+                                            <rect key="frame" x="65" y="50" width="245" height="100"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gsX-Bz-RXx" userLabel="colorIdentifier">
+                                            <rect key="frame" x="0.0" y="0.0" width="10" height="200"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="0.81424605849999998" green="0.038084598599999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </view>
+                                    </subviews>
+                                </view>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dateLabel" destination="KYO-fI-yJE" id="9Yp-St-U5V"/>
+                                    <outlet property="descriptionLabel" destination="AUx-JD-eVD" id="oJK-vV-rAO"/>
+                                    <outlet property="imageLoadActivityIndicator" destination="88T-Ri-o6s" id="KL1-l0-WBm"/>
+                                    <outlet property="imageView" destination="J4i-kc-iU5" id="TUC-wv-hOJ"/>
+                                    <outlet property="titleLabel" destination="Clf-Ay-tQj" id="7Km-8G-y8A"/>
+                                </connections>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NewsCell" id="cCB-Oj-jOh" customClass="NewsFeedCollectionViewCell" customModule="Banak" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="220" width="375" height="200"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ImagePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="gU8-s0-18T">
+                                            <rect key="frame" x="5" y="0.0" width="370" height="200"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="0.74298064720000001" green="0.74298064720000001" blue="0.74298064720000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </imageView>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="5j9-21-lG6">
+                                            <rect key="frame" x="169" y="81" width="37" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </activityIndicatorView>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J8c-EV-UHg" userLabel="titleView">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ffu-XV-8uM">
+                                                    <rect key="frame" x="20" y="0.0" width="350" height="45"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="0.80284674659999999" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.16459787440000001" green="0.16459787440000001" blue="0.16459787440000001" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </view>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="20" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIJ-Xu-O10">
+                                            <rect key="frame" x="125" y="50" width="245" height="100"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aBB-1o-LFl" userLabel="colorIdentifier">
+                                            <rect key="frame" x="0.0" y="0.0" width="10" height="200"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="0.30171699819999998" green="0.72955184930000005" blue="0.45708504309999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kG5-0m-NaH" userLabel="actionView">
+                                            <rect key="frame" x="10" y="170" width="365" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0fw-Yd-bpN">
+                                                    <rect key="frame" x="10" y="5" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Հավանել" image="likeButton"/>
+                                                    <state key="selected" image="likeButtonFilled"/>
+                                                    <state key="highlighted" image="likeButtonFilled"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A1r-sI-aBu">
+                                                    <rect key="frame" x="40" y="5" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Տարածել" image="shareButton"/>
+                                                    <state key="selected" image="likeButtonFilled"/>
+                                                    <state key="highlighted" image="shareButtonFilled"/>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="20 հունիսի 2017 " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HiK-dQ-QHs">
+                                                    <rect key="frame" x="100" y="0.0" width="257" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="0.90000000000000002" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </subviews>
+                                </view>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dateLabel" destination="HiK-dQ-QHs" id="5M7-9g-Kga"/>
+                                    <outlet property="descriptionLabel" destination="xIJ-Xu-O10" id="oIT-Xo-K76"/>
+                                    <outlet property="imageLoadActivityIndicator" destination="5j9-21-lG6" id="8mM-ca-LB7"/>
+                                    <outlet property="imageView" destination="gU8-s0-18T" id="M9D-YW-H1s"/>
+                                    <outlet property="titleLabel" destination="ffu-XV-8uM" id="ITB-6V-BcB"/>
+                                </connections>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="News1000PlusCell" id="bDN-SR-dgN" userLabel="news1000Plus" customClass="NewsFeedCollectionViewCell" customModule="Banak" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="430" width="375" height="200"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ImagePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="j6J-zy-F3a">
+                                            <rect key="frame" x="5" y="0.0" width="370" height="200"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="0.74298064720000001" green="0.74298064720000001" blue="0.74298064720000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </imageView>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="vbz-mQ-cvp">
+                                            <rect key="frame" x="169" y="81" width="37" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </activityIndicatorView>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OZZ-AC-LAE" userLabel="titleView">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="KH8-FY-WJP">
+                                                    <rect key="frame" x="20" y="0.0" width="350" height="45"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="0.80284674659999999" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.16459787440000001" green="0.16459787440000001" blue="0.16459787440000001" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </view>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="20" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z5x-kz-MWs">
+                                            <rect key="frame" x="125" y="50" width="245" height="100"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Iuv-Yr-8X1" userLabel="colorIdentifier">
+                                            <rect key="frame" x="0.0" y="0.0" width="10" height="200"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="0.92941176469999998" green="0.3803921569" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c7P-Pt-37v" userLabel="actionView">
+                                            <rect key="frame" x="10" y="170" width="365" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OBZ-9P-lon">
+                                                    <rect key="frame" x="10" y="5" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Հավանել" image="likeButton"/>
+                                                    <state key="selected" image="likeButtonFilled"/>
+                                                    <state key="highlighted" image="likeButtonFilled"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sGv-W2-Pnv">
+                                                    <rect key="frame" x="40" y="5" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Տարածել" image="shareButton"/>
+                                                    <state key="selected" image="likeButtonFilled"/>
+                                                    <state key="highlighted" image="shareButtonFilled"/>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="20 հունիսի 2017 " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iWa-9b-Zn4">
+                                                    <rect key="frame" x="100" y="0.0" width="257" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="0.90000000000000002" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </subviews>
+                                </view>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dateLabel" destination="iWa-9b-Zn4" id="LQd-fw-uV3"/>
+                                    <outlet property="descriptionLabel" destination="Z5x-kz-MWs" id="VE9-SI-av0"/>
+                                    <outlet property="imageLoadActivityIndicator" destination="vbz-mQ-cvp" id="x4e-94-ctS"/>
+                                    <outlet property="imageView" destination="j6J-zy-F3a" id="lf5-aH-Ug2"/>
+                                    <outlet property="titleLabel" destination="KH8-FY-WJP" id="SpL-T6-8Er"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="dYR-3f-pKQ">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="10"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </collectionReusableView>
+                        <connections>
+                            <outlet property="dataSource" destination="W67-wl-VFF" id="QGg-hC-Jyl"/>
+                            <outlet property="delegate" destination="W67-wl-VFF" id="CYN-nV-CAb"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="ut2-tX-aIT">
+                        <barButtonItem key="backBarButtonItem" title=" " id="0GU-Jl-ivI"/>
+                    </navigationItem>
+                    <nil key="simulatedTopBarMetrics"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uIy-1e-6Hy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1340" y="-709.29535232383819"/>
+        </scene>
     </scenes>
     <resources>
         <image name="1000plus" width="30" height="30"/>
@@ -1009,6 +1300,7 @@
         <image name="closeButton" width="30" height="30"/>
         <image name="contactTab" width="30" height="30"/>
         <image name="contactTabFilled" width="30" height="30"/>
+        <image name="historyLink" width="20" height="20"/>
         <image name="likeButton" width="20" height="20"/>
         <image name="likeButtonFilled" width="20" height="20"/>
         <image name="maintenance" width="175" height="175"/>
@@ -1016,13 +1308,13 @@
         <image name="moreFilled" width="30" height="30"/>
         <image name="newsTab" width="30" height="30"/>
         <image name="newsTabFilled" width="30" height="30"/>
+        <image name="searchHistory" width="20" height="20"/>
         <image name="shareButton" width="20" height="20"/>
         <image name="shareButtonFilled" width="20" height="20"/>
         <image name="socialTab" width="30" height="30"/>
         <image name="socialTabFilled" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wyJ-0t-RCC"/>
-        <segue reference="Hv9-lK-NnE"/>
+        <segue reference="Ti4-7M-Ssr"/>
     </inferredMetricsTieBreakers>
 </document>

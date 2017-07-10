@@ -10,153 +10,51 @@ import UIKit
 
 private var reuseIdentifier = "Cell"
 
-class NewsFeedCollectionViewController: UICollectionViewController {
+class NewsFeedSearchResultsCollectionViewController: UICollectionViewController, UISearchBarDelegate {
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
-    var newsArray: [News] = [] {
+    var searchResults: [News] = [] {
         didSet {
             DispatchQueue.main.async {
-                self.activityIndicator.stopAnimating()
-                self.searchBarItem.isEnabled = true
                 self.collectionView?.reloadData()
-                self.refresher.endRefreshing()
             }
         }
     }
-    
-    var refresher: UIRefreshControl!
-    let imageCache = NSCache<NSString, AnyObject>()
+    var newsArray: [News] = []
+    var imageCache = NSCache<NSString, AnyObject>()
+    var searchHistory: [String] = []
     
     //Search
-    @IBOutlet weak var searchBarItem: UIBarButtonItem!
-    var searchController: UISearchController!
+    var searchBar: UISearchBar!
     var searchText: String!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Setting the UI Refresher
-        refresher = UIRefreshControl()
-        refresher.attributedTitle = NSAttributedString(string: "Բեռնվում է")
-        refresher.addTarget(self, action: #selector(self.populate), for: UIControlEvents.valueChanged)
-        collectionView?.insertSubview(refresher, at: 0)
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        // Register cell classes
+        //Register Cell
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
-        // Do any additional setup after loading the view.
+        //Add SerachBar
+        searchBar = UISearchBar()
+        searchBar.delegate = self
+        searchBar.text = searchText
+        self.navigationItem.titleView = searchBar
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func willMove(toParentViewController parent:UIViewController?)
+    {
+        super.willMove(toParentViewController: parent)
         
-        if (self.navigationController?.isNavigationBarHidden)! {
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
-        }
-        
-        if !activityIndicator.isAnimating {
-            DispatchQueue.main.async {
-                self.activityIndicator.startAnimating()
-            }
-        }
-        populate()
-    }
-    
-    
-    
-    @objc private func populate() {
-        //Disable Searching
-        DispatchQueue.main.async {
-            self.searchBarItem.isEnabled = false
-        }
-        
-        getNews(toPage: 3) { newResults in
-            
-            //Check if news have been added
-            let newsResultsSorted = newResults.sorted {
-                if $0.dateCreated == $1.dateCreated && $0.type != $1.type {
-                    return ($0.type?.rawValue)! < ($1.type?.rawValue)!
-                } else {
-                    return $0.dateCreated! > $1.dateCreated!
-                }
-            }
-            
-            if self.newsArray.isEmpty || self.newsArray[0].title != newsResultsSorted[0].title {
-                self.newsArray = newsResultsSorted
-            } else {
-                self.searchBarItem.isEnabled = true
-                self.refresher.endRefreshing()
-                return
-            }
-        }
-    }
-    
-    func getNews(toPage page: Int, completionHandler: @escaping ([News]) -> Void) {
-        
-        var newNewsArray: [News] = []
-        let downloadGroup = DispatchGroup()
-        downloadGroup.enter()
-        Parser.getYoutube { videoResults, response, error in
-            if error != nil {
-                print(error!)
-            } else {
-                downloadGroup.leave()
-                newNewsArray.append(contentsOf: videoResults)
-            }
-        }
-        
-        for page in 1...page {
-            downloadGroup.enter()
-            Parser.getNews(fromPage: page) { newsResults, response, error in
-                if error != nil {
-                    print(error!)
-                } else {
-                    downloadGroup.leave()
-                    newNewsArray.append(contentsOf: newsResults)
+        if (parent == nil) {
+            if let navigationController = self.navigationController {
+                var viewControllers = navigationController.viewControllers
+                let viewControllersCount = viewControllers.count
+                if (viewControllersCount > 2) {
+                    viewControllers.remove(at: viewControllersCount - 2)
+                    navigationController.setViewControllers(viewControllers, animated:false)
                 }
             }
         }
-        
-        downloadGroup.enter()
-        Parser.get1000PlusNews(fromPage: 1) { (newsResults, respone, error) in
-            downloadGroup.leave()
-            newNewsArray.append(contentsOf: newsResults)
-        }
-        
-        downloadGroup.notify(queue: DispatchQueue.main) {
-            completionHandler(newNewsArray)
-        }
     }
-    
-    
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier! {
-        case "newsSegue":
-            let destintaion = segue.destination as! NewsViewController
-            if let indexPaths = collectionView?.indexPathsForSelectedItems {
-                for indexPath in indexPaths {
-                    let news = newsArray[indexPath.row]
-                    destintaion.news = news
-                    destintaion.articleURL = news.articleURL
-                }
-            }
-        case "searchSegue":
-            let destintaion = segue.destination as! SearchTableViewController
-            destintaion.newsArray = newsArray
-            destintaion.imageCache = imageCache
-        default:
-            break
-        }
-    }
-    
-//    @IBAction func unwindToNewsFeed(segue: UIStoryboardSegue) {}
-    
     
     // MARK: UICollectionViewDataSource
     
@@ -166,13 +64,13 @@ class NewsFeedCollectionViewController: UICollectionViewController {
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return newsArray.count
+        return searchResults.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         //Defining the Reuse Identifier
-        let news = newsArray[indexPath.row]
+        let news = searchResults[indexPath.row]
         switch news.type {
         case .article? :
             reuseIdentifier = "NewsCell"
@@ -257,5 +155,26 @@ class NewsFeedCollectionViewController: UICollectionViewController {
      
      }
      */
+    
+    // MARK: Search and UISearchBarDelegate
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        searchText = searchBar.text
+        searchResults = []
+        for news in newsArray {
+            let newsTitle = news.title
+            if (newsTitle?.contains(searchText))! {
+                searchResults.append(news)
+            }
+        }
+        
+        //Save text for history
+        let defaults = UserDefaults.standard
+        searchHistory.append(searchText)
+        searchHistory = searchHistory.filter { $0 != "" }
+        searchHistory = searchHistory.unique()
+        defaults.set(searchHistory, forKey: "SearchHistoryArray")
+    }
     
 }

@@ -10,20 +10,35 @@ import UIKit
 
 class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     var newsArray: [News] = []
+    var searchResults: [News] = []
+    var searchBar: UISearchBar!
+    var searchHistory: [String] = [] {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
+    var imageCache = NSCache<NSString, AnyObject>()
     
     //Search
-    var searchController: UISearchController!
     var searchText: String!
     var clickedButtonState: Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("searchLoaded")
+        //Hide Navigation
+        //self.navigationController?.setNavigationBarHidden(true, animated: false)
         
-        searchController = UISearchController(searchResultsController: nil)
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.searchBar.delegate = self
-        searchController.searchBar.tintColor = UIColor.gray
+        //Get Search History
+        let defaults = UserDefaults.standard
+        searchHistory = (defaults.array(forKey: "SearchHistoryArray") as? [String]) ?? [""]
+        searchHistory = searchHistory.reversed()
+        
+        searchBar = UISearchBar()
+        searchBar.showsCancelButton = false
+        searchBar.placeholder = "Որոնում"
+        searchBar.delegate = self
+        self.navigationItem.titleView = searchBar
+        searchBar.becomeFirstResponder()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -34,7 +49,10 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.present(searchController, animated: true, completion: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
     }
     
     override func didReceiveMemoryWarning() {
@@ -46,23 +64,25 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return searchHistory.count
     }
     
-    /*
-     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-     
-     // Configure the cell...
-     
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     let cell = tableView.dequeueReusableCell(withIdentifier: "searchHistoryCell", for: indexPath) as! searchHistoryTableViewCell
+        cell.searchHistoryCellLabel.text = searchHistory[indexPath.row]
      return cell
-     }
-     */
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        searchBar.text = searchHistory[indexPath.row]
+        searchBarSearchButtonClicked(self.searchBar)
+    }
     
     /*
      // Override to support conditional editing of the table view.
@@ -106,12 +126,13 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             if identifier == "searchResultsSegue" {
-                let destination = segue.destination as! NewsFeedCollectionViewController
+                let destination = segue.destination as! NewsFeedSearchResultsCollectionViewController
                 if clickedButtonState {
-                    destination.hasSearched = true
                     destination.newsArray = newsArray
-                } else {
-                    destination.hasSearched = false
+                    destination.searchResults = searchResults
+                    destination.searchHistory = searchHistory
+                    destination.searchText = searchText
+                    destination.imageCache = imageCache
                 }
             }
         }
@@ -122,23 +143,41 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         searchText = searchBar.text
-        self.navigationItem.title = searchText.uppercased()
-        var searchResults: [News] = []
-        for news in newsArray {
-            let newsTitle = news.title
-            if (newsTitle?.contains(searchText))! {
-                searchResults.append(news)
+        
+        //Save text for history
+        let defaults = UserDefaults.standard
+        searchHistory.append(searchText)
+        searchHistory = searchHistory.filter { $0 != "" }
+        searchHistory = searchHistory.unique()
+        defaults.set(searchHistory, forKey: "SearchHistoryArray")
+        
+        
+        if let searchTextLowerCased = searchBar.text?.lowercased() {
+            for news in newsArray {
+                let newsTitle = news.title?.lowercased()
+                if (newsTitle?.contains(searchTextLowerCased))! {
+                    searchResults.append(news)
+                }
             }
+            clickedButtonState = true
+            dismiss(animated: true, completion: nil)
+            self.performSegue(withIdentifier: "searchResultsSegue", sender: searchBar)
         }
-        newsArray = searchResults
-        clickedButtonState = true
-        self.performSegue(withIdentifier: "searchResultsSegue", sender: searchBar)
-        dismiss(animated: true, completion: nil)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         clickedButtonState = false
-        self.navigationController?.popViewController(animated: true)
+        dismiss(animated: false, completion: nil)
+        self.navigationController?.popViewController(animated: false)
     }
     
+}
+
+    // MARK: - Extensions
+
+extension Sequence where Iterator.Element: Hashable {
+    func unique() -> [Iterator.Element] {
+        var alreadyAdded = Set<Iterator.Element>()
+        return self.filter { alreadyAdded.insert($0).inserted }
+    }
 }

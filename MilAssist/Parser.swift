@@ -21,13 +21,6 @@ struct Parser {
             request.httpMethod = "GET"
             URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
-                    if let newsFeedCollectionViewController = UIApplication.shared.keyWindow?.rootViewController as? NewsFeedCollectionViewController {
-                        DispatchQueue.main.async {
-                            newsFeedCollectionViewController.activityIndicator.stopAnimating()
-                            newsFeedCollectionViewController.view.bringSubview(toFront: newsFeedCollectionViewController.errorView)
-                            newsFeedCollectionViewController.errorView.isHidden = false
-                        }
-                    }
                     print(error)
                 } else {
                     do {
@@ -107,13 +100,6 @@ struct Parser {
             request.timeoutInterval = 20
             URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
-                    if let newsFeedCollectionViewController = UIApplication.shared.keyWindow?.rootViewController as? NewsFeedCollectionViewController {
-                        DispatchQueue.main.async {
-                            newsFeedCollectionViewController.activityIndicator.stopAnimating()
-                            newsFeedCollectionViewController.view.bringSubview(toFront: newsFeedCollectionViewController.errorView)
-                            newsFeedCollectionViewController.errorView.isHidden = false
-                        }
-                    }
                     print(error)
                 } else if let unwrappedData = data {
                     let dataString = String(data: unwrappedData, encoding: .utf8)
@@ -223,13 +209,6 @@ struct Parser {
             request.timeoutInterval = 20
             URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
-                    if let newsFeedCollectionViewController = UIApplication.shared.keyWindow?.rootViewController as? NewsFeedCollectionViewController {
-                        DispatchQueue.main.async {
-                            newsFeedCollectionViewController.activityIndicator.stopAnimating()
-                            newsFeedCollectionViewController.view.bringSubview(toFront: newsFeedCollectionViewController.errorView)
-                            newsFeedCollectionViewController.errorView.isHidden = false
-                        }
-                    }
                     print(error)
                 } else if let unwrappedData = data {
                     let dataString = String(data: unwrappedData, encoding: .utf8)
@@ -310,14 +289,7 @@ struct Parser {
             request.timeoutInterval = 20
             URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
-                    if let newsFeedCollectionViewController = UIApplication.shared.keyWindow?.rootViewController as? NewsFeedCollectionViewController {
-                        DispatchQueue.main.async {
-                            newsFeedCollectionViewController.activityIndicator.stopAnimating()
-                            newsFeedCollectionViewController.view.bringSubview(toFront: newsFeedCollectionViewController.errorView)
-                            newsFeedCollectionViewController.errorView.isHidden = false
-                        }
                         print(error)
-                    }
                 } else if let unwrappedData = data {
                     
                     let dataString = String(data: unwrappedData, encoding: .utf8)

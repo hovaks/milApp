@@ -52,11 +52,6 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="0.74298064720000001" green="0.74298064720000001" blue="0.74298064720000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </imageView>
-                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="V74-rQ-QZK">
-                                            <rect key="frame" x="169" y="82" width="37" height="37"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        </activityIndicatorView>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O0e-Ae-yse" userLabel="titleView">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -117,7 +112,6 @@
                                 <connections>
                                     <outlet property="dateLabel" destination="cSg-4E-lSu" id="SrK-Fb-eRn"/>
                                     <outlet property="descriptionLabel" destination="XjT-zw-CgJ" id="NfP-zG-HBH"/>
-                                    <outlet property="imageLoadActivityIndicator" destination="V74-rQ-QZK" id="CKE-q3-MVc"/>
                                     <outlet property="imageView" destination="laA-PR-dcz" id="oaE-Xv-09I"/>
                                     <outlet property="titleLabel" destination="qsZ-OE-Buw" id="qdE-Qz-s9d"/>
                                     <segue destination="4Q6-ay-nH6" kind="show" identifier="newsSegue" id="2HG-ck-aZM"/>
@@ -135,11 +129,6 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="0.74298064720812185" green="0.74298064720812185" blue="0.74298064720812185" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </imageView>
-                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="1Jm-cM-lBZ">
-                                            <rect key="frame" x="169" y="81" width="37" height="37"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        </activityIndicatorView>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OYO-EK-T53" userLabel="titleView">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -200,7 +189,6 @@
                                 <connections>
                                     <outlet property="dateLabel" destination="VRB-7h-64J" id="lfD-Xr-R9l"/>
                                     <outlet property="descriptionLabel" destination="oTq-ys-jeh" id="jae-VA-SmM"/>
-                                    <outlet property="imageLoadActivityIndicator" destination="1Jm-cM-lBZ" id="cF1-Mz-eqN"/>
                                     <outlet property="imageView" destination="aBH-kx-E8G" id="nEA-IJ-mSa"/>
                                     <outlet property="titleLabel" destination="Qks-f5-Mh4" id="HKU-4A-HjL"/>
                                     <segue destination="4Q6-ay-nH6" kind="show" identifier="newsSegue" id="Ti4-7M-Ssr"/>
@@ -218,11 +206,6 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="0.74298064720000001" green="0.74298064720000001" blue="0.74298064720000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </imageView>
-                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="jxg-aG-5M6">
-                                            <rect key="frame" x="169" y="81" width="37" height="37"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        </activityIndicatorView>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hHL-FX-Ndf" userLabel="titleView">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -283,7 +266,6 @@
                                 <connections>
                                     <outlet property="dateLabel" destination="Jh3-PL-9VM" id="slQ-ua-jyb"/>
                                     <outlet property="descriptionLabel" destination="Nrc-X6-CQu" id="qoa-MB-vuE"/>
-                                    <outlet property="imageLoadActivityIndicator" destination="jxg-aG-5M6" id="d5i-Id-4bL"/>
                                     <outlet property="imageView" destination="1Vc-Ol-KQj" id="wDe-D9-GAc"/>
                                     <outlet property="titleLabel" destination="e5P-8K-RkH" id="tVY-Wd-LK6"/>
                                     <segue destination="4Q6-ay-nH6" kind="show" identifier="newsSegue" id="wyJ-0t-RCC"/>
@@ -404,7 +386,7 @@
             <objects>
                 <navigationController id="XU8-eC-GWj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Իրավական" image="socialTab" selectedImage="socialTabFilled" id="DeO-TW-YIB"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="8TE-5p-jrx">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8TE-5p-jrx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -449,7 +431,7 @@
             <objects>
                 <navigationController id="O1F-xf-Drr" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="1000+" image="1000plus" selectedImage="1000plus" id="3p4-zP-q3P"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cup-p6-gIo">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cup-p6-gIo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -824,7 +806,7 @@
             <objects>
                 <navigationController id="PMM-GZ-uXZ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Հետադարձ կապ" image="contactTab" selectedImage="contactTabFilled" id="6pI-gi-qDP"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="1lb-sL-oLi">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1lb-sL-oLi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -869,7 +851,7 @@
             <objects>
                 <navigationController id="BSm-3f-2FA" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Այլ" image="more" selectedImage="moreFilled" id="ShF-XW-bV8"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Lli-kv-AGr">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Lli-kv-AGr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -967,7 +949,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RmI-w4-ja0" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Լրահոս" image="newsTab" selectedImage="newsTabFilled" id="9TP-3t-eYj"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="N4S-Tb-wTT">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="N4S-Tb-wTT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1039,11 +1021,6 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="0.74298064720000001" green="0.74298064720000001" blue="0.74298064720000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </imageView>
-                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="88T-Ri-o6s">
-                                            <rect key="frame" x="169" y="82" width="37" height="37"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        </activityIndicatorView>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EWU-M9-vtn" userLabel="titleView">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1104,7 +1081,6 @@
                                 <connections>
                                     <outlet property="dateLabel" destination="KYO-fI-yJE" id="9Yp-St-U5V"/>
                                     <outlet property="descriptionLabel" destination="AUx-JD-eVD" id="oJK-vV-rAO"/>
-                                    <outlet property="imageLoadActivityIndicator" destination="88T-Ri-o6s" id="KL1-l0-WBm"/>
                                     <outlet property="imageView" destination="J4i-kc-iU5" id="TUC-wv-hOJ"/>
                                     <outlet property="titleLabel" destination="Clf-Ay-tQj" id="7Km-8G-y8A"/>
                                 </connections>
@@ -1121,11 +1097,6 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="0.74298064720000001" green="0.74298064720000001" blue="0.74298064720000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </imageView>
-                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="5j9-21-lG6">
-                                            <rect key="frame" x="169" y="81" width="37" height="37"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        </activityIndicatorView>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J8c-EV-UHg" userLabel="titleView">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1186,7 +1157,6 @@
                                 <connections>
                                     <outlet property="dateLabel" destination="HiK-dQ-QHs" id="5M7-9g-Kga"/>
                                     <outlet property="descriptionLabel" destination="xIJ-Xu-O10" id="oIT-Xo-K76"/>
-                                    <outlet property="imageLoadActivityIndicator" destination="5j9-21-lG6" id="8mM-ca-LB7"/>
                                     <outlet property="imageView" destination="gU8-s0-18T" id="M9D-YW-H1s"/>
                                     <outlet property="titleLabel" destination="ffu-XV-8uM" id="ITB-6V-BcB"/>
                                 </connections>
@@ -1203,11 +1173,6 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="0.74298064720000001" green="0.74298064720000001" blue="0.74298064720000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </imageView>
-                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="vbz-mQ-cvp">
-                                            <rect key="frame" x="169" y="81" width="37" height="37"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        </activityIndicatorView>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OZZ-AC-LAE" userLabel="titleView">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1268,7 +1233,6 @@
                                 <connections>
                                     <outlet property="dateLabel" destination="iWa-9b-Zn4" id="LQd-fw-uV3"/>
                                     <outlet property="descriptionLabel" destination="Z5x-kz-MWs" id="VE9-SI-av0"/>
-                                    <outlet property="imageLoadActivityIndicator" destination="vbz-mQ-cvp" id="x4e-94-ctS"/>
                                     <outlet property="imageView" destination="j6J-zy-F3a" id="lf5-aH-Ug2"/>
                                     <outlet property="titleLabel" destination="KH8-FY-WJP" id="SpL-T6-8Er"/>
                                 </connections>

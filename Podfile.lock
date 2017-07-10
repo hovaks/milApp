@@ -27,16 +27,19 @@ PODS:
     - Braintree/UnionPay (~> 4.0)
     - BraintreeDropIn/UIKit
   - BraintreeDropIn/UIKit (5.2.1)
+  - Kingfisher (3.10.3)
 
 DEPENDENCIES:
   - Braintree/3D-Secure
   - Braintree/PayPal
   - BraintreeDropIn
+  - Kingfisher (~> 3.0)
 
 SPEC CHECKSUMS:
   Braintree: b14041582732676facd0b7237bc08cfdc0cbf988
   BraintreeDropIn: e9cecf2ec946f084476f007a7e91925016b77e91
+  Kingfisher: a0ac82dc5bcf0388dd74b294cf2cc13730c63436
 
-PODFILE CHECKSUM: 054bb5aa5e6c79ac14bc6c5558b61c6db4317b05
+PODFILE CHECKSUM: f546bc356d2e244b406c2b7d60920b7b853e1d55
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.0

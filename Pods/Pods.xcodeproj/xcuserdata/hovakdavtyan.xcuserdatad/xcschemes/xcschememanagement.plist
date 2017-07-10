@@ -24,6 +24,11 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>Kingfisher.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
 		<key>Pods-Banak.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -32,12 +37,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>2F0C0F810568D3E82219429D9D870F04</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>312B3E952FE0D7D7ECFB3CFF8C2E6CD1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>334764DC48C1CC7A8EDE19DCF69DF288</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3A3D25486B1AB263B1FFB87BF8922522</key>
 		<dict>
 			<key>primary</key>
 			<true/>

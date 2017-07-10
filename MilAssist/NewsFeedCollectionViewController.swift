@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 private var reuseIdentifier = "Cell"
 
@@ -149,7 +150,6 @@ class NewsFeedCollectionViewController: UICollectionViewController {
         case "searchSegue":
             let destintaion = segue.destination as! SearchTableViewController
             destintaion.newsArray = newsArray
-            destintaion.imageCache = imageCache
         default:
             break
         }
@@ -190,28 +190,6 @@ class NewsFeedCollectionViewController: UICollectionViewController {
         if let newsCell = cell as? NewsFeedCollectionViewCell {
             
             newsCell.news = news
-            
-            //Set Images Using Cache
-            if let imageURL = news.imageURL {
-                let imageURLString = (imageURL.absoluteString) as NSString
-                if let cachedImage = imageCache.object(forKey: imageURLString) as? UIImage {
-                    DispatchQueue.main.async {
-                        newsCell.imageView.image = cachedImage
-                    }
-                } else {
-                    DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-                        if let imageData = try? Data(contentsOf: imageURL) {
-                            let image = UIImage(data: imageData)
-                            self?.imageCache.setObject(image!, forKey: imageURLString)
-                            DispatchQueue.main.async {
-                                newsCell.imageView.image = image
-                                newsCell.imageLoadActivityIndicator.stopAnimating()
-                            }
-                            
-                        }
-                    }
-                }
-            }
         }
         
         //Set Cell Shadow

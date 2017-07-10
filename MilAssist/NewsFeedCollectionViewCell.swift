@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 class NewsFeedCollectionViewCell: UICollectionViewCell {
     
     
@@ -15,7 +14,6 @@ class NewsFeedCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var imageLoadActivityIndicator: UIActivityIndicatorView!
     
     var news: News? { didSet { updateUI() } }
     
@@ -28,11 +26,7 @@ class NewsFeedCollectionViewCell: UICollectionViewCell {
             dateFormatter.dateFormat = "dd MMMM yyyy"
             dateLabel.text = dateFormatter.string(from: date)
         }
-    }
-    
-    override func prepareForReuse() {
-        imageView.image = #imageLiteral(resourceName: "ImagePlaceholder")
-        imageLoadActivityIndicator.startAnimating() //Recheck for work
-        super.prepareForReuse()
+        imageView.kf.indicatorType = .activity
+        imageView.kf.setImage(with: news?.imageURL, placeholder: #imageLiteral(resourceName: "ImagePlaceholder"))
     }
 }

@@ -11,5 +11,5 @@ target 'Banak' do
   pod 'BraintreeDropIn'
   pod 'Braintree/PayPal'
   pod 'Braintree/3D-Secure'
-
+  pod 'Kingfisher', '~> 3.0'
 end

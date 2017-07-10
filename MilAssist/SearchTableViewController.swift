@@ -17,7 +17,6 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
             self.tableView.reloadData()
         }
     }
-    var imageCache = NSCache<NSString, AnyObject>()
     
     //Search
     var searchText: String!
@@ -25,13 +24,13 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //Hide Navigation
-        //self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         //Get Search History
         let defaults = UserDefaults.standard
-        searchHistory = (defaults.array(forKey: "SearchHistoryArray") as? [String]) ?? [""]
+        if let defaultsResults = (defaults.array(forKey: "SearchHistoryArray") as? [String]) {
+        searchHistory = defaultsResults
         searchHistory = searchHistory.reversed()
+        }
         
         searchBar = UISearchBar()
         searchBar.showsCancelButton = false
@@ -132,7 +131,6 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
                     destination.searchResults = searchResults
                     destination.searchHistory = searchHistory
                     destination.searchText = searchText
-                    destination.imageCache = imageCache
                 }
             }
         }

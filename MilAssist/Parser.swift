@@ -186,6 +186,64 @@ struct Parser {
         }
     }
     
+    static func getNewsContent(fromUrl url: URL, completionHandler: @escaping (Article, URLResponse?, Error?) -> Void) {
+        
+        var request = URLRequest(url: url)
+        request.timeoutInterval = 20
+        var text: String?
+        var imageURLs = ["fullImages": [URL?](), "thumbnails": [URL?]()]
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print(error)
+            } else if let unwrappedData = data {
+                let dataString = String(data: unwrappedData, encoding: .utf8)
+                if let newsContainer = dataString?.components(separatedBy: "<div class='stanTxt'>") {
+                    var textContainer = newsContainer
+                    textContainer = textContainer[1].components(separatedBy: "</div>")
+                    let htmlText = textContainer[0]
+                    let encodedData = htmlText.data(using: String.Encoding.utf8, allowLossyConversion: true)!
+                    do {
+                        text = try NSAttributedString(data: encodedData,
+                                                      options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
+                                                                NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue],
+                                                      documentAttributes: nil).string
+                    } catch let error as NSError {
+                        print(error.localizedDescription)
+                    }
+                }
+                
+                if var imageURLsContainer = dataString?.components(separatedBy: "overflow: hidden;\">") {
+                    imageURLsContainer = imageURLsContainer[1].components(separatedBy: "<div u=\"thumbnavigator")
+                    imageURLsContainer = imageURLsContainer[0].components(separatedBy: "<div>")
+                    
+                    for item in imageURLsContainer.dropFirst() {
+                        let allSizeImagesContainer = item.components(separatedBy: "</div>")
+                        
+                        var fullImageContainer = allSizeImagesContainer[0].components(separatedBy: "<a class=\"image-par\" href=\"")
+                        fullImageContainer = fullImageContainer[1].components(separatedBy: "\">")
+                        let fullImageString = fullImageContainer[0]
+                        let fullImageURL = URL(string: "http://www.mil.am/" + fullImageString)
+                        imageURLs["fullImages"]?.append(fullImageURL)
+                        
+                        var thumbnailImageContainer = allSizeImagesContainer[0].components(separatedBy: "<img u=\"thumb\" src=\"")
+                        thumbnailImageContainer = thumbnailImageContainer[1].components(separatedBy: "\" />")
+                        let thumbnailImageString = thumbnailImageContainer[0]
+                        let thumbnailImageURL = URL(string: "http://www.mil.am/" + thumbnailImageString)
+                        imageURLs["thumbnails"]?.append(thumbnailImageURL)
+                    }
+                }
+                
+                let article = Article(text: text, imageURLs: imageURLs)
+                
+                
+                DispatchQueue.main.async {
+                    completionHandler(article, response, error)
+                }
+            }
+            }.resume()
+    }
+    
     static func get1000PlusNews(fromPage page:Int, completionHandler: @escaping ([News], URLResponse?, Error?) -> Void) {
         
         var resultsArray:[News] = []
@@ -289,7 +347,7 @@ struct Parser {
             request.timeoutInterval = 20
             URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
-                        print(error)
+                    print(error)
                 } else if let unwrappedData = data {
                     
                     let dataString = String(data: unwrappedData, encoding: .utf8)

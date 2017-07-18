@@ -26,16 +26,25 @@ class _000PlusViewController: UIViewController, UINavigationControllerDelegate, 
     @IBOutlet weak var donateButton: UIButton!
     @IBOutlet weak var findYourDonationButton: UIButton!
     
+    var currencyPickerView: UIPickerView?
     
     var infoDictionary = [String : [String : String]]() {
         didSet {
-            updateLabelValues()
+            updateLabelValues(forCurrency: "AMD")
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        //Setup Picker
+        currencyPickerView = UIPickerView()
+        let currencyPickerViewFrame = CGRect(x: view.frame.size.width / 2 - 25, y: -(view.frame.size.width / 2) + 60, width: 50, height: view.frame.size.width)
+        currencyPickerView?.frame = currencyPickerViewFrame
+        currencyPickerView?.transform = CGAffineTransform(rotationAngle: 3.14159/2)
+        currencyPickerView?.delegate = self
+        currencyPickerView?.dataSource = self
+        view.addSubview(currencyPickerView!)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,6 +73,9 @@ class _000PlusViewController: UIViewController, UINavigationControllerDelegate, 
         donateButton.layer.cornerRadius = cornerRadius
         findYourDonationButton.layer.cornerRadius = cornerRadius
         
+        //Pick AMD for Default
+        currencyPickerView?.selectRow(1, inComponent: 0, animated: false)
+        
         //Parse Info
         Parser.get1000PlusContent { (resultsDictionary, response, error) in
             self.infoDictionary = resultsDictionary
@@ -75,25 +87,25 @@ class _000PlusViewController: UIViewController, UINavigationControllerDelegate, 
         // Dispose of any resources that can be recreated.
     }
     
-    func updateLabelValues () {
+    func updateLabelValues (forCurrency currency: String) {
         //Set label Values
         if let totalFunds = infoDictionary["TotalFunds"] {
-            totalFundsValueLabel.text = totalFunds["AMD"]
+            totalFundsValueLabel.text = totalFunds[currency]
         }
         if let stampDuty = infoDictionary["StampDuty"] {
-            stampDutyValueLabel.text = stampDuty["AMD"]
+            stampDutyValueLabel.text = stampDuty[currency]
         }
         if let donations = infoDictionary["Donations"] {
-            donationsValueLabel.text = donations["AMD"]
+            donationsValueLabel.text = donations[currency]
         }
         if let compensations = infoDictionary["Compensations"] {
-            compensationsValueLabel.text = compensations["AMD"]
+            compensationsValueLabel.text = compensations[currency]
         }
     }
     
     
-
-     // MARK: - Navigation
+    
+    // MARK: - Navigation
     
     let customPresentAnimationController = CustomPresentAnimationController()
     
@@ -110,5 +122,45 @@ class _000PlusViewController: UIViewController, UINavigationControllerDelegate, 
                               to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         let animationController = CustomPresentAnimationController()
         return animationController
+    }
+}
+
+extension _000PlusViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 4
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 50
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        switch row {
+        case 0: updateLabelValues(forCurrency: "USD")
+        case 1: updateLabelValues(forCurrency: "AMD")
+        case 2: updateLabelValues(forCurrency: "RUB")
+        case 3: updateLabelValues(forCurrency: "EUR")
+        default: break
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        label.transform = CGAffineTransform(rotationAngle: -3.14159/2)
+        
+        switch row {
+        case 0: label.text = "$"
+        case 1: label.text = "֏"
+        case 2: label.text = "₽"
+        case 3: label.text = "€"
+        default: label.text = ""
+        }
+        
+        label.font = UIFont(name: "WeblySleekUISemibold", size: 30)
+        label.textAlignment = .center
+        return label
     }
 }

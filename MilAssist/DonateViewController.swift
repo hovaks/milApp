@@ -13,6 +13,8 @@ import Braintree
 class DonateViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet weak var pickerView: UIPickerView!
+    var currencyPickerView: UIPickerView?
+    var visibilityPickerView: UIPickerView?
     
     //Text Field Outlets
     @IBOutlet weak var nameTextField: UITextField!
@@ -33,7 +35,7 @@ class DonateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     var currencySelected = "valuesAMD" {
         didSet {
-            pickerView.reloadComponent(1)
+            pickerView.reloadAllComponents()
         }
     }
     
@@ -60,11 +62,42 @@ class DonateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         emailTextField.layer.borderColor = borderColor
         donateButton.layer.cornerRadius = cornerRadius
         
+        //Setup Pickers
         
+        //Currency
+        currencyPickerView = UIPickerView()
+        currencyPickerView?.tag = 0
+        let currencyPickerViewFrame = CGRect(x: 0, y: 0, width: 50, height: view.frame.size.width)
+        currencyPickerView?.frame = currencyPickerViewFrame
+        print("currency X:\(currencyPickerView?.frame.origin.y)")
+        currencyPickerView?.transform = CGAffineTransform(rotationAngle: 3.14159/2)
+        currencyPickerView?.frame.origin.x = 0
+        currencyPickerView?.frame.origin.y = 20
+        currencyPickerView?.delegate = self
+        currencyPickerView?.dataSource = self
+        view.addSubview(currencyPickerView!)
+        
+        //Visibility
+        visibilityPickerView = UIPickerView()
+        visibilityPickerView?.tag = 2
+        let visibilityPickerViewFrame = CGRect(x: 0, y: 0, width: 50, height: view.frame.size.width)
+        visibilityPickerView?.frame = visibilityPickerViewFrame
+        visibilityPickerView?.transform = CGAffineTransform(rotationAngle: 3.14159/2)
+        visibilityPickerView?.frame.origin.x = 0
+        visibilityPickerView?.frame.origin.y = (pickerView?.frame.origin.y)! + (pickerView?.frame.height)! + 10
+        visibilityPickerView?.delegate = self
+        visibilityPickerView?.dataSource = self
+        view.addSubview(visibilityPickerView!)
+        
+        //Value
+        pickerView.tag = 1
+        pickerView.frame.origin.x = 0
+        pickerView.frame.origin.y = (currencyPickerView?.frame.origin.y)! + (currencyPickerView?.frame.height)! + 10
         pickerView.delegate = self
         pickerView.dataSource = self
         
-        // Do any additional setup after loading the view.
+        
+        print("currency X:\(currencyPickerView?.frame.origin.y)")
     }
     
     override func didReceiveMemoryWarning() {
@@ -86,11 +119,11 @@ class DonateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     // MARK: - PickerView
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 3
+        return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        switch component {
+        switch pickerView.tag {
         case 0:
             return (pickerData["currency"]?.count)!
         case 1:
@@ -102,50 +135,50 @@ class DonateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         }
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
-        switch component {
-        case 0:
-            switch row {
-            case 0: return pickerData["currency"]?[0]
-            case 1: return pickerData["currency"]?[1]
-            case 2: return pickerData["currency"]?[2]
-            case 3: return pickerData["currency"]?[3]
-            default: return ""
-            }
-        case 1:
-            if let values = pickerData[currencySelected] {
-                switch row {
-                case 0: return values[0]
-                case 1: return values[1]
-                case 2: return values[2]
-                case 3: return values[3]
-                case 4: return values[4]
-                case 5: return values[5]
-                default: return ""
-                }
-            } else {
-                return ""
-            }
-        case 2:
-            switch row {
-            case 0: return pickerData["visibility"]?[0]
-            case 1: return pickerData["visibility"]?[1]
-            default: return ""
-            }
-        default:
-            return "none"
-        }
-    }
+//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//        
+//        switch pickerView.tag {
+//        case 0:
+//            switch row {
+//            case 0: return pickerData["currency"]?[0]
+//            case 1: return pickerData["currency"]?[1]
+//            case 2: return pickerData["currency"]?[2]
+//            case 3: return pickerData["currency"]?[3]
+//            default: return ""
+//            }
+//        case 1:
+//            if let values = pickerData[currencySelected] {
+//                switch row {
+//                case 0: return values[0]
+//                case 1: return values[1]
+//                case 2: return values[2]
+//                case 3: return values[3]
+//                case 4: return values[4]
+//                case 5: return values[5]
+//                default: return ""
+//                }
+//            } else {
+//                return ""
+//            }
+//        case 2:
+//            switch row {
+//            case 0: return pickerData["visibility"]?[0]
+//            case 1: return pickerData["visibility"]?[1]
+//            default: return ""
+//            }
+//        default:
+//            return "none"
+//        }
+//    }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
-        switch component {
+        switch pickerView.tag {
         case 0:
             switch row {
-            case 0: currencySelected = "valuesAMD"
-            case 1: currencySelected = "valuesRUB"
-            case 2: currencySelected = "valuesUSD"
+            case 0: currencySelected = "valuesUSD";                             print("here")
+            case 1: currencySelected = "valuesAMD"
+            case 2: currencySelected = "valuesRUB"
             case 3: currencySelected = "valuesEUR"
             default: break
             }
@@ -153,43 +186,69 @@ class DonateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         }
     }
     
-    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        switch component {
-        case 0: return 50.0
-        case 1: return 100.0
-        case 2: return 218.0 - 25.0
-        default: return 0.0
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        switch pickerView.tag {
+        case 0: return 50
+        case 1: return 50
+        case 2: return self.view.frame.size.width / 2
+        default: return 0
         }
     }
     
-//    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-//        switch component {
-//        case 0:
-//            if let string = pickerData["currency"]?[row] {
-//            let attributedString = NSAttributedString(string: string)
-//            return attributedString
-//            } else {
-//                return NSAttributedString(string: "")
-//            }
-//        case 1:
-//            if let string = pickerData[currencySelected]?[row] {
-//                let attributedString = NSAttributedString(string: string)
-//                return attributedString
-//            } else {
-//                return NSAttributedString(string: "")
-//            }
-//        case 2:
-//            if let string = pickerData[currencySelected]?[row] {
-//                let attributedString = NSMutableAttributedString(string: string)
-//                return attributedString
-//            } else {
-//                return NSAttributedString(string: "")
-//            }
-//        default:
-//            break
-//        }
-//        return NSAttributedString(string: "")
-//    }
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        switch pickerView.tag {
+        case 0:
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+            label.transform = CGAffineTransform(rotationAngle: -3.14159/2)
+            
+            switch row {
+            case 0: label.text = "$"
+            case 1: label.text = "֏"
+            case 2: label.text = "₽"
+            case 3: label.text = "€"
+            default: label.text = ""
+            }
+            
+            label.font = UIFont(name: "WeblySleekUISemibold", size: 30)
+            label.textAlignment = .center
+            return label
+            
+        case 1:
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: (self.view?.frame.size.width)!, height: 50))
+            
+            if let values = pickerData[currencySelected] {
+                switch row {
+                case 0: label.text = values[0]
+                case 1: label.text = values[1]
+                case 2: label.text = values[2]
+                case 3: label.text = values[3]
+                case 4: label.text = values[4]
+                case 5: label.text = values[5]
+                default: label.text = ""
+                }
+            }
+            
+            label.font = UIFont(name: "WeblySleekUISemibold", size: 30)
+            label.textAlignment = .center
+            return label
+            
+        case 2:
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: (self.view?.frame.size.width)! / 2, height: 50))
+            label.transform = CGAffineTransform(rotationAngle: -3.14159/2)
+            
+            switch row {
+            case 0: label.text = pickerData["visibility"]?[0]
+            case 1: label.text = pickerData["visibility"]?[1]
+            default: label.text = ""
+            }
+            
+            label.font = UIFont(name: "WeblySleekUISemibold", size: 30)
+            label.textAlignment = .center
+            return label
+        default: break
+        }
+        return UIView()
+    }
     
     // MARK: Drop In Methods
     func showDropIn(clientTokenOrTokenizationKey: String) {

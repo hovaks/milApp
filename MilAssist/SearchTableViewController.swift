@@ -20,7 +20,6 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     
     //Search
     var searchText: String!
-    var clickedButtonState: Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,10 +47,6 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
     }
     
     override func didReceiveMemoryWarning() {
@@ -126,12 +121,10 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
         if let identifier = segue.identifier {
             if identifier == "searchResultsSegue" {
                 let destination = segue.destination as! NewsFeedSearchResultsCollectionViewController
-                if clickedButtonState {
                     destination.newsArray = newsArray
                     destination.searchResults = searchResults
                     destination.searchHistory = searchHistory
                     destination.searchText = searchText
-                }
             }
         }
     }
@@ -157,14 +150,12 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate {
                     searchResults.append(news)
                 }
             }
-            clickedButtonState = true
             dismiss(animated: true, completion: nil)
             self.performSegue(withIdentifier: "searchResultsSegue", sender: searchBar)
         }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        clickedButtonState = false
         dismiss(animated: false, completion: nil)
         self.navigationController?.popViewController(animated: false)
     }

@@ -15,6 +15,7 @@ class NewsFeedSearchResultsCollectionViewController: UICollectionViewController,
     var searchResults: [News] = [] {
         didSet {
             DispatchQueue.main.async {
+                print("willReloadData")
                 self.collectionView?.reloadData()
             }
         }
@@ -28,6 +29,10 @@ class NewsFeedSearchResultsCollectionViewController: UICollectionViewController,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(searchResults)
+        
+        print("searchViewWillLoad")
         
         //Register Cell
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
@@ -84,6 +89,8 @@ class NewsFeedSearchResultsCollectionViewController: UICollectionViewController,
         //Getting Cell
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         
+        print(cell)
+        
         if let newsCell = cell as? NewsFeedCollectionViewCell {
             newsCell.news = news
         }
@@ -95,9 +102,6 @@ class NewsFeedSearchResultsCollectionViewController: UICollectionViewController,
         cell.layer.shadowOpacity = 1.0
         cell.layer.masksToBounds = false
         cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.contentView.layer.cornerRadius).cgPath
-        //Uncomment to enable round corners
-        //        cell.layer.masksToBounds = true
-        //        cell.layer.cornerRadius = 20
         return cell
     }
     
@@ -135,6 +139,7 @@ class NewsFeedSearchResultsCollectionViewController: UICollectionViewController,
     // MARK: Search and UISearchBarDelegate
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print("gotHere")
         searchBar.resignFirstResponder()
         searchText = searchBar.text
         searchResults = []

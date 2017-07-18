@@ -9,7 +9,7 @@
 import UIKit
 import Kingfisher
 
-class NewsViewController: UIViewController, UIScrollViewDelegate {
+class NewsViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageScrollView: UIScrollView!
@@ -17,7 +17,9 @@ class NewsViewController: UIViewController, UIScrollViewDelegate {
     
     var news: News!
     var articleURL: URL?
-    var imageArray: [UIImage] = []
+    var selectedImageIndex: Int?
+    var imageArray: [URL] = []
+    var tapGestureRecognizer: UITapGestureRecognizer!
     var scrollTimer: Timer?
     var resumeTimer: Timer?
     
@@ -28,6 +30,7 @@ class NewsViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         startTimer()
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
         self.automaticallyAdjustsScrollViewInsets = false
         
         descriptionTextView.text = news.description
@@ -68,12 +71,26 @@ class NewsViewController: UIViewController, UIScrollViewDelegate {
                                                  height: imageSize.height)
                         self.imageScrollView.contentSize.width += imageSize.width + imageSize.padding
                     }
+                    self.imageScrollView.addGestureRecognizer(self.tapGestureRecognizer)
                     imageView.contentMode = .scaleAspectFit
                     imageView.kf.indicatorType = .activity
                     imageView.kf.setImage(with: imageURL, placeholder: #imageLiteral(resourceName: "ImagePlaceholder"))
+                    if let fullImageURLs = article.imageURLs?["fullImages"] {
+                        let fullImageURL = fullImageURLs[index]
+                        self.imageArray.append(fullImageURL!)
+                    }
                     self.imageScrollView.addSubview(imageView)
                 }
             }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if self.selectedImageIndex != nil {
+            self.showImage(index: self.selectedImageIndex!)
+            resumeTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(startTimer), userInfo: nil, repeats: false)
+            self.pageControl.currentPage = self.selectedImageIndex!
         }
     }
     
@@ -93,7 +110,7 @@ class NewsViewController: UIViewController, UIScrollViewDelegate {
     }
     
     
-    // MARK: - ScrollView Delegate and Functions
+    // MARK: - ScrollView Delegate
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         //PageControl using Timer
         //Getting the selected page for the PageController
@@ -110,13 +127,12 @@ class NewsViewController: UIViewController, UIScrollViewDelegate {
         resumeTimer = nil
         //Getting the selected page for the PageController
         let pageWidth = scrollView.frame.width
-        let currentPage = floor((scrollView.contentOffset.x - pageWidth/2)/pageWidth) + 1
+        let currentPage = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1
         pageControl.currentPage = Int(currentPage)
-            resumeTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(startTimer), userInfo: nil, repeats: false)
+        resumeTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(startTimer), userInfo: nil, repeats: false)
     }
     
-    // MARK: - Timer
-    
+    // MARK: - Functions
     func startTimer() {
         scrollTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(moveToNextPage), userInfo: nil, repeats: true)
     }
@@ -144,15 +160,25 @@ class NewsViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
+    func imageTapped() {
+        performSegue(withIdentifier: "imageSegue", sender: self)
+    }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    func showImage(index: Int) {
+        DispatchQueue.main.async {
+            self.imageScrollView.setContentOffset(CGPoint(x: index * (349 + 10), y: 0), animated: false)
+        }
+    }
     
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            if identifier == "imageSegue" {
+                if let destination = segue.destination as? NewsImageViewController {
+                    destination.imageURLs = imageArray
+                    destination.selectedImageIndex = pageControl.currentPage
+                }
+            }
+        }
+    }
 }

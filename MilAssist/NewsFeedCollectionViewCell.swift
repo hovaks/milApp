@@ -18,6 +18,8 @@ class NewsFeedCollectionViewCell: UICollectionViewCell {
     var news: News? { didSet { updateUI() } }
     
     private  func updateUI() {
+                //Here is a bug with cell being called the second time
+        print("willUpdateUI")
         titleLabel.text = news?.title
         descriptionLabel.text = news?.description
         

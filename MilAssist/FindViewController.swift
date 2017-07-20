@@ -10,6 +10,11 @@ import UIKit
 
 class FindViewController: UIViewController {
     
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
+    //Label Outlets
+    @IBOutlet weak var statusLabel: UILabel!
+    
     //Text Field Outlets
     @IBOutlet weak var EINtextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -18,12 +23,28 @@ class FindViewController: UIViewController {
     //Button Outlets
     @IBOutlet weak var findButton: UIButton!
     
+    //Layout Constraints
+    @IBOutlet weak var emailTextFieldHeightConstrain: NSLayoutConstraint!
+    @IBOutlet weak var EINTextFieldTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var SSNTextFieldBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var statusLabelConstraint: NSLayoutConstraint!
+    @IBOutlet weak var descriptionLabelConstraint: NSLayoutConstraint!
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Configure Segmented Control
+        segmentedControl.removeAllSegments()
+        segmentedControl.tintColor = UIColor.gray
+        segmentedControl.insertSegment(withTitle: "Նվիրաբերություններ", at: 0, animated: false)
+        segmentedControl.insertSegment(withTitle: "Պարտադիր վճարներ", at: 1, animated: false)
+        segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
+        
+        segmentedControl.selectedSegmentIndex = 0
         
         //Configure TextField Appearance
         let cornerRadius = CGFloat(5)
@@ -54,6 +75,18 @@ class FindViewController: UIViewController {
         navigationController?.popViewController(animated: false)
     }
     
+    // Mark: - Segmented Control
+    
+    func segmentedControlValueChanged() {
+        statusLabel.text = segmentedControl.titleForSegment(at: segmentedControl.selectedSegmentIndex)
+        switch segmentedControl.selectedSegmentIndex {
+        case 0: emailTextField.isHidden = false
+        case 1: emailTextField.isHidden = true
+        default: break
+        }
+    }
+    
+    
     /*
      // MARK: - Navigation
      
@@ -64,4 +97,13 @@ class FindViewController: UIViewController {
      }
      */
     
+}
+
+extension FindViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        statusLabelConstraint.constant = 0
+        descriptionLabelConstraint.constant = 0
+        EINTextFieldTopConstraint.constant = 10
+        SSNTextFieldBottomConstraint.constant = 57 + 46 + 20 + 8
+    }
 }

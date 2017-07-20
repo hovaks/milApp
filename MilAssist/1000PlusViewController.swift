@@ -26,6 +26,9 @@ class _000PlusViewController: UIViewController, UINavigationControllerDelegate, 
     @IBOutlet weak var donateButton: UIButton!
     @IBOutlet weak var findYourDonationButton: UIButton!
     
+    //SegmentedControl Outlet
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
     var currencyPickerView: UIPickerView?
     
     var infoDictionary = [String : [String : String]]() {
@@ -37,6 +40,18 @@ class _000PlusViewController: UIViewController, UINavigationControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Setup SegmentedControl
+        segmentedControl.tintColor = UIColor.gray
+        segmentedControl.removeAllSegments()
+        segmentedControl.insertSegment(withTitle: "֏", at: 0, animated: false)
+        segmentedControl.insertSegment(withTitle: "$", at: 1, animated: false)
+        segmentedControl.insertSegment(withTitle: "₽", at: 2, animated: false)
+        segmentedControl.insertSegment(withTitle: "€", at: 3, animated: false)
+        let titleFont = UIFont(name: "WeblySleekUISemibold", size: 20)
+        segmentedControl.setTitleTextAttributes([NSFontAttributeName : titleFont!], for: .normal)
+        segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
+        segmentedControl.selectedSegmentIndex = 0
+        
         //Setup Picker
         currencyPickerView = UIPickerView()
         let currencyPickerViewFrame = CGRect(x: view.frame.size.width / 2 - 25, y: -(view.frame.size.width / 2) + 60, width: 50, height: view.frame.size.width)
@@ -44,7 +59,7 @@ class _000PlusViewController: UIViewController, UINavigationControllerDelegate, 
         currencyPickerView?.transform = CGAffineTransform(rotationAngle: 3.14159/2)
         currencyPickerView?.delegate = self
         currencyPickerView?.dataSource = self
-        view.addSubview(currencyPickerView!)
+        //view.addSubview(currencyPickerView!)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -123,7 +138,20 @@ class _000PlusViewController: UIViewController, UINavigationControllerDelegate, 
         let animationController = CustomPresentAnimationController()
         return animationController
     }
+    
+    //MARK: - Segmented Control
+    
+    func segmentedControlValueChanged() {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0: updateLabelValues(forCurrency: "USD")
+        case 1: updateLabelValues(forCurrency: "AMD")
+        case 2: updateLabelValues(forCurrency: "RUB")
+        case 3: updateLabelValues(forCurrency: "EUR")
+        default: break
+        }
+    }
 }
+
 
 extension _000PlusViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

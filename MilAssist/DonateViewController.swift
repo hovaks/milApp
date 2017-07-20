@@ -12,26 +12,42 @@ import Braintree
 
 class DonateViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pickerView: UIPickerView!
+    
     var currencyPickerView: UIPickerView?
     var visibilityPickerView: UIPickerView?
+    var keyboardIsShown: Bool = false
     
     //Text Field Outlets
+    @IBOutlet weak var otherDonationTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var surnameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     
     //Button Outlets
     @IBOutlet weak var donateButton: UIButton!
+    @IBOutlet weak var closeButton: UIButton!
     
-    let pickerData = [
+    //Segmented Control Outlets
+    @IBOutlet weak var currencySegmentedControl: UISegmentedControl!
+    @IBOutlet weak var visibilitySegmentedControl: UISegmentedControl!
+    
+    //Layout Constrains
+    @IBOutlet weak var otherDonationTextFieldBottomConstraint: NSLayoutConstraint!
+    
+    var pickerData = [
         "currency" : ["֏", "₽", "$", "€"],
         "valuesAMD" : ["5000" , "10000", "20000", "50000", "100000", "Այլ"],
         "valuesRUB" : ["1000" , "2000", "5000", "10000", "50000", "Այլ"],
         "valuesUSD" : ["10" , "20", "50", "100", "500", "Այլ"],
         "valuesEUR" : ["10" , "20", "50", "100", "500", "Այլ"],
         "visibility" : ["Տեսանելի", "Գաղտնի"]
-    ]
+        ] {
+        didSet {
+            pickerView.reloadAllComponents()
+        }
+    }
     
     var currencySelected = "valuesAMD" {
         didSet {
@@ -45,6 +61,8 @@ class DonateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Dismiss keyboard on tap
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(endEditing)))
         
         //Configure TextField Appearance
         let cornerRadius = CGFloat(5)
@@ -54,6 +72,7 @@ class DonateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         nameTextField.layer.cornerRadius = cornerRadius
         nameTextField.layer.borderWidth = borderWidth
         nameTextField.layer.borderColor = borderColor
+        nameTextField.textRect(forBounds: CGRect(x: 5, y: 0, width: nameTextField.frame.width, height: nameTextField.frame.height))
         surnameTextField.layer.cornerRadius = cornerRadius
         surnameTextField.layer.borderWidth = borderWidth
         surnameTextField.layer.borderColor = borderColor
@@ -69,13 +88,13 @@ class DonateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         currencyPickerView?.tag = 0
         let currencyPickerViewFrame = CGRect(x: 0, y: 0, width: 50, height: view.frame.size.width)
         currencyPickerView?.frame = currencyPickerViewFrame
-        print("currency X:\(currencyPickerView?.frame.origin.y)")
+        
         currencyPickerView?.transform = CGAffineTransform(rotationAngle: 3.14159/2)
         currencyPickerView?.frame.origin.x = 0
         currencyPickerView?.frame.origin.y = 20
         currencyPickerView?.delegate = self
         currencyPickerView?.dataSource = self
-        view.addSubview(currencyPickerView!)
+        //view.addSubview(currencyPickerView!)
         
         //Visibility
         visibilityPickerView = UIPickerView()
@@ -87,7 +106,7 @@ class DonateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         visibilityPickerView?.frame.origin.y = (pickerView?.frame.origin.y)! + (pickerView?.frame.height)! + 10
         visibilityPickerView?.delegate = self
         visibilityPickerView?.dataSource = self
-        view.addSubview(visibilityPickerView!)
+        //view.addSubview(visibilityPickerView!)
         
         //Value
         pickerView.tag = 1
@@ -96,8 +115,49 @@ class DonateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         pickerView.delegate = self
         pickerView.dataSource = self
         
+        //Pick AMD for Default
+        currencyPickerView?.selectRow(1, inComponent: 0, animated: false)
+        pickerView.selectRow(2, inComponent: 0, animated: false)
         
-        print("currency X:\(currencyPickerView?.frame.origin.y)")
+        //Configure Segmented Controls
+        let titleFont = UIFont(name: "WeblySleekUISemibold", size: 20)
+        
+        //Currency Segmented Control
+        currencySegmentedControl.tintColor = UIColor.gray
+        
+        currencySegmentedControl.removeAllSegments()
+        currencySegmentedControl.insertSegment(withTitle: "֏", at: 0, animated: false)
+        currencySegmentedControl.insertSegment(withTitle: "$", at: 1, animated: false)
+        currencySegmentedControl.insertSegment(withTitle: "₽", at: 2, animated: false)
+        currencySegmentedControl.insertSegment(withTitle: "€", at: 3, animated: false)
+        
+        currencySegmentedControl.setTitleTextAttributes([NSFontAttributeName : titleFont!], for: .normal)
+        
+        currencySegmentedControl.addTarget(self, action: #selector(currencySegmentedControlValueChanged), for: .valueChanged)
+        
+        currencySegmentedControl.selectedSegmentIndex = 0
+        
+        //Visibility Segmented Control
+        visibilitySegmentedControl.tintColor = UIColor.gray
+        
+        visibilitySegmentedControl.removeAllSegments()
+        visibilitySegmentedControl.insertSegment(withTitle: "Տեսանելի", at: 0, animated: false)
+        visibilitySegmentedControl.insertSegment(withTitle: "Գաղտնի", at: 1, animated: false)
+        
+        visibilitySegmentedControl.setTitleTextAttributes([NSFontAttributeName : titleFont!], for: .normal)
+        
+        visibilitySegmentedControl.addTarget(self, action: #selector(visibilitySegmentedControlValueChanged), for: .valueChanged)
+        
+        visibilitySegmentedControl.selectedSegmentIndex = 0
+        
+        //Configure Other Keyboard
+        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 35))
+        toolBar.barStyle = UIBarStyle.blackTranslucent
+        toolBar.items=[
+            UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil),
+            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(numberPadDonePressed))
+        ]
+        otherDonationTextField.inputAccessoryView = toolBar
     }
     
     override func didReceiveMemoryWarning() {
@@ -135,51 +195,35 @@ class DonateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         }
     }
     
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        
-//        switch pickerView.tag {
-//        case 0:
-//            switch row {
-//            case 0: return pickerData["currency"]?[0]
-//            case 1: return pickerData["currency"]?[1]
-//            case 2: return pickerData["currency"]?[2]
-//            case 3: return pickerData["currency"]?[3]
-//            default: return ""
-//            }
-//        case 1:
-//            if let values = pickerData[currencySelected] {
-//                switch row {
-//                case 0: return values[0]
-//                case 1: return values[1]
-//                case 2: return values[2]
-//                case 3: return values[3]
-//                case 4: return values[4]
-//                case 5: return values[5]
-//                default: return ""
-//                }
-//            } else {
-//                return ""
-//            }
-//        case 2:
-//            switch row {
-//            case 0: return pickerData["visibility"]?[0]
-//            case 1: return pickerData["visibility"]?[1]
-//            default: return ""
-//            }
-//        default:
-//            return "none"
-//        }
-//    }
-    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
         switch pickerView.tag {
         case 0:
             switch row {
-            case 0: currencySelected = "valuesUSD";                             print("here")
+            case 0: currencySelected = "valuesUSD"
             case 1: currencySelected = "valuesAMD"
             case 2: currencySelected = "valuesRUB"
             case 3: currencySelected = "valuesEUR"
+            default: break
+            }
+        case 1:
+            switch row {
+            case 0...4:
+                pickerView.isUserInteractionEnabled = true
+                pickerView.view(forRow: 5, forComponent: 0)?.isHidden = false
+                otherDonationTextField.isHidden = true
+                otherDonationTextField.resignFirstResponder()
+            case 5:
+                if keyboardIsShown {
+                    otherDonationTextFieldBottomConstraint.constant = -22
+                } else {
+                    otherDonationTextFieldBottomConstraint.constant = -90
+                }
+                pickerView.isUserInteractionEnabled = false
+                pickerView.view(forRow: 5, forComponent: 0)?.isHidden = true
+                otherDonationTextField.isHidden = false
+                otherDonationTextField.becomeFirstResponder()
+                
             default: break
             }
         default: break
@@ -258,8 +302,9 @@ class DonateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             if (error != nil) {
                 print("ERROR")
             } else if (result?.isCancelled == true) {
-                print("CANCELLED")
-            } else if let result = result {
+                self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+                self.donateButton.isHidden = false
+            } else if result != nil {
                 // Use the BTDropInResult properties to update your UI
                 // result.paymentOptionType
                 // result.paymentMethod
@@ -269,13 +314,81 @@ class DonateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             controller.dismiss(animated: true, completion: nil)
         }
         self.present(dropIn!, animated: true, completion: nil)
-    }    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    }
+    
+    // MARK: Segmented Control Selectors
+    func currencySegmentedControlValueChanged () {
+        switch currencySegmentedControl.selectedSegmentIndex {
+        case 0: currencySelected = "valuesAMD"
+        case 1: currencySelected = "valuesUSD"
+        case 2: currencySelected = "valuesRUB"
+        case 3: currencySelected = "valuesEUR"
+        default: break
+        }
+    }
+    
+    func visibilitySegmentedControlValueChanged () {
+        
+    }
+}
+
+extension DonateViewController: UITextFieldDelegate {
+    
+    func numberPadDonePressed() {
+        nameTextField.becomeFirstResponder()
+    }
+    
+    func endEditing () {
+        if keyboardIsShown {
+        self.view.endEditing(true)
+        self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        self.donateButton.isHidden = false
+        pickerView.isUserInteractionEnabled = true
+        keyboardIsShown = false
+        }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        keyboardIsShown = true
+        if textField.tag != 3 {
+            pickerView.isUserInteractionEnabled = true
+            otherDonationTextField.isHidden = true
+            donateButton.isHidden = true
+            scrollView.setContentOffset(CGPoint(x: 0, y: 135), animated: true)
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("catchya")
+        keyboardIsShown = false
+        if textField.tag == 3 {
+            if let input = textField.text {
+                if !input.isEmpty {
+                    switch currencySegmentedControl.selectedSegmentIndex {
+                    case 0: pickerData["valuesAMD"]?[5] = input
+                    case 1: pickerData["valuesUSD"]?[5] = input
+                    case 2: pickerData["valuesRUB"]?[5] = input
+                    case 3: pickerData["valuesEUR"]?[5] = input
+                    default: break
+                    }
+                } else {
+                    pickerData["valuesAMD"]?[5] = "Այլ"
+                }
+            }
+            otherDonationTextField.isHidden = true
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField.tag {
+        case 0: surnameTextField.becomeFirstResponder()
+        case 1: emailTextField.becomeFirstResponder()
+        case 2:
+            emailTextField.resignFirstResponder()
+            keyboardIsShown = false
+            donate(donateButton)
+        default: return false
+        }
+        return true
+    }
 }

@@ -27,13 +27,20 @@ class NewsFeedCollectionViewController: UICollectionViewController {
     }
     
     var refresher: UIRefreshControl!
-    let imageCache = NSCache<NSString, AnyObject>()
     
     //Search
     @IBOutlet weak var searchBarItem: UIBarButtonItem!
     var searchController: UISearchController!
     var searchText: String!
     
+    //Autoratation Settings
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    override var shouldAutorotate: Bool {
+        return false
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +61,10 @@ class NewsFeedCollectionViewController: UICollectionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        let value =  UIInterfaceOrientation.portrait.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
+        UIViewController.attemptRotationToDeviceOrientation()
         
         if (self.navigationController?.isNavigationBarHidden)! {
             self.navigationController?.setNavigationBarHidden(false, animated: true)

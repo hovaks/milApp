@@ -214,23 +214,25 @@ struct Parser {
                 }
                 
                 if var imageURLsContainer = dataString?.components(separatedBy: "overflow: hidden;\">") {
-                    imageURLsContainer = imageURLsContainer[1].components(separatedBy: "<div u=\"thumbnavigator")
-                    imageURLsContainer = imageURLsContainer[0].components(separatedBy: "<div>")
-                    
-                    for item in imageURLsContainer.dropFirst() {
-                        let allSizeImagesContainer = item.components(separatedBy: "</div>")
+                    if imageURLsContainer.count != 1 {
+                        imageURLsContainer = imageURLsContainer[1].components(separatedBy: "<div u=\"thumbnavigator")
+                        imageURLsContainer = imageURLsContainer[0].components(separatedBy: "<div>")
                         
-                        var fullImageContainer = allSizeImagesContainer[0].components(separatedBy: "<a class=\"image-par\" href=\"")
-                        fullImageContainer = fullImageContainer[1].components(separatedBy: "\">")
-                        let fullImageString = fullImageContainer[0]
-                        let fullImageURL = URL(string: "http://www.mil.am/" + fullImageString)
-                        imageURLs["fullImages"]?.append(fullImageURL)
-                        
-                        var thumbnailImageContainer = allSizeImagesContainer[0].components(separatedBy: "<img u=\"thumb\" src=\"")
-                        thumbnailImageContainer = thumbnailImageContainer[1].components(separatedBy: "\" />")
-                        let thumbnailImageString = thumbnailImageContainer[0]
-                        let thumbnailImageURL = URL(string: "http://www.mil.am/" + thumbnailImageString)
-                        imageURLs["thumbnails"]?.append(thumbnailImageURL)
+                        for item in imageURLsContainer.dropFirst() {
+                            let allSizeImagesContainer = item.components(separatedBy: "</div>")
+                            
+                            var fullImageContainer = allSizeImagesContainer[0].components(separatedBy: "<a class=\"image-par\" href=\"")
+                            fullImageContainer = fullImageContainer[1].components(separatedBy: "\">")
+                            let fullImageString = fullImageContainer[0]
+                            let fullImageURL = URL(string: "http://www.mil.am/" + fullImageString)
+                            imageURLs["fullImages"]?.append(fullImageURL)
+                            
+                            var thumbnailImageContainer = allSizeImagesContainer[0].components(separatedBy: "<img u=\"thumb\" src=\"")
+                            thumbnailImageContainer = thumbnailImageContainer[1].components(separatedBy: "\" />")
+                            let thumbnailImageString = thumbnailImageContainer[0]
+                            let thumbnailImageURL = URL(string: "http://www.mil.am/" + thumbnailImageString)
+                            imageURLs["thumbnails"]?.append(thumbnailImageURL)
+                        }
                     }
                 }
                 

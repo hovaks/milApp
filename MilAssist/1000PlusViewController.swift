@@ -59,7 +59,6 @@ class _000PlusViewController: UIViewController, UINavigationControllerDelegate, 
         currencyPickerView?.transform = CGAffineTransform(rotationAngle: 3.14159/2)
         currencyPickerView?.delegate = self
         currencyPickerView?.dataSource = self
-        //view.addSubview(currencyPickerView!)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -143,8 +142,8 @@ class _000PlusViewController: UIViewController, UINavigationControllerDelegate, 
     
     func segmentedControlValueChanged() {
         switch segmentedControl.selectedSegmentIndex {
-        case 0: updateLabelValues(forCurrency: "USD")
-        case 1: updateLabelValues(forCurrency: "AMD")
+        case 0: updateLabelValues(forCurrency: "AMD")
+        case 1: updateLabelValues(forCurrency: "USD")
         case 2: updateLabelValues(forCurrency: "RUB")
         case 3: updateLabelValues(forCurrency: "EUR")
         default: break
@@ -167,8 +166,8 @@ extension _000PlusViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         switch row {
-        case 0: updateLabelValues(forCurrency: "USD")
-        case 1: updateLabelValues(forCurrency: "AMD")
+        case 0: updateLabelValues(forCurrency: "AMD")
+        case 1: updateLabelValues(forCurrency: "USD")
         case 2: updateLabelValues(forCurrency: "RUB")
         case 3: updateLabelValues(forCurrency: "EUR")
         default: break

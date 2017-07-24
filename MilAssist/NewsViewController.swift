@@ -27,6 +27,15 @@ class NewsViewController: UIViewController, UIScrollViewDelegate, UIGestureRecog
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var titleLabel: UILabel!
     
+    //Autoratation Settings
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    override var shouldAutorotate: Bool {
+        return false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         startTimer()
@@ -42,7 +51,10 @@ class NewsViewController: UIViewController, UIScrollViewDelegate, UIGestureRecog
         Parser.getNewsContent(fromUrl: articleURL!) { (article, response, error) in
             self.contentTextView.text = article.text
             //Images
-            if let imageURLs = article.imageURLs?["thumbnails"] {
+            if var imageURLs = article.imageURLs?["thumbnails"] {
+                if imageURLs.isEmpty {
+                    imageURLs.append(self.news.imageURL)
+                }
                 let imageSize = (width: CGFloat(349), height: CGFloat(223), padding: CGFloat(10))
                 self.pageControl.hidesForSinglePage = true
                 
@@ -75,7 +87,10 @@ class NewsViewController: UIViewController, UIScrollViewDelegate, UIGestureRecog
                     imageView.contentMode = .scaleAspectFit
                     imageView.kf.indicatorType = .activity
                     imageView.kf.setImage(with: imageURL, placeholder: #imageLiteral(resourceName: "ImagePlaceholder"))
-                    if let fullImageURLs = article.imageURLs?["fullImages"] {
+                    if var fullImageURLs = article.imageURLs?["fullImages"] {
+                        if fullImageURLs.isEmpty {
+                            fullImageURLs.append(self.news.imageURL)
+                        }
                         let fullImageURL = fullImageURLs[index]
                         self.imageArray.append(fullImageURL!)
                     }
@@ -87,11 +102,21 @@ class NewsViewController: UIViewController, UIScrollViewDelegate, UIGestureRecog
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if self.selectedImageIndex != nil {
-            self.showImage(index: self.selectedImageIndex!)
-            resumeTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(startTimer), userInfo: nil, repeats: false)
-            self.pageControl.currentPage = self.selectedImageIndex!
+        if pageControl.numberOfPages != 1 {
+        pageControl.isHidden = false
         }
+        pageControl.pageIndicatorTintColor = UIColor.lightGray
+        pageControl.currentPageIndicatorTintColor = UIColor.gray
+        pageControl.backgroundColor = UIColor.clear
+        if selectedImageIndex != nil {
+            showImage(index: self.selectedImageIndex!)
+            resumeTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(startTimer), userInfo: nil, repeats: false)
+            pageControl.currentPage = self.selectedImageIndex!
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        pageControl.isHidden = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -99,14 +124,9 @@ class NewsViewController: UIViewController, UIScrollViewDelegate, UIGestureRecog
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        print("will dissapear")
-    }
-    
     override func viewDidDisappear(_ animated: Bool) {
         scrollTimer?.invalidate()
         resumeTimer?.invalidate()
-        print("did Disappear")
     }
     
     
@@ -148,8 +168,6 @@ class NewsViewController: UIViewController, UIScrollViewDelegate, UIGestureRecog
             slideToX = 0
         }
         
-        print(slideToX)
-        
         DispatchQueue.main.async {
             if slideToX != 0 {
                 self.imageScrollView.setContentOffset(CGPoint(x: slideToX, y: 0), animated: true)
@@ -161,7 +179,7 @@ class NewsViewController: UIViewController, UIScrollViewDelegate, UIGestureRecog
     }
     
     func imageTapped() {
-        performSegue(withIdentifier: "imageSegue", sender: self)
+        performSegue(withIdentifier: "pageViewControllerSegue", sender: self)
     }
     
     func showImage(index: Int) {
@@ -173,8 +191,8 @@ class NewsViewController: UIViewController, UIScrollViewDelegate, UIGestureRecog
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
-            if identifier == "imageSegue" {
-                if let destination = segue.destination as? NewsImageViewController {
+            if identifier == "pageViewControllerSegue" {
+                if let destination = segue.destination as? NewsImagePageViewController {
                     destination.imageURLs = imageArray
                     destination.selectedImageIndex = pageControl.currentPage
                 }

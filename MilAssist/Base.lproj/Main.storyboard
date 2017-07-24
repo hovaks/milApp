@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -414,54 +413,73 @@
                         <outlet property="pageControl" destination="dbZ-C4-uGF" id="haA-zG-Wl5"/>
                         <outlet property="scrollView" destination="5Wc-ta-1fx" id="3u4-is-zPY"/>
                         <outlet property="titleLabel" destination="mpb-Fh-829" id="sTY-tX-nPs"/>
-                        <segue destination="I7d-gu-SNH" kind="show" identifier="imageSegue" animates="NO" id="osE-js-aKc"/>
+                        <segue destination="H38-KA-bbz" kind="show" identifier="pageViewControllerSegue" id="H1E-Hq-Noz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FSY-eo-od3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1829.5999999999999" y="-277.51124437781112"/>
         </scene>
-        <!--News Image View Controller-->
-        <scene sceneID="B27-Wk-Nwa">
+        <!--News Image Page View Controller-->
+        <scene sceneID="vVo-C5-FU3">
             <objects>
-                <viewController id="I7d-gu-SNH" customClass="NewsImageViewController" customModule="Banak" customModuleProvider="target" sceneMemberID="viewController">
+                <pageViewController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" transitionStyle="scroll" pageSpacing="10" navigationOrientation="horizontal" spineLocation="none" id="H38-KA-bbz" customClass="NewsImagePageViewController" customModule="Banak" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fwu-my-PIh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2596" y="-278"/>
+        </scene>
+        <!--News Image View Controller-->
+        <scene sceneID="rcb-yl-3eN">
+            <objects>
+                <viewController storyboardIdentifier="NewsImageViewController" automaticallyAdjustsScrollViewInsets="NO" id="C6z-7a-d3g" customClass="NewsImageViewController" customModule="Banak" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="0Dk-gx-JhZ"/>
-                        <viewControllerLayoutGuide type="bottom" id="OUA-lb-NsW"/>
+                        <viewControllerLayoutGuide type="top" id="YKu-dO-jji"/>
+                        <viewControllerLayoutGuide type="bottom" id="9Tx-Im-ms8"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="rGC-SC-m6X">
+                    <view key="view" contentMode="scaleToFill" id="zmH-qc-YrR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fFQ-tY-etH">
-                                <rect key="frame" x="-10" y="209" width="395" height="249"/>
+                            <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yj5-Vc-XT9">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2Qy-py-3AF">
+                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="666"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="666" id="j0A-d7-o29"/>
+                                            <constraint firstAttribute="width" constant="1000" id="qWZ-gk-hLg"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="249" id="p49-4q-kBo"/>
+                                    <constraint firstAttribute="bottom" secondItem="2Qy-py-3AF" secondAttribute="bottom" id="EZ7-0K-ve8"/>
+                                    <constraint firstItem="2Qy-py-3AF" firstAttribute="top" secondItem="Yj5-Vc-XT9" secondAttribute="top" id="LYE-Sl-Ckd"/>
+                                    <constraint firstItem="2Qy-py-3AF" firstAttribute="leading" secondItem="Yj5-Vc-XT9" secondAttribute="leading" id="OdK-Of-tg6"/>
+                                    <constraint firstAttribute="trailing" secondItem="2Qy-py-3AF" secondAttribute="trailing" id="wJe-z1-fCX"/>
                                 </constraints>
                             </scrollView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="1" translatesAutoresizingMaskIntoConstraints="NO" id="jwd-Ne-WII">
-                                <rect key="frame" x="187.5" y="610" width="0.0" height="0.0"/>
-                                <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="currentPageIndicatorTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                            </pageControl>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="jwd-Ne-WII" firstAttribute="centerX" secondItem="rGC-SC-m6X" secondAttribute="centerX" id="1eZ-JJ-Sz7"/>
-                            <constraint firstItem="OUA-lb-NsW" firstAttribute="top" secondItem="jwd-Ne-WII" secondAttribute="bottom" constant="8" id="Itr-xh-6Qc"/>
-                            <constraint firstItem="fFQ-tY-etH" firstAttribute="width" secondItem="rGC-SC-m6X" secondAttribute="width" multiplier="1.053" id="K2t-RH-7JZ"/>
-                            <constraint firstItem="fFQ-tY-etH" firstAttribute="centerX" secondItem="rGC-SC-m6X" secondAttribute="centerX" id="LsI-q6-g2O"/>
-                            <constraint firstItem="fFQ-tY-etH" firstAttribute="centerY" secondItem="rGC-SC-m6X" secondAttribute="centerY" id="eSc-Wj-Eqi"/>
+                            <constraint firstAttribute="trailing" secondItem="Yj5-Vc-XT9" secondAttribute="trailing" id="7wf-0i-u3F"/>
+                            <constraint firstItem="Yj5-Vc-XT9" firstAttribute="top" secondItem="YKu-dO-jji" secondAttribute="bottom" id="Uxj-Gi-Lit"/>
+                            <constraint firstItem="9Tx-Im-ms8" firstAttribute="top" secondItem="Yj5-Vc-XT9" secondAttribute="bottom" id="VAr-bA-Knt"/>
+                            <constraint firstItem="Yj5-Vc-XT9" firstAttribute="leading" secondItem="zmH-qc-YrR" secondAttribute="leading" id="WPm-EW-yov"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="imageScrollView" destination="fFQ-tY-etH" id="LDp-Jh-h89"/>
-                        <outlet property="pageControl" destination="jwd-Ne-WII" id="aHr-ET-LKa"/>
+                        <outlet property="imageView" destination="2Qy-py-3AF" id="Jgv-uB-NFf"/>
+                        <outlet property="imageViewBottomConstraint" destination="EZ7-0K-ve8" id="4UY-nR-ivo"/>
+                        <outlet property="imageViewHeightConstraint" destination="j0A-d7-o29" id="tKD-H4-DAB"/>
+                        <outlet property="imageViewLeadingConstraint" destination="OdK-Of-tg6" id="Ymy-gP-JxW"/>
+                        <outlet property="imageViewTopConstraint" destination="LYE-Sl-Ckd" id="8ul-b8-OeL"/>
+                        <outlet property="imageViewTrailingConstraint" destination="wJe-z1-fCX" id="azd-9y-WpJ"/>
+                        <outlet property="imageViewWidthConstraint" destination="qWZ-gk-hLg" id="BZs-gA-PR2"/>
+                        <outlet property="scrollView" destination="Yj5-Vc-XT9" id="CaI-eO-Xfh"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Xz5-Pl-lB9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F6f-no-gvW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2668" y="-277"/>
+            <point key="canvasLocation" x="3360.8000000000002" y="-277.51124437781112"/>
         </scene>
         <!--Search Table View Controller-->
         <scene sceneID="fhG-y8-0E1">
@@ -717,7 +735,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xi6-gL-GHq">
                                 <rect key="frame" x="59" y="484" width="256" height="42"/>
-                                <color key="backgroundColor" red="0.094117647058823528" green="0.57647058823529407" blue="0.72156862745098038" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.92941176469999998" green="0.3803921569" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="CIu-0t-rGP"/>
                                 </constraints>
@@ -731,7 +749,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B1f-wE-o0m">
                                 <rect key="frame" x="59" y="551" width="256" height="42"/>
-                                <color key="backgroundColor" red="0.094117647060000004" green="0.57647058819999997" blue="0.72156862749999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.92941176469999998" green="0.3803921569" blue="0.054901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="X3a-wr-jhj"/>
                                 </constraints>
@@ -1236,7 +1254,7 @@
         <!--Լրահոս-->
         <scene sceneID="9Pf-4x-yV8">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RmI-w4-ja0" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RmI-w4-ja0" customClass="NewsFeedNavigationController" customModule="Banak" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Լրահոս" image="newsTab" selectedImage="newsTabFilled" id="9TP-3t-eYj"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="N4S-Tb-wTT">
@@ -1252,10 +1270,10 @@
             </objects>
             <point key="canvasLocation" x="-720" y="-276"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Banak Tab Bar Controller-->
         <scene sceneID="Xt2-55-jZc">
             <objects>
-                <tabBarController id="84A-Pg-lnw" sceneMemberID="viewController">
+                <tabBarController id="84A-Pg-lnw" customClass="BanakTabBarController" customModule="Banak" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Ipk-2z-UuW">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>

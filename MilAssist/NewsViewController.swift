@@ -22,10 +22,11 @@ class NewsViewController: UIViewController, UIScrollViewDelegate, UIGestureRecog
     var tapGestureRecognizer: UITapGestureRecognizer!
     var scrollTimer: Timer?
     var resumeTimer: Timer?
+    var logoView: UIImageView?
     
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var contentTextView: UITextView!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleTextView: UITextView!
     
     //Autoratation Settings
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -43,8 +44,7 @@ class NewsViewController: UIViewController, UIScrollViewDelegate, UIGestureRecog
         self.automaticallyAdjustsScrollViewInsets = false
         
         descriptionTextView.text = news.description
-        titleLabel.text = news.title
-        navigationItem.titleView = titleLabel
+        titleTextView.text = news.title
         
         imageScrollView.delegate = self
         
@@ -106,17 +106,37 @@ class NewsViewController: UIViewController, UIScrollViewDelegate, UIGestureRecog
         pageControl.isHidden = false
         }
         pageControl.pageIndicatorTintColor = UIColor.lightGray
-        pageControl.currentPageIndicatorTintColor = UIColor.gray
+        pageControl.currentPageIndicatorTintColor = UIColor.white
         pageControl.backgroundColor = UIColor.clear
         if selectedImageIndex != nil {
             showImage(index: self.selectedImageIndex!)
             resumeTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(startTimer), userInfo: nil, repeats: false)
             pageControl.currentPage = self.selectedImageIndex!
         }
+        
+        //Add logo to NavigationBar
+        logoView = UIImageView(image: #imageLiteral(resourceName: "logo"))
+        let logoViewPositionX = (navigationController?.navigationBar.frame.width)! / 2 - 5
+        logoView?.frame = CGRect(x: logoViewPositionX, y: 15, width: 10, height: 10)
+        logoView?.contentMode = .scaleAspectFit
+        logoView?.alpha = 0
+        navigationController?.navigationBar.addSubview(logoView!)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIView.animate(withDuration: 0.3) {
+            self.logoView?.frame.origin.x -= 10
+            self.logoView?.frame.origin.y -= 10
+            self.logoView?.frame.size.width = 30
+            self.logoView?.frame.size.height = 30
+            self.logoView?.alpha = 1
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         pageControl.isHidden = true
+        logoView?.removeFromSuperview()
     }
     
     override func didReceiveMemoryWarning() {

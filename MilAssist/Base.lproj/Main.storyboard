@@ -10,6 +10,12 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="WeblySleek_UI_Normal.ttf">
+            <string>WeblySleekUINormal</string>
+        </array>
+        <array key="weblysleekuisb.ttf">
+            <string>WeblySleekUISemibold</string>
+        </array>
         <array key="weblysleekuisl.ttf">
             <string>WeblySleekUISemilight</string>
         </array>
@@ -35,10 +41,13 @@
                             <subviews>
                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xPf-0Z-NW0">
                                     <rect key="frame" x="177" y="323" width="20" height="20"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </activityIndicatorView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="xPf-0Z-NW0" firstAttribute="centerY" secondItem="P0c-EV-wWN" secondAttribute="centerY" id="Ubk-4v-gUd"/>
+                                <constraint firstItem="xPf-0Z-NW0" firstAttribute="centerX" secondItem="P0c-EV-wWN" secondAttribute="centerX" id="xcl-Bm-WAA"/>
+                            </constraints>
                         </view>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="VideoCell" id="ImX-o7-m1I" userLabel="VideoCell" customClass="NewsFeedCollectionViewCell" customModule="Banak" customModuleProvider="target">
@@ -49,18 +58,18 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ImagePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="laA-PR-dcz">
-                                            <rect key="frame" x="5" y="0.0" width="370" height="200"/>
+                                            <rect key="frame" x="10" y="0.0" width="365" height="200"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" red="0.74298064720000001" green="0.74298064720000001" blue="0.74298064720000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                         </imageView>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O0e-Ae-yse" userLabel="titleView">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
+                                            <rect key="frame" x="10" y="0.0" width="365" height="45"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qsZ-OE-Buw">
-                                                    <rect key="frame" x="20" y="0.0" width="350" height="45"/>
+                                                    <rect key="frame" x="8" y="0.5" width="362" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="WeblySleekUISemilight" family="WeblySleek UI" pointSize="13"/>
+                                                    <fontDescription key="fontDescription" name="WeblySleekUISemilight" family="WeblySleek UI" pointSize="15"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.80284674659999999" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -79,14 +88,14 @@
                                                     <state key="highlighted" image="likeButtonFilled"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cSg-4E-lSu">
-                                                    <rect key="frame" x="100" y="0.0" width="257" height="30"/>
+                                                    <rect key="frame" x="66" y="0.0" width="291" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="WeblySleekUISemilight" family="WeblySleek UI" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aO4-Lc-719">
-                                                    <rect key="frame" x="40" y="5" width="20" height="20"/>
+                                                    <rect key="frame" x="38" y="5" width="20" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Տարածել" image="shareButton"/>
                                                     <state key="selected" image="likeButtonFilled"/>
@@ -95,13 +104,6 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="0.90000000000000002" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="20" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XjT-zw-CgJ">
-                                            <rect key="frame" x="65" y="50" width="245" height="100"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xC5-6c-TiU" userLabel="colorIdentifier">
                                             <rect key="frame" x="0.0" y="0.0" width="10" height="200"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -112,7 +114,6 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dateLabel" destination="cSg-4E-lSu" id="SrK-Fb-eRn"/>
-                                    <outlet property="descriptionLabel" destination="XjT-zw-CgJ" id="NfP-zG-HBH"/>
                                     <outlet property="imageView" destination="laA-PR-dcz" id="oaE-Xv-09I"/>
                                     <outlet property="titleLabel" destination="qsZ-OE-Buw" id="qdE-Qz-s9d"/>
                                     <segue destination="4Q6-ay-nH6" kind="show" identifier="newsSegue" id="2HG-ck-aZM"/>
@@ -128,7 +129,7 @@
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ImagePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="aBH-kx-E8G">
                                             <rect key="frame" x="5" y="0.0" width="370" height="200"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" red="0.74298064720812185" green="0.74298064720812185" blue="0.74298064720812185" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                         </imageView>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OYO-EK-T53" userLabel="titleView">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
@@ -137,20 +138,13 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Qks-f5-Mh4">
                                                     <rect key="frame" x="20" y="0.0" width="350" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="WeblySleekUISemilight" family="WeblySleek UI" pointSize="15"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.80284674659999999" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.16459787440000001" green="0.16459787440000001" blue="0.16459787440000001" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="displayP3"/>
                                         </view>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="20" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oTq-ys-jeh">
-                                            <rect key="frame" x="125" y="50" width="245" height="100"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hFO-nf-ZoF" userLabel="colorIdentifier">
                                             <rect key="frame" x="0.0" y="0.0" width="10" height="200"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -177,7 +171,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="20 հունիսի 2017 " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VRB-7h-64J">
                                                     <rect key="frame" x="100" y="0.0" width="257" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="WeblySleekUISemilight" family="WeblySleek UI" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -189,7 +183,6 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dateLabel" destination="VRB-7h-64J" id="lfD-Xr-R9l"/>
-                                    <outlet property="descriptionLabel" destination="oTq-ys-jeh" id="jae-VA-SmM"/>
                                     <outlet property="imageView" destination="aBH-kx-E8G" id="nEA-IJ-mSa"/>
                                     <outlet property="titleLabel" destination="Qks-f5-Mh4" id="HKU-4A-HjL"/>
                                     <segue destination="4Q6-ay-nH6" kind="show" identifier="newsSegue" id="Ti4-7M-Ssr"/>
@@ -205,7 +198,7 @@
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ImagePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="1Vc-Ol-KQj">
                                             <rect key="frame" x="5" y="0.0" width="370" height="200"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" red="0.74298064720000001" green="0.74298064720000001" blue="0.74298064720000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                         </imageView>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hHL-FX-Ndf" userLabel="titleView">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
@@ -214,20 +207,13 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="e5P-8K-RkH">
                                                     <rect key="frame" x="20" y="0.0" width="350" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="WeblySleekUISemilight" family="WeblySleek UI" pointSize="15"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.80284674659999999" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.16459787440000001" green="0.16459787440000001" blue="0.16459787440000001" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="displayP3"/>
                                         </view>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="20" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nrc-X6-CQu">
-                                            <rect key="frame" x="125" y="50" width="245" height="100"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x0H-og-ram" userLabel="colorIdentifier">
                                             <rect key="frame" x="0.0" y="0.0" width="10" height="200"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -254,7 +240,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="20 հունիսի 2017 " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jh3-PL-9VM">
                                                     <rect key="frame" x="100" y="0.0" width="257" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="WeblySleekUISemilight" family="WeblySleek UI" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -266,7 +252,6 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dateLabel" destination="Jh3-PL-9VM" id="slQ-ua-jyb"/>
-                                    <outlet property="descriptionLabel" destination="Nrc-X6-CQu" id="qoa-MB-vuE"/>
                                     <outlet property="imageView" destination="1Vc-Ol-KQj" id="wDe-D9-GAc"/>
                                     <outlet property="titleLabel" destination="e5P-8K-RkH" id="tVY-Wd-LK6"/>
                                     <segue destination="4Q6-ay-nH6" kind="show" identifier="newsSegue" id="wyJ-0t-RCC"/>
@@ -297,7 +282,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XHR-0F-u1q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="844" y="-277"/>
+            <point key="canvasLocation" x="844" y="-277.51124437781112"/>
         </scene>
         <!--News View Controller-->
         <scene sceneID="JtO-so-pIE">
@@ -315,51 +300,59 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZZV-4f-JFJ" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="322"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="371"/>
                                         <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Tp9-86-eVn">
-                                                <rect key="frame" x="8" y="8" width="359" height="33"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4Xi-JK-3Ff">
+                                                <rect key="frame" x="8" y="8" width="359" height="43"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" name="WeblySleekUISemibold" family="WeblySleek UI" pointSize="20"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Tp9-86-eVn">
+                                                <rect key="frame" x="8" y="51" width="359" height="36"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="WeblySleekUINormal" family="WeblySleek UI Normal" pointSize="15"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rPg-mF-nTX" userLabel="divider">
-                                                <rect key="frame" x="-0.5" y="41" width="375" height="1"/>
+                                                <rect key="frame" x="-0.5" y="87" width="375" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="PZS-TE-nfC"/>
                                                 </constraints>
                                             </view>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bwF-LC-caa">
-                                                <rect key="frame" x="8" y="41" width="359" height="240"/>
+                                                <rect key="frame" x="8" y="87" width="359" height="240"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="240" id="b5J-KG-Oet"/>
                                                 </constraints>
                                             </scrollView>
                                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="1" translatesAutoresizingMaskIntoConstraints="NO" id="dbZ-C4-uGF">
-                                                <rect key="frame" x="187" y="231" width="0.0" height="50"/>
+                                                <rect key="frame" x="187" y="277" width="0.0" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="fSZ-2i-4vQ"/>
                                                 </constraints>
                                             </pageControl>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BMV-Ai-t59" userLabel="divider">
-                                                <rect key="frame" x="0.0" y="280" width="375" height="1"/>
+                                                <rect key="frame" x="0.0" y="326" width="375" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="zSo-Gx-fh9"/>
                                                 </constraints>
                                             </view>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="d4s-ge-h0a">
-                                                <rect key="frame" x="8" y="281" width="359" height="33"/>
+                                                <rect key="frame" x="8" y="327" width="359" height="36"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" name="WeblySleekUINormal" family="WeblySleek UI Normal" pointSize="15"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="d4s-ge-h0a" firstAttribute="top" secondItem="dbZ-C4-uGF" secondAttribute="bottom" id="9AJ-2E-zEP"/>
-                                            <constraint firstItem="Tp9-86-eVn" firstAttribute="top" secondItem="ZZV-4f-JFJ" secondAttribute="top" constant="8" id="9Zj-g2-PGL"/>
+                                            <constraint firstItem="4Xi-JK-3Ff" firstAttribute="top" secondItem="ZZV-4f-JFJ" secondAttribute="top" constant="8" id="G19-mP-0Ty"/>
+                                            <constraint firstItem="Tp9-86-eVn" firstAttribute="top" secondItem="4Xi-JK-3Ff" secondAttribute="bottom" id="GFd-Be-zEZ"/>
+                                            <constraint firstAttribute="trailing" secondItem="4Xi-JK-3Ff" secondAttribute="trailing" constant="8" id="I2b-kp-7oQ"/>
                                             <constraint firstAttribute="trailing" secondItem="bwF-LC-caa" secondAttribute="trailing" constant="8" id="KD5-jN-6DW"/>
                                             <constraint firstItem="Tp9-86-eVn" firstAttribute="leading" secondItem="ZZV-4f-JFJ" secondAttribute="leading" constant="8" id="MEg-vr-ER5"/>
                                             <constraint firstAttribute="trailing" secondItem="d4s-ge-h0a" secondAttribute="trailing" constant="8" id="OO6-MM-Wt0"/>
@@ -376,6 +369,7 @@
                                             <constraint firstItem="bwF-LC-caa" firstAttribute="top" secondItem="Tp9-86-eVn" secondAttribute="bottom" id="odA-p9-msh"/>
                                             <constraint firstAttribute="bottom" secondItem="d4s-ge-h0a" secondAttribute="bottom" constant="8" id="rG6-fa-4Hm"/>
                                             <constraint firstItem="dbZ-C4-uGF" firstAttribute="centerX" secondItem="ZZV-4f-JFJ" secondAttribute="centerX" id="uuc-ad-Wzw"/>
+                                            <constraint firstItem="4Xi-JK-3Ff" firstAttribute="leading" secondItem="ZZV-4f-JFJ" secondAttribute="leading" constant="8" id="y1v-7p-gdN"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -386,13 +380,6 @@
                                     <constraint firstAttribute="bottom" secondItem="ZZV-4f-JFJ" secondAttribute="bottom" id="yIf-Wa-3z4"/>
                                 </constraints>
                             </scrollView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Test Lonnnng Titileeeee" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="mpb-Fh-829">
-                                <rect key="frame" x="16" y="20" width="343" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -412,7 +399,7 @@
                         <outlet property="imageScrollView" destination="bwF-LC-caa" id="3KC-1f-fQ0"/>
                         <outlet property="pageControl" destination="dbZ-C4-uGF" id="haA-zG-Wl5"/>
                         <outlet property="scrollView" destination="5Wc-ta-1fx" id="3u4-is-zPY"/>
-                        <outlet property="titleLabel" destination="mpb-Fh-829" id="sTY-tX-nPs"/>
+                        <outlet property="titleTextView" destination="4Xi-JK-3Ff" id="hQ7-GF-D9p"/>
                         <segue destination="H38-KA-bbz" kind="show" identifier="pageViewControllerSegue" id="H1E-Hq-Noz"/>
                     </connections>
                 </viewController>
@@ -860,7 +847,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m0u-H5-svv">
-                                <rect key="frame" x="40.5" y="154" width="294.5" height="36"/>
+                                <rect key="frame" x="40" y="154" width="295" height="36"/>
                                 <string key="text">Դուք կարող եք փնտրել տվյալները՝ 
 մուտքագրելով</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -1327,7 +1314,7 @@
                                         <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ImagePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="J4i-kc-iU5">
                                             <rect key="frame" x="5" y="0.0" width="370" height="200"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" red="0.74298064720000001" green="0.74298064720000001" blue="0.74298064720000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                         </imageView>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EWU-M9-vtn" userLabel="titleView">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
@@ -1336,7 +1323,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Clf-Ay-tQj">
                                                     <rect key="frame" x="20" y="0.0" width="350" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="WeblySleekUISemilight" family="WeblySleek UI" pointSize="15"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.80284674659999999" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1357,7 +1344,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KYO-fI-yJE">
                                                     <rect key="frame" x="100" y="0.0" width="257" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="WeblySleekUISemilight" family="WeblySleek UI" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1371,13 +1358,6 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="0.90000000000000002" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="20" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AUx-JD-eVD">
-                                            <rect key="frame" x="65" y="50" width="245" height="100"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gsX-Bz-RXx" userLabel="colorIdentifier">
                                             <rect key="frame" x="0.0" y="0.0" width="10" height="200"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1388,7 +1368,6 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dateLabel" destination="KYO-fI-yJE" id="9Yp-St-U5V"/>
-                                    <outlet property="descriptionLabel" destination="AUx-JD-eVD" id="oJK-vV-rAO"/>
                                     <outlet property="imageView" destination="J4i-kc-iU5" id="TUC-wv-hOJ"/>
                                     <outlet property="titleLabel" destination="Clf-Ay-tQj" id="7Km-8G-y8A"/>
                                 </connections>
@@ -1403,7 +1382,7 @@
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ImagePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="gU8-s0-18T">
                                             <rect key="frame" x="5" y="0.0" width="370" height="200"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" red="0.74298064720000001" green="0.74298064720000001" blue="0.74298064720000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                         </imageView>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J8c-EV-UHg" userLabel="titleView">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
@@ -1412,20 +1391,13 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ffu-XV-8uM">
                                                     <rect key="frame" x="20" y="0.0" width="350" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="WeblySleekUISemilight" family="WeblySleek UI" pointSize="15"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.80284674659999999" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.16459787440000001" green="0.16459787440000001" blue="0.16459787440000001" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="displayP3"/>
                                         </view>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="20" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIJ-Xu-O10">
-                                            <rect key="frame" x="125" y="50" width="245" height="100"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aBB-1o-LFl" userLabel="colorIdentifier">
                                             <rect key="frame" x="0.0" y="0.0" width="10" height="200"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1452,7 +1424,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="20 հունիսի 2017 " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HiK-dQ-QHs">
                                                     <rect key="frame" x="100" y="0.0" width="257" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="WeblySleekUISemilight" family="WeblySleek UI" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1464,7 +1436,6 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dateLabel" destination="HiK-dQ-QHs" id="5M7-9g-Kga"/>
-                                    <outlet property="descriptionLabel" destination="xIJ-Xu-O10" id="oIT-Xo-K76"/>
                                     <outlet property="imageView" destination="gU8-s0-18T" id="M9D-YW-H1s"/>
                                     <outlet property="titleLabel" destination="ffu-XV-8uM" id="ITB-6V-BcB"/>
                                 </connections>
@@ -1479,7 +1450,7 @@
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ImagePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="j6J-zy-F3a">
                                             <rect key="frame" x="5" y="0.0" width="370" height="200"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" red="0.74298064720000001" green="0.74298064720000001" blue="0.74298064720000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                         </imageView>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OZZ-AC-LAE" userLabel="titleView">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
@@ -1488,20 +1459,13 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="KH8-FY-WJP">
                                                     <rect key="frame" x="20" y="0.0" width="350" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="WeblySleekUISemilight" family="WeblySleek UI" pointSize="15"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.80284674659999999" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.16459787440000001" green="0.16459787440000001" blue="0.16459787440000001" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="displayP3"/>
                                         </view>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="20" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z5x-kz-MWs">
-                                            <rect key="frame" x="125" y="50" width="245" height="100"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Iuv-Yr-8X1" userLabel="colorIdentifier">
                                             <rect key="frame" x="0.0" y="0.0" width="10" height="200"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1528,7 +1492,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="20 հունիսի 2017 " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iWa-9b-Zn4">
                                                     <rect key="frame" x="100" y="0.0" width="257" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="WeblySleekUISemilight" family="WeblySleek UI" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1540,7 +1504,6 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dateLabel" destination="iWa-9b-Zn4" id="LQd-fw-uV3"/>
-                                    <outlet property="descriptionLabel" destination="Z5x-kz-MWs" id="VE9-SI-av0"/>
                                     <outlet property="imageView" destination="j6J-zy-F3a" id="lf5-aH-Ug2"/>
                                     <outlet property="titleLabel" destination="KH8-FY-WJP" id="SpL-T6-8Er"/>
                                 </connections>

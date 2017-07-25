@@ -115,13 +115,13 @@ class NewsImageViewController: UIViewController {
                 if isZoomed {
                     yOffset = yOffset + naviGationBarHeight - tabBarHeight + 20 - 14
                 } else {
-                    yOffset = yOffset + 20 - 5
+                    yOffset = yOffset + 0
                 }
             } else {
                 if isZoomed {
                     yOffset = yOffset - tabBarHeight - 14
                 } else {
-                    yOffset -= tabBarHeight
+                    yOffset -= tabBarHeight + 20 - 5
                 }
             }
         } else {

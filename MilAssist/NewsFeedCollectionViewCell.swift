@@ -11,7 +11,6 @@ class NewsFeedCollectionViewCell: UICollectionViewCell {
     
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
     
@@ -20,7 +19,6 @@ class NewsFeedCollectionViewCell: UICollectionViewCell {
     private  func updateUI() {
                 //Here is a bug with cell being called the second time
         titleLabel.text = news?.title
-        descriptionLabel.text = news?.description
         
         if let date = news?.dateCreated {
             let dateFormatter = DateFormatter()

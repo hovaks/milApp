@@ -62,6 +62,7 @@ class NewsImageViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         //Set Image
         imageView.kf.setImage(with: imageURL, placeholder: #imageLiteral(resourceName: "ImagePlaceholder"), options: [.scaleFactor(2)], progressBlock: nil) { (image, error, cacheType, url) in
             if error == nil {

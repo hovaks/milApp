@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import youtube_ios_player_helper
 
 private var reuseIdentifier = "Cell"
 
@@ -27,6 +28,7 @@ class NewsFeedCollectionViewController: UICollectionViewController {
     }
     
     var refresher: UIRefreshControl!
+    var selectedIndex: IndexPath?
     
     //Search
     @IBOutlet weak var searchBarItem: UIBarButtonItem!
@@ -35,11 +37,15 @@ class NewsFeedCollectionViewController: UICollectionViewController {
     
     //Autoratation Settings
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
+        return [.portrait, .landscape]
     }
     
     override var shouldAutorotate: Bool {
-        return false
+        if globals.currentPlayer?.playerState() == .playing {
+            return true
+        } else {
+            return false
+        }
     }
     
     override func viewDidLoad() {
@@ -62,6 +68,20 @@ class NewsFeedCollectionViewController: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        if let indexPath = selectedIndex {
+            if let cell = collectionView?.cellForItem(at: indexPath) as? NewsFeedCollectionViewCell {
+                cell.resumeVideo()
+                cell.imageView.addSubview(globals.currentPlayer!)
+                if let state = globals.currentPlayer?.playerState() {
+                    switch state {
+                    case .paused: globals.currentPlayer?.pauseVideo()
+                    case .playing: globals.currentPlayer?.playVideo()
+                    default: return
+                    }
+                }
+            }
+        }
+        
         let value =  UIInterfaceOrientation.portrait.rawValue
         UIDevice.current.setValue(value, forKey: "orientation")
         UIViewController.attemptRotationToDeviceOrientation()
@@ -76,6 +96,21 @@ class NewsFeedCollectionViewController: UICollectionViewController {
             }
         }
         populate()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        globals.playerMod = .normal
+        print("normal Mod")
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        if UIDevice.current.orientation.isLandscape {
+            if globals.currentPlayer?.playerState() == .playing {
+                performSegue(withIdentifier: "fullScreenSegue", sender: nil)
+            }
+        }
     }
     
     
@@ -161,12 +196,19 @@ class NewsFeedCollectionViewController: UICollectionViewController {
         case "searchSegue":
             let destintaion = segue.destination as! SearchTableViewController
             destintaion.newsArray = newsArray
+            
+        case "fullScreenSegue":
+            if let cell = collectionView?.cellForItem(at: selectedIndex!) as? NewsFeedCollectionViewCell {
+                let videoID = cell.news?.articleURL?.description
+                let destination = segue.destination as! FullScreenVideoViewController
+                destination.videoID = videoID
+                //globals.currentPlayer?.cueVideo(byId: videoID!, startSeconds: (globals.currentPlayer?.currentTime())!, suggestedQuality: .medium)
+            }
+            
         default:
             break
         }
     }
-    
-//    @IBAction func unwindToNewsFeed(segue: UIStoryboardSegue) {}
     
     
     // MARK: UICollectionViewDataSource
@@ -181,6 +223,7 @@ class NewsFeedCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         
         //Defining the Reuse Identifier
         let news = newsArray[indexPath.row]
@@ -199,7 +242,6 @@ class NewsFeedCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         
         if let newsCell = cell as? NewsFeedCollectionViewCell {
-            
             newsCell.news = news
         }
         
@@ -210,11 +252,27 @@ class NewsFeedCollectionViewController: UICollectionViewController {
         cell.layer.shadowOpacity = 1.0
         cell.layer.masksToBounds = false
         cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.contentView.layer.cornerRadius).cgPath
-        //Uncomment to enable round corners
-        //        cell.layer.masksToBounds = true
-        //        cell.layer.cornerRadius = 20
+        
         return cell
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? NewsFeedCollectionViewCell {
+            selectedIndex = indexPath
+            if !cell.playerIsConfigured {
+                cell.configurePlayer()
+            } else {
+                if let state = globals.currentPlayer?.playerState() {
+                    switch state {
+                    case .paused: globals.currentPlayer?.playVideo()
+                    case .playing: globals.currentPlayer?.pauseVideo()
+                    default: return
+                    }
+                }
+            }
+        }
+    }
+    
     
     // MARK: UICollectionViewDelegate
     
@@ -246,5 +304,14 @@ class NewsFeedCollectionViewController: UICollectionViewController {
      
      }
      */
+}
+
+struct globals {
+    enum PlayerMod {
+        case normal
+        case fullScreen
+    }
     
+    static var currentPlayer: YTPlayerView?
+    static var playerMod: PlayerMod?
 }

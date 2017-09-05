@@ -12,4 +12,5 @@ target 'Banak' do
   pod 'Braintree/PayPal'
   pod 'Braintree/3D-Secure'
   pod 'Kingfisher', '~> 3.0'
+  pod "youtube-ios-player-helper", "~> 0.1.6"
 end

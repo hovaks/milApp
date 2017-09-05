@@ -101,22 +101,61 @@
                                                     <state key="selected" image="likeButtonFilled"/>
                                                     <state key="highlighted" image="shareButtonFilled"/>
                                                 </button>
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="psZ-5Q-kbY" userLabel="play">
+                                                    <rect key="frame" x="3" y="0.0" width="30" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Հավանել" image="playIcon"/>
+                                                    <state key="selected" image="PauseIcon"/>
+                                                    <state key="highlighted" image="playIcon"/>
+                                                    <connections>
+                                                        <action selector="playButton:" destination="ImX-o7-m1I" eventType="touchUpInside" id="v4J-1t-z0I"/>
+                                                    </connections>
+                                                </button>
+                                                <slider hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="8nQ-JW-QF0">
+                                                    <rect key="frame" x="36" y="0.0" width="323" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="minimumTrackTintColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="slide:" destination="ImX-o7-m1I" eventType="valueChanged" id="qqE-W6-59l"/>
+                                                    </connections>
+                                                </slider>
+                                                <slider hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="thF-8n-Aoc">
+                                                    <rect key="frame" x="36" y="0.0" width="323" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="minimumTrackTintColor" red="0.81568627449999997" green="0.039215686270000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="maximumTrackTintColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="0.25" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="slide:" destination="ImX-o7-m1I" eventType="valueChanged" id="z7J-CG-aTu"/>
+                                                    </connections>
+                                                </slider>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="0.90000000000000002" colorSpace="calibratedWhite"/>
                                         </view>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xC5-6c-TiU" userLabel="colorIdentifier">
                                             <rect key="frame" x="0.0" y="0.0" width="10" height="200"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" red="0.81424605846405029" green="0.038084598601822485" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="backgroundColor" red="0.81568627450980391" green="0.039215686274509803" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </view>
+                                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ayS-BM-Q2V">
+                                            <rect key="frame" x="152" y="65" width="70" height="70"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button" image="youtube"/>
+                                        </button>
                                     </subviews>
                                 </view>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
+                                    <outlet property="actionView" destination="8tX-KQ-8O9" id="W5j-kD-sYe"/>
+                                    <outlet property="bufferSlider" destination="8nQ-JW-QF0" id="6ie-3k-poP"/>
                                     <outlet property="dateLabel" destination="cSg-4E-lSu" id="SrK-Fb-eRn"/>
                                     <outlet property="imageView" destination="laA-PR-dcz" id="oaE-Xv-09I"/>
+                                    <outlet property="likeButton" destination="M4e-rp-Gvh" id="LTw-H9-Cua"/>
+                                    <outlet property="playButton" destination="psZ-5Q-kbY" id="WhH-Dr-v2m"/>
+                                    <outlet property="playButtonLogo" destination="ayS-BM-Q2V" id="osv-Nw-YmI"/>
+                                    <outlet property="shareButton" destination="aO4-Lc-719" id="UeR-hF-TCz"/>
+                                    <outlet property="slider" destination="thF-8n-Aoc" id="3K6-Fy-q9S"/>
                                     <outlet property="titleLabel" destination="qsZ-OE-Buw" id="qdE-Qz-s9d"/>
-                                    <segue destination="4Q6-ay-nH6" kind="show" identifier="newsSegue" id="2HG-ck-aZM"/>
+                                    <outlet property="titleView" destination="O0e-Ae-yse" id="z4q-Lt-edD"/>
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NewsCell" id="42L-O3-6v1" customClass="NewsFeedCollectionViewCell" customModule="Banak" customModuleProvider="target">
@@ -278,11 +317,34 @@
                     <connections>
                         <outlet property="activityIndicator" destination="xPf-0Z-NW0" id="ago-bU-ET0"/>
                         <outlet property="searchBarItem" destination="SgW-Fv-92g" id="l6n-8j-aYV"/>
+                        <segue destination="yh1-rE-ZAS" kind="show" identifier="fullScreenSegue" animates="NO" id="0CQ-WZ-OWp"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XHR-0F-u1q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="2LA-OQ-U3d"/>
             </objects>
             <point key="canvasLocation" x="844" y="-277.51124437781112"/>
+        </scene>
+        <!--Full Screen Video View Controller-->
+        <scene sceneID="lJL-qX-kyR">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="yh1-rE-ZAS" customClass="FullScreenVideoViewController" customModule="Banak" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ked-MR-5qL"/>
+                        <viewControllerLayoutGuide type="bottom" id="SYx-Qb-Wzc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bx4-sY-hIR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="80W-cj-DsN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1830" y="484"/>
         </scene>
         <!--News View Controller-->
         <scene sceneID="JtO-so-pIE">
@@ -466,7 +528,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F6f-no-gvW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3360.8000000000002" y="-277.51124437781112"/>
+            <point key="canvasLocation" x="3198" y="-278"/>
         </scene>
         <!--Search Table View Controller-->
         <scene sceneID="fhG-y8-0E1">
@@ -1531,6 +1593,7 @@
     <resources>
         <image name="1000plus" width="30" height="30"/>
         <image name="ImagePlaceholder" width="454" height="454"/>
+        <image name="PauseIcon" width="52" height="52"/>
         <image name="closeButton" width="30" height="30"/>
         <image name="contactTab" width="30" height="30"/>
         <image name="contactTabFilled" width="30" height="30"/>
@@ -1541,11 +1604,13 @@
         <image name="moreFilled" width="30" height="30"/>
         <image name="newsTab" width="30" height="30"/>
         <image name="newsTabFilled" width="30" height="30"/>
+        <image name="playIcon" width="48" height="48"/>
         <image name="searchHistory" width="20" height="20"/>
         <image name="shareButton" width="20" height="20"/>
         <image name="shareButtonFilled" width="20" height="20"/>
         <image name="socialTab" width="30" height="30"/>
         <image name="socialTabFilled" width="30" height="30"/>
+        <image name="youtube" width="256" height="256"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Ti4-7M-Ssr"/>

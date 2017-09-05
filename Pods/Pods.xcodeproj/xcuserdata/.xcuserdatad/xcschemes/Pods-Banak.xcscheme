@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '3A3D25486B1AB263B1FFB87BF8922522'
+               BlueprintIdentifier = '5183A3775EF8933AFEDE2EF102C8AD35'
                BlueprintName = 'Pods-Banak'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods-Banak.framework'>

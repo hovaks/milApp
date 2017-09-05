@@ -29,38 +29,40 @@ struct Parser {
                             for item in items {
                                 
                                 let itemDictionary = item as! Dictionary<String, AnyObject>
-                                let snippetDictionary = itemDictionary["snippet"] as! Dictionary<String, AnyObject>
-                                
-                                //Chech Date, if in range get other values and append
-                                let calendar = Calendar.current
-                                let weekEarlier = calendar.date(byAdding: .day, value: -8, to: Date())
-                                if let dateCreatedString = snippetDictionary["publishedAt"] as? String {
-                                    let dateFormatter = DateFormatter()
-                                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-                                    if let dateCreated = dateFormatter.date(from: dateCreatedString) {
-                                        if dateCreated > weekEarlier! {
-                                            var videoNews = News()
-                                            //Setting Date, Title, Description
-                                            videoNews.dateCreated = dateCreated
-                                            videoNews.title = snippetDictionary["title"] as? String
-                                            videoNews.description = snippetDictionary["description"] as? String
-                                            //Setting imageURL
-                                            let imageDictionary = snippetDictionary["thumbnails"] as! Dictionary<String, AnyObject>
-                                            let imageDictionaryDefault = imageDictionary["high"] as! Dictionary<String, AnyObject>
-                                            if let imageURLString = imageDictionaryDefault["url"] as? String {
-                                                videoNews.imageURL = URL(string: imageURLString)
-                                            }
-                                            //Setting Article URL
-                                            let itemDictionary = item as! Dictionary<String, AnyObject>
-                                            let idDictionary = itemDictionary["id"] as! Dictionary<String, AnyObject>
-                                            if let videoId = idDictionary["videoId"] as? String {
-                                                var articleURLString = "https://www.youtube.com/watch?v="
-                                                articleURLString.append("\(videoId)")
-                                                videoNews.articleURL = URL(string: articleURLString)
-                                            }
-                                            //Setting The Type and appending
-                                            videoNews.type = .video
-                                            videosArray.append(videoNews)
+                                let itemId = item["id"] as! Dictionary<String, AnyObject>
+                                let itemKind = itemId["kind"] as! String
+                                if  itemKind == "youtube#video" {
+                                    let snippetDictionary = itemDictionary["snippet"] as! Dictionary<String, AnyObject>
+                                    //Chech Date, if in range get other values and append
+                                    let calendar = Calendar.current
+                                    let weekEarlier = calendar.date(byAdding: .day, value: -8, to: Date())
+                                    if let dateCreatedString = snippetDictionary["publishedAt"] as? String {
+                                        let dateFormatter = DateFormatter()
+                                        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                                        if let dateCreated = dateFormatter.date(from: dateCreatedString) {
+//                                            if dateCreated > weekEarlier! {
+                                                var videoNews = News()
+                                                //Setting Date, Title, Description
+                                                videoNews.dateCreated = dateCreated
+                                                videoNews.title = snippetDictionary["title"] as? String
+                                                videoNews.description = snippetDictionary["description"] as? String
+                                                //Setting imageURL
+                                                let imageDictionary = snippetDictionary["thumbnails"] as! Dictionary<String, AnyObject>
+                                                let imageDictionaryDefault = imageDictionary["high"] as! Dictionary<String, AnyObject>
+                                                if let imageURLString = imageDictionaryDefault["url"] as? String {
+                                                    videoNews.imageURL = URL(string: imageURLString)
+                                                }
+                                                //Setting Article URL
+                                                let itemDictionary = item as! Dictionary<String, AnyObject>
+                                                let idDictionary = itemDictionary["id"] as! Dictionary<String, AnyObject>
+                                                if let videoId = idDictionary["videoId"] as? String {
+                                                    let articleURLString = "\(videoId)"
+                                                    videoNews.articleURL = URL(string: articleURLString)
+                                                }
+                                                //Setting The Type and appending
+                                                videoNews.type = .video
+                                                videosArray.append(videoNews)
+//                                            }
                                         }
                                     }
                                 }
